@@ -1,3 +1,9 @@
+# Update APT cache (once every 24h)
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
 # Create user juri
 - name: Create user juri
   ansible.builtin.user:
