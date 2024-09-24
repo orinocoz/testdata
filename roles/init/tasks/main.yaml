@@ -3,35 +3,3 @@
   ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 86400
-
-# Create user juri
-- name: Create user juri
-  ansible.builtin.user:
-    name: juri
-    state: present
-    shell: /bin/bash
-
-# Add public key for user juri
-- name: Add public key for user juri from GitHub
-  ansible.builtin.authorized_key:
-    user: juri
-    state: present
-    key: https://github.com/hudolejev.keys
-
-# Create user roman
-- name: Create user roman
-  ansible.builtin.user:
-    name: roman
-    state: present
-    shell: /bin/bash
-
-# Add public key for user roman from GitHub
-- name: Add public key for user roman from GitHub
-  ansible.builtin.authorized_key:
-    user: roman
-    state: present
-    key: https://github.com/romankuchin.keys
-
-# Commented out the ping task as it's no longer needed
-#- name: Ansible ping module
-#  ansible.builtin.ping:
