@@ -9,4 +9,6 @@
   hosts: web_servers
   become: true
   roles:
+    - agama
+    - uwsgi
     - nginx

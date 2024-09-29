@@ -1,0 +1,26 @@
+- name: Install uWSGI packages
+  ansible.builtin.apt:
+    name:
+      - uwsgi
+      - uwsgi-plugin-python3
+    update_cache: yes
+
+- name: Copy uWSGI configuration
+  ansible.builtin.copy:
+    src: agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+    owner: agama
+    mode: '0644'
+
+- name: Restart uWSGI service if config changed
+  ansible.builtin.service:
+    name: uwsgi
+    state: restarted
+  notify:
+    - Restart uWSGI
+
+- name: Ensure uWSGI service is started and enabled
+  ansible.builtin.service:
+    name: uwsgi
+    state: started
+    enabled: true
