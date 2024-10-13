@@ -29,3 +29,10 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Override mysql bind address
+  ansible.builtin.template:
+    src: override.cnf.j2
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: 
+    - Restart Mysql
