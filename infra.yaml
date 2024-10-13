@@ -12,3 +12,8 @@
     - agama
     - uwsgi
     - nginx
+
+- name: Database server
+  hosts: db_servers
+  roles:
+    - mysql
