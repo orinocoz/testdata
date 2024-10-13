@@ -1,6 +1,8 @@
-- name: Install MySQL
-  apt:
-    name: mysql-server
+- name: Install mysql
+  ansible.builtin.apt:
+    name: 
+      - mysql-server
+      - python3-pymysql
     state: present
 
 - name: Ensure MySQL is started and enabled
@@ -8,3 +10,22 @@
     name: mysql
     state: started
     enabled: true
+
+- name: Make sure mysql is running
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Create MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create MySQL user
+  community.mysql.mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    host: "%"
+    priv: "{{ mysql_database }}.*:ALL"
+    login_unix_socket: /var/run/mysqld/mysqld.sock

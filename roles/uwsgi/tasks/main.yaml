@@ -3,14 +3,16 @@
     name:
       - uwsgi
       - uwsgi-plugin-python3
+      - python3-pymysql
     update_cache: yes
 
 - name: Copy uWSGI configuration
-  ansible.builtin.copy:
-    src: agama.ini
+  ansible.builtin.template:
+    src: templates/agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
-    mode: '0644'
+    mode: '0600'
+  no_log: true
 
 - name: Restart uWSGI service if config changed
   ansible.builtin.service:

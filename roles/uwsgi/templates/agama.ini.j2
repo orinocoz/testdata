@@ -9,5 +9,5 @@ master = true
 vacuum = true
 die-on-term = true
 processes = 5
-env = AGAMA_DATABASE_URI=sqlite:////opt/agama/db.sqlite3
+env = AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
 plugins = python3
