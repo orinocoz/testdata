@@ -1,0 +1,12 @@
+- name: Install Bind9
+  ansible.builtin.apt:
+    name: bind9
+    state: present
+  become: yes
+
+- name: Ensure Bind9 is running and enabled
+  ansible.builtin.service:
+    name: bind9
+    state: started
+    enabled: yes
+  become: yes
