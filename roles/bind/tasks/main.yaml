@@ -23,3 +23,16 @@
     state: restarted
   become: yes
 
+- name: Configure master zone
+  ansible.builtin.template:
+    src: db.master.j2
+    dest: /var/cache/bind/db.{{ startup_name }}
+  become: yes
+
+- name: Add master zone reference in named.conf.local
+  ansible.builtin.lineinfile:
+    path: /etc/bind/named.conf.local
+    line: 'zone "{{ startup_name }}" { type master; file "/var/cache/bind/db.{{ startup_name }}"; };'
+    state: present
+  become: yes
+
