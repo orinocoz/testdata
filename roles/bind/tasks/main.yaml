@@ -10,3 +10,16 @@
     state: started
     enabled: yes
   become: yes
+
+- name: Configure DNS forwarders
+  ansible.builtin.template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  become: yes
+
+- name: Restart Bind9 after config changes
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+  become: yes
+

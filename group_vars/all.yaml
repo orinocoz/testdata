@@ -9,3 +9,14 @@ mysql_password: !vault |
           6562333466353332620a323162343161366132326464633031336666653736363238643365373263
           6131
 #mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
+forwarders:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9
+
+allowed_networks:
+  - 192.168.42.0/23
+  - 127.0.0.0/8
+
+
+

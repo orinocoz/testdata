@@ -1,0 +1,17 @@
+options {
+    directory "/var/cache/bind";
+
+    forwarders {
+        {% for forwarder in dns_forwarders %}
+        {{ forwarder }};
+        {% endfor %}
+    };
+
+    dnssec-validation auto;
+
+    listen-on { any; };
+    allow-query { localhost; {{ dns_allowed_networks }}; };
+
+    recursion yes;
+};
+
