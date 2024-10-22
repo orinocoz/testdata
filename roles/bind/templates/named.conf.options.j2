@@ -1,17 +1,40 @@
-options {
-    directory "/var/cache/bind";
+#options {
+#    directory "/var/cache/bind";
+#
+#    forwarders {
+#        {% for forwarder in dns_forwarders %}
+#        {{ forwarder }};
+#        {% endfor %}
+#    };
+#
+#   dnssec-validation auto;
+#
+#    listen-on { any; };
+#    allow-query {
+#        localhost;
+#        {% for network in dns_allowed_networks %}
+#        {{ network }};
+#        {% endfor %}
+#    };
 
-    forwarders {
-        {% for forwarder in dns_forwarders %}
-        {{ forwarder }};
-        {% endfor %}
-    };
-
-    dnssec-validation auto;
-
-    listen-on { any; };
-    allow-query { localhost; {{ dns_allowed_networks }}; };
-
-    recursion yes;
+#    recursion yes;
+#};
+acl dns_allowed_networks{
+    {% for net in dns_allowed_networks %}
+    {{ net }};
+    {% endfor %}
 };
 
+options {
+  directory "/var/cache/bind";
+
+  allow-query {dns_allowed_networks;};
+
+  forwarders {
+   {% for n in dns_forwarders %}
+   {{ n }};
+   {% endfor %}
+  };
+
+  dnssec-validation no;
+};

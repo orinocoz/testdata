@@ -2,6 +2,7 @@
   ansible.builtin.apt:
     name: bind9
     state: present
+    update_cache: yes
   become: yes
 
 - name: Ensure Bind9 is running and enabled
@@ -13,8 +14,11 @@
 
 - name: Configure DNS forwarders
   ansible.builtin.template:
-    src: named.conf.options.j2
-    dest: /etc/bind/named.conf.options
+    src: named.conf.{{ item }}.j2
+    dest: /etc/bind/named.conf.{{ item }}
+  loop:
+    - options
+    - local
   become: yes
 
 - name: Restart Bind9 after config changes
@@ -28,11 +32,5 @@
     src: db.master.j2
     dest: /var/cache/bind/db.{{ startup_name }}
   become: yes
-
-- name: Add master zone reference in named.conf.local
-  ansible.builtin.lineinfile:
-    path: /etc/bind/named.conf.local
-    line: 'zone "{{ startup_name }}" { type master; file "/var/cache/bind/db.{{ startup_name }}"; };'
-    state: present
-  become: yes
+  notify: Reload rndc
 

@@ -7,4 +7,4 @@ $TTL 86400
        604800 ) ; Negative Cache TTL
 ;
 @   IN  NS  {{ startup_name }}.
-@   IN  A   {{ hostvars[vm_name]['ansible_default_ipv4']['address'] }}
+@   IN  A   {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}
