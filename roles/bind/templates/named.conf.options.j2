@@ -1,24 +1,4 @@
-#options {
-#    directory "/var/cache/bind";
 #
-#    forwarders {
-#        {% for forwarder in dns_forwarders %}
-#        {{ forwarder }};
-#        {% endfor %}
-#    };
-#
-#   dnssec-validation auto;
-#
-#    listen-on { any; };
-#    allow-query {
-#        localhost;
-#        {% for network in dns_allowed_networks %}
-#        {{ network }};
-#        {% endfor %}
-#    };
-
-#    recursion yes;
-#};
 acl dns_allowed_networks{
     {% for net in dns_allowed_networks %}
     {{ net }};
