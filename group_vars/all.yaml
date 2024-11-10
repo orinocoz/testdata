@@ -19,3 +19,11 @@ dns_allowed_networks:
   - 127.0.0.0/8
 
 startup_name: acme.ttu
+
+prometheus_exporters:
+  mysql:
+    port: 9104
+  bind:
+    port: 9119
+  nginx:
+   port: 9113
