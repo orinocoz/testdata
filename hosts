@@ -9,3 +9,6 @@ orinocoz-2
 
 [dns_servers]
 orinocoz-2
+
+[prometheus]
+orinocoz-2

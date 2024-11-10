@@ -24,10 +24,16 @@
   gather_facts: yes
   roles:
     - bind
-      #    - resolve
-- name: Resolve
+
+- name: DNS resolver
   hosts: all
   become: true
   gather_facts: yes
   roles: 
     - resolve
+
+- name: Prometheus server
+  hosts: prometheus
+  roles:
+    - nginx
+    - prometheus
