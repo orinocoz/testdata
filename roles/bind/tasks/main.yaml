@@ -33,4 +33,28 @@
     dest: /var/cache/bind/db.{{ startup_name }}
   become: yes
   notify: Reload rndc
+- name: Download and extract Bind9 exporter to /opt
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus-community/bind_exporter/releases/download/v0.6.1/bind_exporter-0.6.1.linux-amd64.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Create symlink to /usr/local/bin/bind_exporter
+  ansible.builtin.file:
+    src: /opt/bind_exporter-0.6.1.linux-amd64/bind_exporter
+    dest: /usr/local/bin/bind_exporter
+    state: link
+
+- name: Create systemd service file for prometheus-bind-exporter
+  ansible.builtin.template:
+    src: bind_exporter.service.j2
+    dest: /etc/systemd/system/bind_exporter.service
+  notify:
+    - Reload systemd
+
+- name: Bind exporter service
+  ansible.builtin.systemd:
+    name: bind_exporter
+    state: started
+    enabled: true
 

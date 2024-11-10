@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus exporter for Bind
+Documentation=https://github.com/digital_ocean/bind_exporter
+
+[Service]
+Restart=on-failure
+User=prometheus
+ExecStart=/usr/local/bin/bind_exporter
+
+[Install]
+WantedBy=multi-user.target
+

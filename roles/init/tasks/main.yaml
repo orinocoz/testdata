@@ -3,3 +3,14 @@
   ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 86400
+
+- name: Install APT prometheus-node-exporter
+  ansible.builtin.apt:
+    name:
+      - prometheus-node-exporter
+
+- name: Prometheus node exporter service
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: true
