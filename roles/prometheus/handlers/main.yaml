@@ -1,0 +1,6 @@
+- name: Prometheus restart
+  ansible.builtin.service:
+    name: prometheus
+    state: restarted
+    enabled: yes
+

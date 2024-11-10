@@ -1,0 +1,4 @@
+- name: Install APT prometheus
+  ansible.builtin.apt:
+    name:
+      - prometheus
