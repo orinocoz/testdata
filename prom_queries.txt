@@ -1,0 +1,2 @@
+rate(node_disk_io_time_seconds_total[1m]) * 100
+node_load1 / count(count(node_cpu_seconds_total) by (cpu))
