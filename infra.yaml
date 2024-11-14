@@ -4,6 +4,7 @@
   become: true
   roles:
     - init
+  tags: i
 
 - name: Web server
   hosts: web_servers
@@ -12,11 +13,13 @@
     - agama
     - uwsgi
     - nginx
+  tags: w
 
 - name: Database server
   hosts: db_servers
   roles:
     - mysql
+  tags: m
 
 - name: DNS server
   hosts: dns_servers
@@ -24,6 +27,7 @@
   gather_facts: yes
   roles:
     - bind
+  tags: b
 
 - name: DNS resolver
   hosts: all
@@ -31,9 +35,18 @@
   gather_facts: yes
   roles: 
     - resolve
+  tags: r
 
 - name: Prometheus server
   hosts: prometheus
   roles:
     - nginx
     - prometheus
+  tags: p
+
+- name: Grafana
+  hosts: grafana
+  roles:
+    - nginx
+    - grafana
+  tags: g
