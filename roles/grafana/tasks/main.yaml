@@ -29,4 +29,31 @@
   no_log: true
   notify:
     - Restart Grafana
+- name: File datasource.yaml
+  ansible.builtin.template:
+    src: datasource.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/datasource.yaml
+  notify:
+     - Restart Grafana
+
+- name: File dashboards.yaml
+  ansible.builtin.template:
+    src: dashboards.yaml.j2
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+  notify:
+    - Restart Grafana
+
+- name: Ensure dashboards directory exists
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+    owner: grafana
+    group: grafana
+
+      #- name: File main.json
+      #  ansible.builtin.copy:
+      #    src: main.json
+      #   dest: /var/lib/grafana/dashboards/main.json
+      # notify:
+      #   - Restart Grafana
 
