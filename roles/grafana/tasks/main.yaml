@@ -50,10 +50,10 @@
     owner: grafana
     group: grafana
 
-      #- name: File main.json
-      #  ansible.builtin.copy:
-      #    src: main.json
-      #   dest: /var/lib/grafana/dashboards/main.json
-      # notify:
-      #   - Restart Grafana
+- name: File main.json
+  ansible.builtin.copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/main.json
+  notify:
+   - Restart Grafana
 
