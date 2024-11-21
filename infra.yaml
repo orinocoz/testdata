@@ -60,5 +60,5 @@
 - name: Agama client
   hosts: agama_client
   roles:
-    - agama-client
+    - agama_client
   tags: ac
