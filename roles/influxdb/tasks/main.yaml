@@ -1,0 +1,26 @@
+- name: Add InfluxDB GPG key
+  ansible.builtin.apt_key:
+    url: https://repos.influxdata.com/influxdata-archive_compat.key
+    state: present
+    validate_certs: yes
+    keyring: /usr/share/keyrings/influxdata-archive-keyring.gpg
+
+- name: Add InfluxDB APT repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/influxdata-archive-keyring.gpg] https://repos.influxdata.com/debian stable main"
+    state: present
+
+      #- name: Update apt cache
+      #  ansible.builtin.apt:
+      #  update_cache: yes
+
+- name: Install APT InfluxDB
+  ansible.builtin.apt:
+    name: influxdb=1.8.10-1
+    state: present
+
+- name: Service InfluxDB
+  ansible.builtin.service:
+    name: influxdb
+    state: started
+    enabled: true

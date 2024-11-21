@@ -1,0 +1,29 @@
+- name: Copy agama-client
+  ansible.builtin.copy:
+    src: agama-client
+    dest: /usr/local/bin/agama-client
+    mode: '0755'
+  become: true
+
+- name: Copy agama-client.service
+  ansible.builtin.template:
+    src: agama-client.service.j2
+    dest: /etc/systemd/system/agama-client.service
+  notify: Reload systemd manager configuration
+
+- name: Create agama-client user
+  ansible.builtin.user:
+    name: agama-client
+    state: present
+
+- name: Create directory for agama-client configuration
+  ansible.builtin.file:
+    path: /etc/agama-client
+    state: directory
+    mode: '0755'
+
+- name: Copy agama-client.conf
+  ansible.builtin.template:
+    src: agama-client.conf.j2
+    dest: /etc/agama-client/agama-client.conf
+  notify: Restart agama-client.service if there are changes in config

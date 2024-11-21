@@ -50,3 +50,15 @@
     - nginx
     - grafana
   tags: g
+
+- name: Influx DB
+  hosts: influxdb
+  roles:
+    - influxdb
+  tags: if
+
+- name: Agama client
+  hosts: agama_client
+  roles:
+    - agama-client
+  tags: ac
