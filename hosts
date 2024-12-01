@@ -1,5 +1,5 @@
-orinocoz-1 ansible_host=193.40.156.67 ansible_port=16880 ansible_user=ubuntu
-orinocoz-2 ansible_host=193.40.156.67 ansible_port=10180 ansible_user=ubuntu
+orinocoz-1 ansible_host=193.40.156.67 ansible_port=16822 ansible_user=ubuntu
+orinocoz-2 ansible_host=193.40.156.67 ansible_port=10122 ansible_user=ubuntu
 
 [web_servers]
 orinocoz-1
