@@ -26,4 +26,4 @@
   ansible.builtin.template:
     src: agama-client.conf.j2
     dest: /etc/agama-client/agama-client.conf
-  notify: Restart agama-client.service if there are changes in config
+  notify: Restart agama_client.service if there are changes in config
