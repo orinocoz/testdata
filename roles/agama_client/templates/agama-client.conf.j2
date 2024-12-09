@@ -1,3 +1,3 @@
-database_url=http://{{ groups['influxdb'][0] }}
-database_name=influxdb
-subnet=192.168.0.0/24
+database_url=http://{{hostvars[groups['influxdb'][0]].ansible_hostname }}:8086
+database_name=agama_client_db
+subnet=192.168.43.0/23
