@@ -3,7 +3,7 @@
     name: agama_client
     state: restarted
 
-- name: Restart agama-client
+- name: Restart agama_client
   ansible.builtin.service:
     name: agama_client
     state: restarted
