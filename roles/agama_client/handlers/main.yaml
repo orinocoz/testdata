@@ -1,9 +1,9 @@
 - name: Reload systemd
   ansible.builtin.service:
-    name: agama_client
+    name: agama-client
     state: restarted
 
 - name: Restart agama-client
   ansible.builtin.service:
-    name: agama_client
+    name: agama-client
     state: restarted
