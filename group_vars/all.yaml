@@ -45,3 +45,11 @@ prometheus_exporters:
     port: 9119
   nginx:
    port: 9113
+
+# InfluxDB
+influxdb_agama_database:    agama
+influxdb_telegraf_database: telegraf
+influxdb_http_port:         8086
+
+
+
