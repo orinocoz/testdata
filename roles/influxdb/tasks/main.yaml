@@ -1,3 +1,4 @@
+#Influxdb conf
 - name: Add InfluxDB GPG key
   ansible.builtin.apt_key:
     url: https://repos.influxdata.com/influxdata-archive_compat.key
@@ -20,3 +21,35 @@
     name: influxdb
     state: started
     enabled: true
+
+# Telegraf conf
+
+- name: Install Telegraf repository key
+  get_url:
+    url:  https://repos.influxdata.com/influxdata-archive.key
+    dest: /etc/apt/keyrings/telegraf.asc
+    mode: '0644'
+    
+- name: Install Telegraf repository
+  apt_repository:
+    repo:  "deb [signed-by=/etc/apt/keyrings/telegraf.asc] https://repos.influxdata.com/debian stable main"
+    state: present
+
+- name: Install Telegraf
+  apt:
+    name:  telegraf
+    state: present
+    
+- name:   Configure Telegraf SysLog input and InfluxDB output
+  notify: Restart Telegraf
+  template:
+    src:  telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+    mode: '0644'
+
+- name: Make sure Telegraf is started
+  service:
+    name:    telegraf
+    state:   started
+    enabled: true
+

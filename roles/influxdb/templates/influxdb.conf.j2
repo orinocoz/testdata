@@ -8,3 +8,10 @@
 [http]
   log-enabled = false
   write-tracing = false
+  enabled       = true
+  bind-address  = ":{{ influxdb_http_port }}"
+
+[[udp]]
+  enabled      = true
+  bind-address = ":8089"
+  database     = "{{ influxdb_telegraf_database }}"
