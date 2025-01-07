@@ -1,5 +1,6 @@
 apiVersion: 1
 datasources:
+# Prometheus
   - name: Prometheus
     type: prometheus
     access: proxy
@@ -9,3 +10,20 @@ datasources:
     version: 1
     editable: false
 
+# Influx Agama
+  - name:     influxdb:{{ influxdb_agama_database }}
+    type:     influxdb
+    access:   proxy
+    url:      http://influxdb:8086
+    database: {{ influxdb_agama_database }}
+    editable: false
+    uid:      {{ influxdb_agama_database }}
+
+# Influx rsyslog
+  - name:     influxdb:{{ influxdb_telegraf_database }}
+    type:     influxdb
+    access:   proxy
+    url:      http://influxdb:8086
+    database: {{ influxdb_telegraf_database }}
+    editable: false
+    uid:      {{ influxdb_telegraf_database }}
