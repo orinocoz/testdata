@@ -9,3 +9,13 @@
   service:
     name:  telegraf
     state: restarted
+
+# Influx stat exporter
+- name: Restart the influxDB stat exporter
+  service:
+    name: prometheus-influxdb-stats-exporter
+    state: restarted
+
+- name: Restart the system daemon
+  systemd:
+    daemon_reload: true

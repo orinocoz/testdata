@@ -4,6 +4,7 @@
     update_cache: yes
     cache_valid_time: 86400
 
+# Proemetheus node exporter
 - name: Install APT prometheus-node-exporter
   ansible.builtin.apt:
     name:
@@ -13,4 +14,18 @@
   ansible.builtin.service:
     name: prometheus-node-exporter
     state: started
+    enabled: true
+
+# Rsyslog to Telegraf      
+- name:   Configure rsyslog to send logs to Telegraf
+  notify: Restart rsyslog
+  template:
+    src:  rsyslog.conf.j2
+    dest: /etc/rsyslog.d/rsyslog.conf
+    mode: '0644'
+    
+- name: Make sure ryslog is started
+  service:
+    name:    rsyslog
+    state:   started
     enabled: true

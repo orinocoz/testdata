@@ -53,3 +53,24 @@
     name: telegraf
     state: started
     enabled: true
+
+# Prometheus InfluxDB stats exporter
+- name: Install InfluxDB stats exporter
+  get_url:
+    url:   https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64
+    dest:  /usr/local/bin/
+    mode:  '0500'
+    owner: prometheus
+
+- name: Describe the service in '/etc/systemd/system/prometheus-influxdb-stats-exporter.service'
+  notify: Restart the System Daemon
+  template:
+    src:  prometheus-influxdb-stats-exporter.service.j2
+    dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+    mode: '0644'
+    
+- name: Make sure the InfluxDB stat exporter is started
+  service:
+    name:    prometheus-influxdb-stats-exporter
+    state:   started
+    enabled: true
