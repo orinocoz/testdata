@@ -63,7 +63,7 @@
     owner: prometheus
 
 - name: Describe the service in '/etc/systemd/system/prometheus-influxdb-stats-exporter.service'
-  notify: Restart the System Daemon
+  notify: Restart the system daemon
   template:
     src:  prometheus-influxdb-stats-exporter.service.j2
     dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
