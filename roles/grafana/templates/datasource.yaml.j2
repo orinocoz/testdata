@@ -14,7 +14,7 @@ datasources:
   - name:     influxdb:{{ influxdb_agama_database }}
     type:     influxdb
     access:   proxy
-    url:      http://influxdb:8086
+    url:      http://{{hostvars[groups['influxdb'][0]]['ansible_hostname']}}:8086
     database: {{ influxdb_agama_database }}
     editable: false
     uid:      {{ influxdb_agama_database }}
@@ -23,7 +23,7 @@ datasources:
   - name:     influxdb:{{ influxdb_telegraf_database }}
     type:     influxdb
     access:   proxy
-    url:      http://influxdb:8086
+    url:      http://{{hostvars[groups['influxdb'][0]]['ansible_hostname']}}:8086
     database: {{ influxdb_telegraf_database }}
     editable: false
     uid:      {{ influxdb_telegraf_database }}

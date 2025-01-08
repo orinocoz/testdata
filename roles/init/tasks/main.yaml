@@ -29,3 +29,32 @@
     name:    rsyslog
     state:   started
     enabled: true
+
+- name: Create backup user with SSH
+  ansible.builtin.user:
+    name: backup
+    state: present
+    home: /home/backup
+    shell: /bin/bash
+    generate_ssh_key: true
+
+- name: Create backup restore directory 
+  ansible.builtin.file:
+    path: /home/backup/restore
+    state: directory
+    mode: '0755'
+    owner: backup
+    group: backup
+
+- name: Create known_hosts for backup user
+  ansible.builtin.template:
+    src: backup_known_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+    owner: backup
+    group: backup
+    mode: 0644
+
+- name: Install duplicity
+  ansible.builtin.apt:
+    name: duplicity
+    state: present
