@@ -9,3 +9,7 @@
     state: restarted
     enabled: yes
 
+- name: Restart cron
+  ansible.builtin.service:
+    name: cron
+    state: restarted

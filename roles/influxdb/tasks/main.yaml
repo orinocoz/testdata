@@ -74,3 +74,17 @@
     name:    prometheus-influxdb-stats-exporter
     state:   started
     enabled: true
+
+- name: Create the InfluxDB backup directory
+  ansible.builtin.file:
+    path: /home/backup/influxdb
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0755'
+
+- name: Add cron tab
+  ansible.builtin.template:
+    src: templates/influxdb-backup.j2
+    dest: /etc/cron.d/influx-backup
+  notify: Restart cron

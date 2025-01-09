@@ -19,3 +19,8 @@
 - name: Restart the system daemon
   systemd:
     daemon_reload: true
+
+- name: Restart cron
+  ansible.builtin.service:
+    name: cron
+    state: restarted
