@@ -68,4 +68,38 @@
     state: started
     enabled: true
 
+- name: Create the mysql backup directory
+  ansible.builtin.file:
+    path: /home/backup/mysql
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0755'
+
+- name: Create MySQL backup user
+  community.mysql.mysql_user:
+    name: "{{ backup_host }}"
+    password: "{{ mysql_backup_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host: "%"
+    priv:
+      "{{ mysql_database }}.*:LOCK TABLES,SELECT"
+    state: present
+  no_log: true
+
+- name: Add MySQL backup user conf
+  ansible.builtin.template:
+    src: templates/mysql_backup.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: '0600'
+  no_log: true
+
+- name: Add cron tab
+  ansible.builtin.template:
+    src: templates/mysql-backup.j2
+    dest: /etc/cron.d/mysql-backup
+  notify: Restart cron
+
 

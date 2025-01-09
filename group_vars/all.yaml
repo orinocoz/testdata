@@ -1,3 +1,5 @@
+
+# MySQL
 mysql_host: orinocoz-2 
 mysql_database: agama
 mysql_user: agama
@@ -18,6 +20,7 @@ mysql_exporter_password: !vault |
           3634346432353363650a343439316631396530393961353362616362643264396363323661633961
           6537
 
+# Grafana          
 grafana_user: grafanaadmin
 grafana_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -27,6 +30,7 @@ grafana_password: !vault |
           3937633464613865390a386437346165663538666364363235316437366461616638386435353039
           6431
 
+# DNS          
 dns_forwarders:
   - 1.1.1.1
   - 8.8.8.8
@@ -38,6 +42,8 @@ dns_allowed_networks:
 
 startup_name: acme.ttu
 
+
+# Prometheus  
 prometheus_exporters:
   mysql:
     port: 9104
@@ -51,6 +57,7 @@ influxdb_agama_database:    agama_client_db
 influxdb_telegraf_database: telegraf
 influxdb_http_port:         8086
 
+# Backup  
 backup_user: backup
 backup_host: backup
 backup_host_ip: 192.168.42.132
@@ -62,4 +69,4 @@ backup_password: !vault |
           3535353438383837330a626162393931653033346538353432376537633437653764623464356132
           31323735386230646665656530386230323763306631366263373232663136626132
 backup_pub_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
-
+git_user: orinocoz
