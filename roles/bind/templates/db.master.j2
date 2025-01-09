@@ -13,4 +13,4 @@ $TTL 86400
 {% for host in groups['all'] %}
 {{ hostvars[host]['inventory_hostname'] }}	IN	A	{{ hostvars[host]['ansible_default_ipv4']['address'] | default('127.0.0.1') }}
 {% endfor %}
-
+{{ backup_host }} IN A {{backup_host_ip }}
