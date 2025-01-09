@@ -35,3 +35,7 @@ scrape_configs:
         - {{ vm }}:{{ prometheus_exporters['nginx']['port'] }}
 {% endfor %}
 
+
+  - job_name: 'backup_metrics'
+    static_configs:
+      - targets: ['backup.acme.ttu:9111'] 

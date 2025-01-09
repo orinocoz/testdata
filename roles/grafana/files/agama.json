@@ -611,24 +611,24 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "{cpu=\"0\", instance=\"iosind-1:9100\", job=\"linux\", mode=\"idle\"}"
+              "options": "{cpu=\"0\", instance=\"orinocoz-1:9100\", job=\"linux\", mode=\"idle\"}"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "iosind-1"
+                "value": "orinocoz-1"
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "{cpu=\"0\", instance=\"iosind-2:9100\", job=\"linux\", mode=\"idle\"}"
+              "options": "{cpu=\"0\", instance=\"orinocoz-2:9100\", job=\"linux\", mode=\"idle\"}"
             },
             "properties": [
               {
                 "id": "displayName",
-                "value": "iosind-2"
+                "value": "orinocoz-2"
               }
             ]
           }
