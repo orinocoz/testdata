@@ -51,6 +51,7 @@
     owner: grafana
     group: grafana
 
+
 - name: File main.json
   ansible.builtin.copy:
     src: main.json
@@ -73,3 +74,9 @@
    - Restart Grafana
 
 
+- name: File syslog.json
+  ansible.builtin.copy:
+    src: syslog.json
+    dest: /var/lib/grafana/dashboards/syslog.json
+  notify:
+   - Restart Grafana
