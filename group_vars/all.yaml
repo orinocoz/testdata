@@ -1,6 +1,6 @@
 
 # MySQL
-mysql_host: orinocoz-2 
+mysql_host: {{ git_user }}-2 
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -79,3 +79,12 @@ mysql_backup_password: !vault |
           3732653362373261660a346330386133353461323831376661613865343866393563643861333962
           3164
 mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
+
+mysql_replication_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35633138353834303961656363343463373136386236373331333262366565643036646330623735
+          6461623933376632623464633535353939316366306335300a383536393035306236363737313431
+          65393030396637306137666235316537633866306263636562353965646636343233633839313132
+          3732653362373261660a346330386133353461323831376661613865343866393563643861333962
+          3164
+node_id: "{{ (hostvars[inventory_hostname].ansible_port / 100) | int }}"
