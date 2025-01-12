@@ -1,6 +1,6 @@
 
 # MySQL
-mysql_host: {{ git_user }}-2 
+mysql_host: "{{ git_user }}-2" 
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
