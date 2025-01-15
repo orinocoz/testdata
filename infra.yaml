@@ -62,3 +62,9 @@
   roles:
     - agama_client
   tags: ac
+
+- name: Docker servers
+  hosts: docker
+  roles:
+    - docker
+  tags: d
