@@ -1,0 +1,12 @@
+- name: Install docker on the host
+  apt:
+    state: present
+    name: 
+      - docker.io
+      - python3-docker
+
+- name: Make sure docker is started
+  service:
+    name:    docker
+    state:   started
+    enabled: true
