@@ -12,10 +12,10 @@
     state:   started
     enabled: true
 
-- name: Debug docker installation
-  command: docker --version
-  register: docker_version_output
+      #- name: Debug docker installation
+      #  command: docker --version
+      #  register: docker_version_output
 
-- name: Display docker version (debugging)
-  debug:
-    msg: "{{ docker_version_output.stdout }}"
+      #- name: Display docker version (debugging)
+      #  debug:
+      #    msg: "{{ docker_version_output.stdout }}"
