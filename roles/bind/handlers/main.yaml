@@ -11,3 +11,7 @@
   ansible.builtin.systemd:
     daemon_reload: yes
 
+- name: Restart exporter service
+  ansible.builtin.service:
+    name: bind_exporter
+    state: restarted

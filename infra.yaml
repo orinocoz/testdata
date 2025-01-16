@@ -1,25 +1,9 @@
----
 - name: Initial setup
   hosts: all
   become: true
   roles:
     - init
   tags: i
-
-- name: Web server
-  hosts: web_servers
-  become: true
-  roles:
-    - agama
-    - uwsgi
-    - nginx
-  tags: w
-
-- name: Database server
-  hosts: db_servers
-  roles:
-    - mysql
-  tags: m
 
 - name: DNS server
   hosts: dns_servers
@@ -37,6 +21,24 @@
     - resolve
   tags: r
 
+- name: Docker servers
+  hosts: docker
+  roles:
+    - docker
+  tags: d
+
+- name: Database server
+  hosts: db_servers
+  roles:
+    - mysql
+  tags: m
+
+- name: Influx DB
+  hosts: influxdb
+  roles:
+    - influxdb
+  tags: if
+
 - name: Prometheus server
   hosts: prometheus
   roles:
@@ -51,20 +53,19 @@
     - grafana
   tags: g
 
-- name: Influx DB
-  hosts: influxdb
-  roles:
-    - influxdb
-  tags: if
-
 - name: Agama client
   hosts: agama_client
   roles:
     - agama_client
   tags: ac
 
-- name: Docker servers
-  hosts: docker
+- name: Web server
+  hosts: web_servers
+  become: true
   roles:
-    - docker
-  tags: d
+    - agama
+      #    - uwsgi
+    - nginx
+  tags: w
+
+
