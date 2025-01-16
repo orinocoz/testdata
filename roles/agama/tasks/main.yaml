@@ -1,31 +1,49 @@
-- name: Create agama user
-  ansible.builtin.user:
-    name: agama
-    state: present
-
-- name: Create /opt/agama directory
+- name: Create opt/agama directory owned by root
   ansible.builtin.file:
     path: /opt/agama
     state: directory
-    owner: agama
-    group: agama
 
-- name: Install dependencies
-  ansible.builtin.apt:
-    name:
-      - python3
-      - python3-venv
-      - sqlite3
-      - python3-flask
-      - python3-flask-sqlalchemy
-      - python3-pymysql
-    update_cache: yes
-    state: present
-
-- name: Download AGAMA application
+- name: Download agama
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
-    dest: /opt/agama/agama.py
-    owner: agama
-    group: agama
-    mode: '0755'
+    dest: /opt/agama/
+
+- name: Install agama
+  ansible.builtin.get_url: 
+    url: https://raw.githubusercontent.com/hudolejev/agama/master/Dockerfile
+    dest: /opt/agama/
+
+- name: Agama image for docker
+  community.docker.docker_image:
+    name: agama
+    source: build
+    build:
+      path: /opt/agama
+
+- name: Run Agama container(s)
+  community.docker.docker_container:
+    container_default_behavior: no_defaults
+    name: agama-{{ item }}
+    image: agama
+    state: started
+    volumes: /opt/agama:/opt/agama
+    restart_policy: always
+    published_ports:
+      - "{{ agama_port + item }}:8000"
+    env:
+      AGAMA_DATABASE_URI: mysql+pymysql://{{mysql_user}}:{{mysql_password}}@{{mysql_host}}/{{mysql_database}}
+  loop: "{{ range(0, containers) | list }}"
+    #  no_log: true
+
+- name: Check for amount of containers
+  command: docker ps -a -q
+  register: amount_containers
+  changed_when: false
+
+- name: Remove unused Agama containers
+  community.docker.docker_container:
+    name: "agama-{{ item }}"
+    state: absent
+    force_kill: yes
+  with_sequence: start="{{ containers + 1 | int }}" end="{{ containers + 1 + (amount_containers.stdout_lines | length) - 1 }}"
+

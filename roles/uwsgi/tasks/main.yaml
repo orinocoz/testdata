@@ -12,7 +12,7 @@
     dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
     mode: '0600'
-  no_log: true
+      #no_log: true
 
 - name: Restart uWSGI service if config changed
   ansible.builtin.service:
@@ -21,7 +21,7 @@
   notify:
     - Restart uWSGI
 
-- name: Ensure uWSGI service is started and enabled
+- name: Make sure uWSGI service is started and enabled
   ansible.builtin.service:
     name: uwsgi
     state: started

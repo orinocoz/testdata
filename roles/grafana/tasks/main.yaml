@@ -16,14 +16,14 @@
 
 - name: Create Grafana dashboard template
   ansible.builtin.template:
-    src: dashboards.yaml
+    src: dashboards.yaml.j2
     dest: /opt/grafana/provisioning/dashboards/dashboards.yaml
     mode: '0644'
   notify: Restart grafana-docker
 
 - name: Run grafana datasource template
   ansible.builtin.template:
-    src: datasources.yaml
+    src: datasources.yaml.j2
     dest: /opt/grafana/provisioning/datasources/datasources.yaml
     mode: '0644'
   notify: Restart grafana-docker
@@ -40,11 +40,12 @@
   notify: Restart grafana-docker
 
 - name: Run Grafana in docker
-  docker_container:
+  community.docker.docker_container:
     name: grafana
     image: grafana/grafana
     state: started
     restart_policy: always
     volumes: /opt/grafana:/etc/grafana
     published_ports: "{{ grafana_port }}:3000"
-
+    container_default_behavior: compatibility  
+  notify: Restart grafana-docker

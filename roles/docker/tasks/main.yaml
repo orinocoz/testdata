@@ -1,6 +1,7 @@
 - name: Install docker on the host
   apt:
     state: present
+    update_cache: yes    
     name: 
       - docker.io
       - python3-docker
@@ -10,3 +11,11 @@
     name:    docker
     state:   started
     enabled: true
+
+- name: Debug docker installation
+  command: docker --version
+  register: docker_version_output
+
+- name: Display docker version (debugging)
+  debug:
+    msg: "{{ docker_version_output.stdout }}"

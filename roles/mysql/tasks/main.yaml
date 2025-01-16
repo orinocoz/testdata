@@ -29,6 +29,7 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+    column_case_sensitive: false 
 
 - name: Override mysql bind address
   ansible.builtin.template:
@@ -47,6 +48,7 @@
     password: "{{ mysql_exporter_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
+    column_case_sensitive: false
 
 - name: MySQL Exporter user conf
   ansible.builtin.template:

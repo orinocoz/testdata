@@ -1,40 +1,35 @@
 server {
 	listen 80 default_server;
-	server_name orinocoz-1;
+	server_name _;
 
 	{% if inventory_hostname in groups['web_servers'] %}
 	location / {
-		uwsgi_pass localhost:5000;
-		include uwsgi_params;
+	     	proxy_pass http://localhost:{{ agama_port }};
+        	proxy_set_header Host $http_host;
 	}
 	{% endif %}
 
-	{% if inventory_hostname in groups['prometheus'] %}	
-	location / {
-            deny all;
-        }
+ 	{% if inventory_hostname in groups['prometheus_servers'] %}
 
-        location /prometheus {
-                proxy_pass http://localhost:9090;
-        }
-	{% endif %}
+	location /prometheus {
+        	proxy_pass http://localhost:9090;
+    	}
+    	{% endif %}
 
-        {% if inventory_hostname in groups['grafana'] %}
-        location /grafana {
-                proxy_pass http://localhost:3000;
-                proxy_set_header Host $http_host;
-        }
-        {% endif %}
-
+    	{% if inventory_hostname in groups['grafana'] %}
+    	location /grafana {
+        	proxy_set_header Host $http_host;
+        	proxy_pass http://localhost:{{ grafana_port }};
+    	}
+    	{% endif %}
 }
 
 server {
-        listen 8080 default_server;
+    listen 8080 default_server;
 
-        location = /stub_status {
-                stub_status;
-        }
+    location /stub_status {
+        stub_status;
+    }
 }
-
 
 
