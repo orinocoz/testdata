@@ -5,7 +5,7 @@
       - python3-pymysql
     state: present
 
-- name: Ensure MySQL is started and enabled
+- name: Make sure mysql is started and enabled
   service:
     name: mysql
     state: started
@@ -17,12 +17,12 @@
     state: started
     enabled: true
 
-- name: Create MySQL database
+- name: Create mysql database
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-- name: Create MySQL user
+- name: Create mysql user
   community.mysql.mysql_user:
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
@@ -38,11 +38,11 @@
   notify: 
     - Restart Mysql
 
-- name: MySQL Exporter
+- name: Mysql exporter
   ansible.builtin.apt:
     name: prometheus-mysqld-exporter
 
-- name: MySQL Exporter user
+- name: Mysql exporter user
   community.mysql.mysql_user:
     name: "{{ mysql_exporter_user }}"
     password: "{{ mysql_exporter_password }}"
@@ -50,7 +50,7 @@
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
     column_case_sensitive: false
 
-- name: MySQL Exporter user conf
+- name: Mysql exporter user conf
   ansible.builtin.template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
@@ -64,7 +64,7 @@
 - name: Force mysql exporter restart
   ansible.builtin.meta: flush_handlers
 
-- name: MySQL Exporter service
+- name: Mysql exporter service
   ansible.builtin.service:
     name: prometheus-mysqld-exporter
     state: started
@@ -78,7 +78,7 @@
     group: backup
     mode: '0755'
 
-- name: Create MySQL backup user
+- name: Create mysql backup user
   community.mysql.mysql_user:
     name: "{{ backup_host }}"
     password: "{{ mysql_backup_password }}"
@@ -89,7 +89,7 @@
     state: present
   no_log: true
 
-- name: Add MySQL backup user conf
+- name: Add mysql backup user conf
   ansible.builtin.template:
     src: templates/mysql_backup.cnf.j2
     dest: /home/backup/.my.cnf
@@ -98,7 +98,7 @@
     mode: '0600'
   no_log: true
 
-- name: Reset MySQL source
+- name: Reset mysql source
   community.mysql.mysql_replication:
     mode: "{{ item }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
@@ -107,7 +107,7 @@
     - resetprimary
   when: inventory_hostname == mysql_host
 
-- name: Reset MySQL replica
+- name: Reset mysql replica
   community.mysql.mysql_replication:
     mode: "{{ item }}"
     primary_host: "{{ mysql_host }}"

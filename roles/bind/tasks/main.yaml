@@ -21,12 +21,6 @@
     - local
   become: yes
 
-- name: Restart Bind9 after config changes
-  ansible.builtin.service:
-    name: bind9
-    state: restarted
-  become: yes
-
 - name: Configure master zone
   ansible.builtin.template:
     src: db.master.j2
