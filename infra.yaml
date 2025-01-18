@@ -68,4 +68,8 @@
     - nginx
   tags: w
 
-
+- name: Keepalived service
+  hosts: keepalived
+  roles:
+    - keepalived
+  tags: k

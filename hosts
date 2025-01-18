@@ -26,3 +26,7 @@ orinocoz-1
 [docker]
 orinocoz-1
 orinocoz-2
+
+[keepalived]
+orinocoz-2
+orinocoz-1
