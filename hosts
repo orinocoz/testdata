@@ -30,3 +30,8 @@ orinocoz-2
 [keepalived]
 orinocoz-2
 orinocoz-1
+
+[haproxy]
+orinocoz-2
+orinocoz-1
+

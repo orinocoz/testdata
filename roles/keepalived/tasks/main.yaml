@@ -23,7 +23,7 @@
   ansible.builtin.template:
     src: keepalived.conf.j2
     dest: /etc/keepalived/keepalived.conf
-    no_log: true
+      #no_log: true
   notify: Restart keepalived
 
 - name: Check keepalived script and restart
