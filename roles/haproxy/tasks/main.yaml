@@ -1,0 +1,35 @@
+- name: Install haproxy
+  ansible.builtin.apt:
+    name: haproxy
+    state: present
+
+- name: Configure haproxy
+  ansible.builtin.template:
+    dest: /etc/haproxy/haproxy.cfg
+    src: haproxy.cfg.j2
+  notify: Restart haproxy
+
+- name: Install haproxy exporter
+  ansible.builtin.apt:
+    name: prometheus-haproxy-exporter
+    state: present
+  
+- name: Create prometheus scrape uri
+  ansible.builtin.template:
+    src: haproxy.scrape-uri.j2
+    dest: /etc/default/prometheus-haproxy-exporter
+  notify: 
+    - Restart haproxy
+    - Restart haproxy exporter
+
+- name: Make sure haproxy running
+  ansible.builtin.service:
+    name: haproxy
+    state: started
+    enabled: true
+
+- name: Make sure haproxy exporter running
+  ansible.builtin.service:
+    name: prometheus-haproxy-exporter
+    state: started
+    enabled: true
