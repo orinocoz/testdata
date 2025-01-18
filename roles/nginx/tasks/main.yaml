@@ -15,8 +15,8 @@
   notify:
     - Restart Nginx
 
-- name: Flush nginx handlers
-  ansible.builtin.meta: flush_handlers
+      #- name: Flush nginx handlers
+      #  ansible.builtin.meta: flush_handlers
 
 - name: Make sure Nginx service is started and enabled
   ansible.builtin.service:
