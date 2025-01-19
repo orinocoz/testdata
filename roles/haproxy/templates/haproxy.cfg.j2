@@ -1,6 +1,7 @@
 global
     log /dev/log    local0
     log /dev/log    local1 notice
+    stats timeout 30s
     user haproxy
     group haproxy
     daemon
@@ -25,8 +26,10 @@ defaults
 listen mybackend
     bind :88
     {% for num in range(0,containers) %}
-    server lb-1-{{ num }} lb-1:{{ 8001 + num }} check
-    server lb-2-{{ num }} lb-2:{{ 8001 + num }} check
+        server {{inventory_hostname}}-agama-1 {{ groups['web_servers'][0] }}:8001 check
+        server {{inventory_hostname}}-agama-2 {{ groups['web_servers'][0] }}:8002 check
+        server {{inventory_hostname}}-agama-3 {{ groups['web_servers'][1] }}:8001 check
+        server {{inventory_hostname}}-agama-4 {{ groups['web_servers'][1] }}:8002 check
     {% endfor %}
 
 
