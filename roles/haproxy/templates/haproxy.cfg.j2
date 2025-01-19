@@ -25,12 +25,10 @@ defaults
 
 listen mybackend
     bind :88
-    {% for num in range(0,containers) %}
         server {{inventory_hostname}}-agama-1 {{ groups['web_servers'][0] }}:8001 check
         server {{inventory_hostname}}-agama-2 {{ groups['web_servers'][0] }}:8002 check
         server {{inventory_hostname}}-agama-3 {{ groups['web_servers'][1] }}:8001 check
         server {{inventory_hostname}}-agama-4 {{ groups['web_servers'][1] }}:8002 check
-    {% endfor %}
 
 
 listen stats
