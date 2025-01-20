@@ -8,7 +8,7 @@ acl dns_allowed_networks{
 options {
   directory "/var/cache/bind";
 
-  allow-query {dns_allowed_networks;};
+  allow-query {dns_allowed_networks; 172.17.0.0/16;};
 
   forwarders {
    {% for n in dns_forwarders %}
@@ -18,9 +18,19 @@ options {
 
   forward first;
   dnssec-validation no;
+  listen-on-v6 { none; };
 };
 
 statistics-channels {
   inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
 };
 
+key "transfer.key" {
+	algorithm hmac-sha256;
+	secret "{{ transfer_key | trim }}";
+};
+
+key "nsupdate.key" {
+  algorithm hmac-sha256;
+  secret "{{ nsupdate_key | trim }}";
+};

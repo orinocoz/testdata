@@ -59,7 +59,7 @@
     dest: /var/cache/bind/db.rev
     force: yes
   notify: Restart bind9
-  when: inventory_hostname in groups['ns_masters']
+  when: inventory_hostname in groups['dns_primary']
 
 - name: Install nsupdate dependency
   ansible.builtin.apt:
@@ -73,19 +73,24 @@
   community.general.nsupdate:
     key_algorithm: hmac-sha256
     key_name: nsupdate.key
-    key_secret: "{{ ns_update_key }}"
+    key_secret: "{{ nsupdate_key }}"
     record: backup
-    server: "{{hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address']}}"
+    server: "{{hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address']}}"
     state: present
     type: A
     zone: "{{ startup_name }}"
     value: "{{ backup_host_ip }}"
   register: nsupdate_result
-  when: inventory_hostname in groups['dns_masters']
+  when: inventory_hostname in groups['dns_primary']
 
-- name: Assign CNAME
-  include_role:
-    name: "ns_record"
-  vars:
-    service: "{{ inventory_hostname | replace('orinocoz','ns') }}"
-
+- name: Assign CNAME record
+  community.general.nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdate.key"
+    key_secret: "{{ nsupdate_key }}"
+    record: "{{ inventory_hostname | replace('orinocoz', 'ns') }}"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    state: present
+    type: CNAME
+    zone: "{{ startup_name }}"
+    value: "{{ inventory_hostname }}"
