@@ -1,11 +1,11 @@
-- name: Install Bind9
+- name: Install bind9
   ansible.builtin.apt:
     name: bind9
     state: present
     update_cache: yes
   become: yes
 
-- name: Ensure Bind9 is running and enabled
+- name: Make sure bind9 is running and enabled
   ansible.builtin.service:
     name: bind9
     state: started
@@ -27,7 +27,8 @@
     dest: /var/cache/bind/db.{{ startup_name }}
   become: yes
   notify: Reload rndc
-- name: Download and extract Bind9 exporter to /opt
+
+- name: Download and extract bind9 exporter to /opt
   ansible.builtin.unarchive:
     src: https://github.com/prometheus-community/bind_exporter/releases/download/v0.6.1/bind_exporter-0.6.1.linux-amd64.tar.gz
     dest: /opt
@@ -51,4 +52,40 @@
     name: bind_exporter
     state: started
     enabled: true
+
+- name: Configure rev
+  ansible.builtin.template:
+    src: db.rev.j2
+    dest: /var/cache/bind/db.rev
+    force: yes
+  notify: Restart bind9
+  when: inventory_hostname in groups['ns_masters']
+
+- name: Install nsupdate dependency
+  ansible.builtin.apt:
+    name: python3-dnspython
+    state: present
+
+- name: Flush bind handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Add backup record
+  community.general.nsupdate:
+    key_algorithm: hmac-sha256
+    key_name: nsupdate.key
+    key_secret: "{{ ns_update_key }}"
+    record: backup
+    server: "{{hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address']}}"
+    state: present
+    type: A
+    zone: "{{ startup_name }}"
+    value: "{{ backup_host_ip }}"
+  register: nsupdate_result
+  when: inventory_hostname in groups['dns_masters']
+
+- name: Assign CNAME
+  include_role:
+    name: "ns_record"
+  vars:
+    service: "{{ inventory_hostname | replace('orinocoz','ns') }}"
 
