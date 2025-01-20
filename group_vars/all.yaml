@@ -71,6 +71,7 @@ backup_password: !vault |
 backup_pub_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEu6pFFWyuRrl4WGFPQGElYN9txwTGm2wSntcpVAaN90
 git_user: orinocoz
 
+# MySQL
 mysql_backup_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           35633138353834303961656363343463373136386236373331333262366565643036646330623735
@@ -89,11 +90,13 @@ mysql_replication_password: !vault |
           3164
 node_id: "{{ (hostvars[inventory_hostname].ansible_port / 100) | int }}"
 
+# Grafana
 grafana_port: 3001
 agama_port: 8001
 agama_port2: 8002
 containers: 2
 
+# HAproxy
 auth_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           35633138353834303961656363343463373136386236373331333262366565643036646330623735
@@ -103,6 +106,7 @@ auth_password: !vault |
           3164
 haproxy_port: 9188
 
+# DNS
 transfer_key: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           32626462623335623335336233373339613766626435333330633731393336346631636639653261

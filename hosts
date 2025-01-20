@@ -22,13 +22,13 @@ dns_primary
 dns_secondary
 
 [prometheus]
-orinocoz-2
+orinocoz-3
 
 [grafana]
-orinocoz-1
+orinocoz-3
 
 [influxdb]
-orinocoz-1
+orinocoz-3
 
 [agama_client]
 orinocoz-1
@@ -36,6 +36,7 @@ orinocoz-1
 [docker]
 orinocoz-1
 orinocoz-2
+orinocoz-3
 
 [keepalived]
 orinocoz-2
