@@ -83,14 +83,31 @@
   register: nsupdate_result
   when: inventory_hostname in groups['dns_primary']
 
-- name: Assign CNAME record
+    #- name: Assign CNAME record
+    #  community.general.nsupdate:
+    #    key_algorithm: "hmac-sha256"
+    #    key_name: "nsupdate.key"
+    #    key_secret: "{{ nsupdate_key }}"
+    #    record: "{{ inventory_hostname | replace('orinocoz', 'ns') }}"
+    #    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    #    state: present
+    #    type: CNAME
+    #    zone: "{{ startup_name }}"
+    #    value: "{{ inventory_hostname }}"
+
+- name: Assign CNAME records for ns and www
   community.general.nsupdate:
     key_algorithm: "hmac-sha256"
     key_name: "nsupdate.key"
     key_secret: "{{ nsupdate_key }}"
-    record: "{{ inventory_hostname | replace('orinocoz', 'ns') }}"
+    record: "{{ inventory_hostname | replace('orinocoz', item) }}"
     server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
     state: present
     type: CNAME
     zone: "{{ startup_name }}"
     value: "{{ inventory_hostname }}"
+  with_items:
+    - "ns"
+    - "www"
+    - "grafana"
+    - "lb"

@@ -1,6 +1,6 @@
-orinocoz-1 ansible_host=193.40.156.67 ansible_port=4522 ansible_user=ubuntu
-orinocoz-2 ansible_host=193.40.156.67 ansible_port=6222 ansible_user=ubuntu
-orinocoz-3 ansible_host=193.40.156.67 ansible_port=2822 ansible_user=ubuntu
+orinocoz-1 ansible_host=193.40.156.67 ansible_port=38022 ansible_user=ubuntu
+orinocoz-2 ansible_host=193.40.156.67 ansible_port=37522 ansible_user=ubuntu
+orinocoz-3 ansible_host=193.40.156.67 ansible_port=34322 ansible_user=ubuntu
 
 [web_servers]
 orinocoz-1
@@ -10,17 +10,25 @@ orinocoz-2
 orinocoz-1
 orinocoz-2
 
-[dns_servers]
+[dns_primary]
+orinocoz-3
+
+[dns_secondary]
+orinocoz-1
 orinocoz-2
+
+[dns_servers:children]
+dns_primary
+dns_secondary
 
 [prometheus]
-orinocoz-2
+orinocoz-3
 
 [grafana]
-orinocoz-1
+orinocoz-3
 
 [influxdb]
-orinocoz-1
+orinocoz-3
 
 [agama_client]
 orinocoz-1
@@ -28,6 +36,7 @@ orinocoz-1
 [docker]
 orinocoz-1
 orinocoz-2
+orinocoz-3
 
 [keepalived]
 orinocoz-2
@@ -37,4 +46,3 @@ orinocoz-1
 orinocoz-2
 orinocoz-1
 
-orinocoz-3 ansible_host=193.40.156.67 ansible_port=2822
