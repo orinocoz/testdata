@@ -36,7 +36,7 @@
     src: override.cnf.j2
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify: 
-    - Restart Mysql
+    - Restart mysql
 
 - name: Mysql exporter
   ansible.builtin.apt:
@@ -59,7 +59,7 @@
     mode: '0600'
   no_log: true
   notify:
-    - Restart MySQL Exporter
+    - Restart mysql exporter
 
 - name: Force mysql exporter restart
   ansible.builtin.meta: flush_handlers
