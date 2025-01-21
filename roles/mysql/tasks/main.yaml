@@ -104,4 +104,8 @@
     dest: /etc/cron.d/mysql-backup
   notify: Restart cron
 
-
+- name: Assign CNAME
+  include_role:
+    name: "dns_record"
+  vars:
+    service: "{{ inventory_hostname | replace('orinocoz','db') }}"

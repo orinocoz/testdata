@@ -1,4 +1,4 @@
-Mon Jan 20 11:05:28 PM EET 2025
+Tue Jan 21 11:37:14 AM EET 2025
 + hostname
 angaar
 + ansible-playbook infra.yaml --diff
@@ -11,9 +11,9 @@ ok: [orinocoz-1]
 ok: [orinocoz-3]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Install APT prometheus-node-exporter] *****************************
 ok: [orinocoz-2]
@@ -21,51 +21,51 @@ ok: [orinocoz-1]
 ok: [orinocoz-3]
 
 TASK [init : Prometheus node exporter service] *********************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Configure rsyslog to send logs to Telegraf] ***********************
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 
 TASK [init : Make sure ryslog is started] **************************************
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [init : Create backup user with SSH] **************************************
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 ok: [orinocoz-2]
-ok: [orinocoz-1]
 
 TASK [init : Create backup restore directory] **********************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [init : Create known_hosts for backup user] *******************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Install duplicity] ************************************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [bind : Make sure bind9 is running and enabled] ***************************
 ok: [orinocoz-3]
@@ -76,34 +76,34 @@ TASK [bind : Configure DNS forwarders] *****************************************
 ok: [orinocoz-2] => (item=options)
 ok: [orinocoz-3] => (item=options)
 ok: [orinocoz-1] => (item=options)
-ok: [orinocoz-3] => (item=local)
 ok: [orinocoz-2] => (item=local)
+ok: [orinocoz-3] => (item=local)
 ok: [orinocoz-1] => (item=local)
 
 TASK [bind : Configure master zone] ********************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [bind : Download and extract bind9 exporter to /opt] **********************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 ok: [orinocoz-1]
 
 TASK [bind : Create symlink to /usr/local/bin/bind_exporter] *******************
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Bind exporter service] ********************************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Configure rev] ****************************************************
 skipping: [orinocoz-1]
@@ -111,9 +111,9 @@ skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [bind : Install nsupdate dependency] **************************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [bind : Flush bind handlers] **********************************************
 
@@ -126,17 +126,26 @@ skipping: [orinocoz-1]
 skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
-TASK [bind : Assign CNAME record] **********************************************
-ok: [orinocoz-3]
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+TASK [bind : Assign CNAME records for ns and www] ******************************
+ok: [orinocoz-1] => (item=ns)
+ok: [orinocoz-2] => (item=ns)
+ok: [orinocoz-3] => (item=ns)
+ok: [orinocoz-2] => (item=www)
+ok: [orinocoz-3] => (item=www)
+ok: [orinocoz-1] => (item=www)
+ok: [orinocoz-1] => (item=grafana)
+ok: [orinocoz-2] => (item=grafana)
+ok: [orinocoz-3] => (item=grafana)
+ok: [orinocoz-3] => (item=lb)
+ok: [orinocoz-2] => (item=lb)
+ok: [orinocoz-1] => (item=lb)
 
 PLAY [DNS resolver] ************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [resolve : Stop daemon systemd-resolved] **********************************
 ok: [orinocoz-1]
@@ -144,26 +153,26 @@ ok: [orinocoz-3]
 ok: [orinocoz-2]
 
 TASK [resolve : Change DNS configuration file] *********************************
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 
 PLAY [Docker servers] **********************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [docker : Install docker on the host] *************************************
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 
 TASK [docker : Make sure docker is started] ************************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 PLAY [Database server] *********************************************************
 
@@ -176,78 +185,60 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Make sure mysql is started and enabled] **************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Make sure mysql is running] **************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Create mysql database] *******************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Create mysql user] ***********************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Override mysql bind address] *************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Mysql exporter] **************************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Mysql exporter user] *********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Mysql exporter user conf] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : Mysql exporter service] ******************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Create the mysql backup directory] *******************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Create mysql backup user] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Add mysql backup user conf] **************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
-
-TASK [mysql : Reset mysql source] **********************************************
-skipping: [orinocoz-1] => (item=stopreplica) 
-skipping: [orinocoz-1] => (item=resetprimary) 
-skipping: [orinocoz-1]
-changed: [orinocoz-2] => (item=stopreplica)
-changed: [orinocoz-2] => (item=resetprimary)
-
-TASK [mysql : Reset mysql replica] *********************************************
-skipping: [orinocoz-2] => (item=stopreplica) 
-skipping: [orinocoz-2] => (item=changeprimary) 
-skipping: [orinocoz-2] => (item=resetreplica) 
-skipping: [orinocoz-2] => (item=startreplica) 
-skipping: [orinocoz-2]
-changed: [orinocoz-1] => (item=stopreplica)
-changed: [orinocoz-1] => (item=changeprimary)
-changed: [orinocoz-1] => (item=resetreplica)
-changed: [orinocoz-1] => (item=startreplica)
+ok: [orinocoz-1]
 
 TASK [mysql : Add cron tab] ****************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 PLAY [Influx DB] ***************************************************************
 
@@ -423,8 +414,8 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [agama : Install agama] ***************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Agama image for docker] ******************************************
 ok: [orinocoz-2]
@@ -445,29 +436,28 @@ ok: [orinocoz-2]
 TASK [agama : Remove unused Agama containers] **********************************
 ok: [orinocoz-2] => (item=3)
 ok: [orinocoz-1] => (item=3)
-ok: [orinocoz-1] => (item=4)
 ok: [orinocoz-2] => (item=4)
-ok: [orinocoz-1] => (item=5)
+ok: [orinocoz-1] => (item=4)
 
 TASK [nginx : Update the repository cache and update nginx to latest version] ***
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Install Nginx] ***************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Nginx configuration] *********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [nginx : Flush nginx handlers] ********************************************
 
 TASK [nginx : Flush nginx handlers] ********************************************
 
 TASK [nginx : Make sure Nginx service is started and enabled] ******************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
 ok: [orinocoz-2]
@@ -480,24 +470,24 @@ ok: [orinocoz-1]
 PLAY [Keepalived service] ******************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Install keepalived] *****************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Make sure keepalive is running] *****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Create keepalived home dir] *********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Create keepalived config] ***********************************
 ok: [orinocoz-2]
@@ -516,8 +506,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Create keepalive service] ***********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Make sure keepalive exporter is started] ********************
 ok: [orinocoz-2]
@@ -526,12 +516,12 @@ ok: [orinocoz-1]
 PLAY [Haproxy] *****************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [haproxy : Install haproxy] ***********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Configure haproxy] *********************************************
 ok: [orinocoz-2]
@@ -550,12 +540,12 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Make sure haproxy exporter running] ****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY RECAP *********************************************************************
-orinocoz-1                 : ok=83   changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-orinocoz-2                 : ok=75   changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+orinocoz-1                 : ok=82   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+orinocoz-2                 : ok=74   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 orinocoz-3                 : ok=68   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
@@ -563,99 +553,99 @@ orinocoz-3                 : ok=68   changed=0    unreachable=0    failed=0    s
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 ok: [orinocoz-1]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Install APT prometheus-node-exporter] *****************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Prometheus node exporter service] *********************************
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [init : Configure rsyslog to send logs to Telegraf] ***********************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Make sure ryslog is started] **************************************
-ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [init : Create backup user with SSH] **************************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Create backup restore directory] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [init : Create known_hosts for backup user] *******************************
-ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [init : Install duplicity] ************************************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [bind : Install bind9] ****************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 ok: [orinocoz-1]
 
 TASK [bind : Make sure bind9 is running and enabled] ***************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [bind : Configure DNS forwarders] *****************************************
-ok: [orinocoz-3] => (item=options)
 ok: [orinocoz-1] => (item=options)
+ok: [orinocoz-3] => (item=options)
 ok: [orinocoz-2] => (item=options)
+ok: [orinocoz-2] => (item=local)
 ok: [orinocoz-3] => (item=local)
 ok: [orinocoz-1] => (item=local)
-ok: [orinocoz-2] => (item=local)
 
 TASK [bind : Configure master zone] ********************************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Download and extract bind9 exporter to /opt] **********************
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 
 TASK [bind : Create symlink to /usr/local/bin/bind_exporter] *******************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
-ok: [orinocoz-1]
 ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 
 TASK [bind : Bind exporter service] ********************************************
 ok: [orinocoz-3]
@@ -668,8 +658,8 @@ skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [bind : Install nsupdate dependency] **************************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 
 TASK [bind : Flush bind handlers] **********************************************
@@ -683,54 +673,63 @@ skipping: [orinocoz-1]
 skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
-TASK [bind : Assign CNAME record] **********************************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+TASK [bind : Assign CNAME records for ns and www] ******************************
+ok: [orinocoz-3] => (item=ns)
+ok: [orinocoz-2] => (item=ns)
+ok: [orinocoz-1] => (item=ns)
+ok: [orinocoz-3] => (item=www)
+ok: [orinocoz-1] => (item=www)
+ok: [orinocoz-2] => (item=www)
+ok: [orinocoz-3] => (item=grafana)
+ok: [orinocoz-2] => (item=grafana)
+ok: [orinocoz-1] => (item=grafana)
+ok: [orinocoz-2] => (item=lb)
+ok: [orinocoz-3] => (item=lb)
+ok: [orinocoz-1] => (item=lb)
 
 PLAY [DNS resolver] ************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 
 TASK [resolve : Stop daemon systemd-resolved] **********************************
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 
 TASK [resolve : Change DNS configuration file] *********************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 
 PLAY [Docker servers] **********************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 ok: [orinocoz-2]
-ok: [orinocoz-1]
 
 TASK [docker : Install docker on the host] *************************************
-ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [docker : Make sure docker is started] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 
 PLAY [Database server] *********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Install mysql] ***************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Make sure mysql is started and enabled] **************************
 ok: [orinocoz-1]
@@ -753,24 +752,24 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Mysql exporter] **************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Mysql exporter user] *********************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Mysql exporter user conf] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : Mysql exporter service] ******************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Create the mysql backup directory] *******************************
 ok: [orinocoz-1]
@@ -784,27 +783,9 @@ TASK [mysql : Add mysql backup user conf] **************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
-TASK [mysql : Reset mysql source] **********************************************
-skipping: [orinocoz-1] => (item=stopreplica) 
-skipping: [orinocoz-1] => (item=resetprimary) 
-skipping: [orinocoz-1]
-changed: [orinocoz-2] => (item=stopreplica)
-changed: [orinocoz-2] => (item=resetprimary)
-
-TASK [mysql : Reset mysql replica] *********************************************
-skipping: [orinocoz-2] => (item=stopreplica) 
-skipping: [orinocoz-2] => (item=changeprimary) 
-skipping: [orinocoz-2] => (item=resetreplica) 
-skipping: [orinocoz-2] => (item=startreplica) 
-skipping: [orinocoz-2]
-changed: [orinocoz-1] => (item=stopreplica)
-changed: [orinocoz-1] => (item=changeprimary)
-changed: [orinocoz-1] => (item=resetreplica)
-changed: [orinocoz-1] => (item=startreplica)
-
 TASK [mysql : Add cron tab] ****************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Influx DB] ***************************************************************
 
@@ -972,8 +953,8 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [agama : Create opt/agama directory owned by root] ************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Download agama] **************************************************
 ok: [orinocoz-1]
@@ -988,27 +969,26 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [agama : Run Agama container(s)] ******************************************
-ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-2]
 ok: [orinocoz-1] => (item=None)
 ok: [orinocoz-1]
 
 TASK [agama : Check for amount of containers] **********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Remove unused Agama containers] **********************************
-ok: [orinocoz-2] => (item=3)
 ok: [orinocoz-1] => (item=3)
-ok: [orinocoz-2] => (item=4)
+ok: [orinocoz-2] => (item=3)
 ok: [orinocoz-1] => (item=4)
-ok: [orinocoz-1] => (item=5)
+ok: [orinocoz-2] => (item=4)
 
 TASK [nginx : Update the repository cache and update nginx to latest version] ***
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Install Nginx] ***************************************************
 ok: [orinocoz-2]
@@ -1027,12 +1007,12 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Keepalived service] ******************************************************
 
@@ -1041,8 +1021,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Install keepalived] *****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Create keepalived_script user] ******************************
 ok: [orinocoz-2]
@@ -1077,8 +1057,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Make sure keepalive exporter is started] ********************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Haproxy] *****************************************************************
 
@@ -1095,8 +1075,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Install haproxy exporter] **************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Create prometheus scrape uri] **********************************
 ok: [orinocoz-2]
@@ -1111,24 +1091,24 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 PLAY RECAP *********************************************************************
-orinocoz-1                 : ok=83   changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-orinocoz-2                 : ok=75   changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+orinocoz-1                 : ok=82   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+orinocoz-2                 : ok=74   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 orinocoz-3                 : ok=68   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
 orinocoz-3 | CHANGED => {
     "changed": true,
-    "elapsed": 36,
+    "elapsed": 48,
     "rebooted": true
 }
 orinocoz-1 | CHANGED => {
     "changed": true,
-    "elapsed": 42,
+    "elapsed": 54,
     "rebooted": true
 }
 orinocoz-2 | CHANGED => {
     "changed": true,
-    "elapsed": 43,
+    "elapsed": 55,
     "rebooted": true
 }
 + sleep 15
@@ -1137,61 +1117,61 @@ orinocoz-2 | CHANGED => {
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 
 TASK [init : Install APT prometheus-node-exporter] *****************************
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 
 TASK [init : Prometheus node exporter service] *********************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Configure rsyslog to send logs to Telegraf] ***********************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Make sure ryslog is started] **************************************
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 
 TASK [init : Create backup user with SSH] **************************************
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 
 TASK [init : Create backup restore directory] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [init : Create known_hosts for backup user] *******************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [init : Install duplicity] ************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-3]
 
 TASK [bind : Install bind9] ****************************************************
 ok: [orinocoz-1]
@@ -1204,29 +1184,28 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [bind : Configure DNS forwarders] *****************************************
-ok: [orinocoz-3] => (item=options)
 ok: [orinocoz-2] => (item=options)
+ok: [orinocoz-3] => (item=options)
 ok: [orinocoz-1] => (item=options)
-ok: [orinocoz-3] => (item=local)
 ok: [orinocoz-2] => (item=local)
+ok: [orinocoz-3] => (item=local)
 ok: [orinocoz-1] => (item=local)
 
 TASK [bind : Configure master zone] ********************************************
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 diff skipped: destination file appears to be binary
 changed: [orinocoz-2]
-diff skipped: destination file appears to be binary
-changed: [orinocoz-1]
 
 TASK [bind : Download and extract bind9 exporter to /opt] **********************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Create symlink to /usr/local/bin/bind_exporter] *******************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
 ok: [orinocoz-2]
@@ -1235,8 +1214,8 @@ ok: [orinocoz-1]
 
 TASK [bind : Bind exporter service] ********************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Configure rev] ****************************************************
 skipping: [orinocoz-1]
@@ -1244,8 +1223,8 @@ skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [bind : Install nsupdate dependency] **************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [bind : Flush bind handlers] **********************************************
@@ -1256,29 +1235,37 @@ TASK [bind : Flush bind handlers] **********************************************
 
 RUNNING HANDLER [bind : Reload rndc] *******************************************
 changed: [orinocoz-2]
-changed: [orinocoz-1]
 
 TASK [bind : Add backup record] ************************************************
 skipping: [orinocoz-1]
 skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
-TASK [bind : Assign CNAME record] **********************************************
-ok: [orinocoz-3]
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+TASK [bind : Assign CNAME records for ns and www] ******************************
+ok: [orinocoz-3] => (item=ns)
+ok: [orinocoz-2] => (item=ns)
+ok: [orinocoz-1] => (item=ns)
+ok: [orinocoz-3] => (item=www)
+ok: [orinocoz-2] => (item=www)
+ok: [orinocoz-1] => (item=www)
+ok: [orinocoz-3] => (item=grafana)
+ok: [orinocoz-2] => (item=grafana)
+ok: [orinocoz-1] => (item=grafana)
+ok: [orinocoz-3] => (item=lb)
+ok: [orinocoz-2] => (item=lb)
+ok: [orinocoz-1] => (item=lb)
 
 PLAY [DNS resolver] ************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [resolve : Stop daemon systemd-resolved] **********************************
-changed: [orinocoz-3]
 changed: [orinocoz-1]
 changed: [orinocoz-2]
+changed: [orinocoz-3]
 
 TASK [resolve : Change DNS configuration file] *********************************
 ok: [orinocoz-2]
@@ -1288,33 +1275,33 @@ ok: [orinocoz-1]
 PLAY [Docker servers] **********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [docker : Install docker on the host] *************************************
-ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [docker : Make sure docker is started] ************************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 PLAY [Database server] *********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Install mysql] ***************************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Make sure mysql is started and enabled] **************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Make sure mysql is running] **************************************
 ok: [orinocoz-1]
@@ -1325,24 +1312,24 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Create mysql user] ***********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Override mysql bind address] *************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Mysql exporter] **************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Mysql exporter user] *********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Mysql exporter user conf] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
@@ -1357,34 +1344,16 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Create mysql backup user] ****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Add mysql backup user conf] **************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
-TASK [mysql : Reset mysql source] **********************************************
-skipping: [orinocoz-1] => (item=stopreplica) 
-skipping: [orinocoz-1] => (item=resetprimary) 
-skipping: [orinocoz-1]
-changed: [orinocoz-2] => (item=stopreplica)
-changed: [orinocoz-2] => (item=resetprimary)
-
-TASK [mysql : Reset mysql replica] *********************************************
-skipping: [orinocoz-2] => (item=stopreplica) 
-skipping: [orinocoz-2] => (item=changeprimary) 
-skipping: [orinocoz-2] => (item=resetreplica) 
-skipping: [orinocoz-2] => (item=startreplica) 
-skipping: [orinocoz-2]
-changed: [orinocoz-1] => (item=stopreplica)
-changed: [orinocoz-1] => (item=changeprimary)
-changed: [orinocoz-1] => (item=resetreplica)
-changed: [orinocoz-1] => (item=startreplica)
-
 TASK [mysql : Add cron tab] ****************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Influx DB] ***************************************************************
 
@@ -1543,7 +1512,7 @@ ok: [orinocoz-1]
 TASK [agama_client : Flush agama_client handlers] ******************************
 
 TASK [agama_client : Start agama-client service] *******************************
-ok: [orinocoz-1]
+changed: [orinocoz-1]
 
 PLAY [Web server] **************************************************************
 
@@ -1556,8 +1525,8 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [agama : Download agama] **************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Install agama] ***************************************************
 ok: [orinocoz-1]
@@ -1568,12 +1537,12 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [agama : Run Agama container(s)] ******************************************
-ok: [orinocoz-1] => (item=None)
 ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-1] => (item=None)
-ok: [orinocoz-1]
 ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-2]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
 
 TASK [agama : Check for amount of containers] **********************************
 ok: [orinocoz-2]
@@ -1584,7 +1553,6 @@ ok: [orinocoz-2] => (item=3)
 ok: [orinocoz-1] => (item=3)
 ok: [orinocoz-2] => (item=4)
 ok: [orinocoz-1] => (item=4)
-ok: [orinocoz-1] => (item=5)
 
 TASK [nginx : Update the repository cache and update nginx to latest version] ***
 ok: [orinocoz-2]
@@ -1603,16 +1571,16 @@ TASK [nginx : Flush nginx handlers] ********************************************
 TASK [nginx : Flush nginx handlers] ********************************************
 
 TASK [nginx : Make sure Nginx service is started and enabled] ******************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 PLAY [Keepalived service] ******************************************************
 
@@ -1641,12 +1609,12 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Check keepalived script and restart] ************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Download Keepalive exporter] ********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Install Keepalived exporter] ********************************
 ok: [orinocoz-2]
@@ -1671,16 +1639,16 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Configure haproxy] *********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Install haproxy exporter] **************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Create prometheus scrape uri] **********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [haproxy : Make sure haproxy running] *************************************
 ok: [orinocoz-2]
@@ -1691,9 +1659,9 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 PLAY RECAP *********************************************************************
-orinocoz-1                 : ok=84   changed=4    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
-orinocoz-2                 : ok=76   changed=4    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+orinocoz-1                 : ok=82   changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+orinocoz-2                 : ok=75   changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
 orinocoz-3                 : ok=68   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Mon Jan 20 11:12:51 PM EET 2025
+Tue Jan 21 11:44:39 AM EET 2025

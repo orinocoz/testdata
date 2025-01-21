@@ -49,3 +49,9 @@
     published_ports: "{{ grafana_port }}:3000"
     container_default_behavior: compatibility  
   notify: Restart grafana-docker
+
+- name: Assign CNAME
+  include_role:
+    name: "dns_record"
+  vars:
+    service: "grafana"

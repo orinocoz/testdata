@@ -92,6 +92,8 @@ node_id: "{{ (hostvars[inventory_hostname].ansible_port / 100) | int }}"
 
 # Grafana
 grafana_port: 3001
+
+# Agama
 agama_port: 8001
 agama_port2: 8002
 containers: 2

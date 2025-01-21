@@ -88,3 +88,9 @@
     src: templates/influxdb-backup.j2
     dest: /etc/cron.d/influx-backup
   notify: Restart cron
+
+- name: Assign CNAME
+  include_role:
+    name: "dns_record"
+  vars:
+    service: "{{ inventory_hostname | replace('orinocoz','influxdb') }}"

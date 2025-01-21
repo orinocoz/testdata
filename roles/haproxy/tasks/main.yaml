@@ -33,3 +33,9 @@
     name: prometheus-haproxy-exporter
     state: started
     enabled: true
+
+- name: Assign CNAME
+  include_role:
+    name: "dns_record"
+  vars:
+    service: "{{ inventory_hostname | replace('orinocoz','lb') }}"
