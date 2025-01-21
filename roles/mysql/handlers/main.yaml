@@ -14,26 +14,26 @@
     name: cron
     state: restarted
 
-- name: Reset mysql source
+- name: Reset MySQL source
+  when: inventory_hostname in groups['db_primary']
   community.mysql.mysql_replication:
     mode: "{{ item }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   loop:
     - stopreplica
     - resetprimary
-  when: inventory_hostname == mysql_host
 
-- name: Reset mysql replica
+- name: Reset MySQL replica
+  when: inventory_hostname in groups['db_secondary']
   community.mysql.mysql_replication:
     mode: "{{ item }}"
     primary_host: "{{ mysql_host }}"
     primary_user: "replication"
-    primary_password: "{{ mysql_replication_password }}"
+    primary_password: "{{ mysql_replication_password | trim}}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   loop:
     - stopreplica
     - changeprimary
     - resetreplica
     - startreplica
-  when: inventory_hostname != mysql_host
-
+#

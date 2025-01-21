@@ -6,8 +6,14 @@ orinocoz-3 ansible_host=193.40.156.67 ansible_port=12122 ansible_user=ubuntu
 orinocoz-1
 orinocoz-2
 
-[db_servers]
+[db_servers:children]
+db_primary
+db_secondary
+
+[db_primary]
 orinocoz-1
+
+[db_secondary]
 orinocoz-2
 
 [dns_primary]

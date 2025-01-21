@@ -11,16 +11,13 @@
     state: started
     enabled: true
 
-- name: Make sure mysql is running
-  ansible.builtin.service:
-    name: mysql
-    state: started
-    enabled: true
-
 - name: Create mysql database
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+    - Reset MySQL source
+    - Reset MySQL replica
 
 - name: Create mysql user
   community.mysql.mysql_user:
@@ -29,12 +26,20 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-    column_case_sensitive: false 
+    column_case_sensitive: false
+  no_log: true
+
+- name: Ensure MySQL service is started and enabled
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: true
 
 - name: Override mysql bind address
   ansible.builtin.template:
     src: override.cnf.j2
     dest: /etc/mysql/mysql.conf.d/override.cnf
+  no_log: true
   notify: 
     - Restart mysql
 
@@ -49,6 +54,10 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
     column_case_sensitive: false
+    host: "%"
+  no_log: true
+  notify:
+    - Restart mysql exporter
 
 - name: Mysql exporter user conf
   ansible.builtin.template:
@@ -104,8 +113,20 @@
     dest: /etc/cron.d/mysql-backup
   notify: Restart cron
 
+- name: Put replication MySQL server into read_only mode
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "{{ 'OFF' if inventory_hostname in groups['db_primary'] else 'ON' }}"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+    - Reset MySQL source
+    - Reset MySQL replica
+
+
 - name: Assign CNAME
   include_role:
     name: "dns_record"
   vars:
     service: "{{ inventory_hostname | replace('orinocoz','db') }}"
+
