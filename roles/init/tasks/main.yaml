@@ -1,6 +1,12 @@
 #- name: Ansible ping module
 #  ansible.builtin.ping:
 
+# Update APT cache
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
 # Create user juri
 - name: Create user juri
   ansible.builtin.user:
