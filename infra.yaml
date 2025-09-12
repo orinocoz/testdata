@@ -6,7 +6,7 @@
   tags: i
 
 - name: Web Servers
-hosts: web_servers
-become: true
-roles:
-  - nginx
+  hosts: web_servers
+  become: true
+  roles:
+    - nginx
