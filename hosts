@@ -1,1 +1,4 @@
 orinocoz-1 ansible_host=193.40.157.25 ansible_port=41122 ansible_user=ubuntu
+
+[web_servers]
+orinocoz-1
