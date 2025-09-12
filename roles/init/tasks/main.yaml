@@ -1,2 +1,30 @@
-- name: Ansible ping module
-  ansible.builtin.ping:
+#- name: Ansible ping module
+#  ansible.builtin.ping:
+
+# Create user juri
+- name: Create user juri
+  ansible.builtin.user:
+    name: juri
+    state: present
+    shell: /bin/bash
+
+# Add public key for user juri from github
+- name: Add public key for user juri from github
+  ansible.builtin.authorized_key:
+    user: juri
+    state: present
+    key: https://github.com/hudolejev.keys
+
+# Create user roman
+- name: Create user roman
+  ansible.builtin.user:
+    name: roman
+    state: present
+    shell: /bin/bash
+
+# Add public key for user roman from github
+- name: Add public key for user roman from github
+  ansible.builtin.authorized_key:
+    user: roman
+    state: present
+    key: https://github.com/romankuchin.keys
