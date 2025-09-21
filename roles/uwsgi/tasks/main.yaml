@@ -4,6 +4,8 @@
       - uwsgi
       - uwsgi-plugin-python3
     update_cache: yes
+  notify:
+    - Restart uWSGI
 
 - name: Copy uWSGI configuration
   ansible.builtin.copy:
@@ -12,12 +14,13 @@
     owner: agama
     mode: '0644'
 
-- name: Restart uWSGI service if config changed
-  ansible.builtin.service:
-    name: uwsgi
-    state: restarted
-  notify:
-    - Restart uWSGI
+# not needed as install has notify
+#- name: Restart uWSGI service if config changed
+#  ansible.builtin.service:
+#    name: uwsgi
+#    state: restarted
+#  notify:
+#    - Restart uWSGI
 
 - name: Ensure uWSGI service is started and enabled
   ansible.builtin.service:
