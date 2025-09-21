@@ -2,6 +2,8 @@
   ansible.builtin.apt:
     name: nginx=1.24.0-2ubuntu7.5
     state: present
+  notify: 
+    - Restart Nginx
 
 - name: Copy nginx uWSGI config
   ansible.builtin.copy:
@@ -10,12 +12,13 @@
     owner: root
     mode: '0644'
 
-- name: Restart Nginx if config changed
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
-  notify:
-    - Restart Nginx
+# First install does not need that, restart every time
+#- name: Restart Nginx if config changed
+#  ansible.builtin.service:
+#    name: nginx
+#    state: restarted
+#  notify:
+#    - Restart Nginx
 
 - name: Ensure Nginx service is started and enabled
   ansible.builtin.service:
