@@ -3,3 +3,22 @@
     name: nginx=1.24.0-2ubuntu7.5
     state: present
 
+- name: Copy nginx uWSGI config
+  ansible.builtin.copy:
+    src: default
+    dest: /etc/nginx/sites-enabled/default
+    owner: root
+    mode: '0644'
+
+- name: Restart Nginx if config changed
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  notify:
+    - Restart Nginx
+
+- name: Ensure Nginx service is started and enabled
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
