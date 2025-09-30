@@ -1,6 +1,8 @@
 - name: Install MySQL
   apt:
-    name: mysql-server
+    name: 
+      - mysql-server
+      - python-pymysql
     state: present
 
 - name: Ensure MySQL is started and enabled
@@ -8,3 +10,9 @@
     name: mysql
     state: started
     enabled: true
+
+- name: MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
