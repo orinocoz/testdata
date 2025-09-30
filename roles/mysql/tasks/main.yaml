@@ -5,6 +5,13 @@
       - python3-pymysql
     state: present
 
+- name: Override MySQL bind address
+  ansible.builtin.template:
+    src: override.cnf.j2
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: 
+    - Restart MySQL
+
 - name: Ensure MySQL is started and enabled
   service:
     name: mysql
