@@ -5,6 +5,12 @@
     - init
   tags: i
 
+- name: Database servers
+  hosts: db_servers
+  become: true
+  roles:
+    - mysql
+
 - name: Web Servers
   hosts: web_servers
   become: true
