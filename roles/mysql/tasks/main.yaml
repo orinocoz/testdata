@@ -2,7 +2,7 @@
   apt:
     name: 
       - mysql-server
-      - python-pymysql
+      - python3-pymysql
     state: present
 
 - name: Ensure MySQL is started and enabled
