@@ -1,0 +1,8 @@
+[uwsgi]
+uid = agama
+gid = agama
+chdir = /opt/agama
+module = agama:app
+socket = 127.0.0.1:5000
+plugins = python3
+env = AGAMA_DATABASE_URI=mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}

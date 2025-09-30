@@ -3,24 +3,18 @@
     name:
       - uwsgi
       - uwsgi-plugin-python3
+      - python3-pymysql
     update_cache: yes
   notify:
     - Restart uWSGI
 
 - name: Copy uWSGI configuration
-  ansible.builtin.copy:
-    src: agama.ini
+  ansible.builtin.template:
+    src: templates/agama.ini.j2
     dest: /etc/uwsgi/apps-enabled/agama.ini
     owner: agama
-    mode: '0644'
-
-# not needed as install has notify
-#- name: Restart uWSGI service if config changed
-#  ansible.builtin.service:
-#    name: uwsgi
-#    state: restarted
-#  notify:
-#    - Restart uWSGI
+    mode: '0600'
+  no_log: true
 
 - name: Ensure uWSGI service is started and enabled
   ansible.builtin.service:
