@@ -1,4 +1,13 @@
-mysql_host: 192.168.43.236
+startup_name: acme.ttu
+forwarders:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9
+allowed_networks:
+  - 192.168.42.0/23
+  - 127.0.0.0/8
+
+mysql_host: orinocoz-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
