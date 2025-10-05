@@ -1,12 +1,35 @@
-- name: Install Bind9
+- name: Install Bind
   ansible.builtin.apt:
     name: bind9
     state: present
+    update_cache: yes
   become: yes
 
-- name: Ensure Bind9 is running and enabled
+- name: Ensure Bind is running and enabled
   ansible.builtin.service:
     name: bind9
     state: started
     enabled: yes
   become: yes
+
+- name: Configure DNS forwarders
+  ansible.builtin.template:
+    src: named.conf.{{ item }}.j2
+    dest: /etc/bind/named.conf.{{ item }}
+  loop:
+    - options
+    - local
+  become: yes
+
+- name: Restart Bind after config changes
+  ansible.builtin.service:
+    name: bind9
+    state: restarted
+  become: yes
+
+- name: Configure master zone
+  ansible.builtin.template:
+    src: db.master.j2
+    dest: /var/cache/bind/db.{{ startup_name }}
+  become: yes
+  notify: Reload rndc

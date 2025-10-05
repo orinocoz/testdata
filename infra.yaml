@@ -5,6 +5,19 @@
     - init
   tags: i
 
+- name: DNS server
+  hosts: dns_servers
+  become: true
+  roles:
+    - bind
+
+- name: Resolve
+  hosts: all
+  become: true
+  gather_facts: yes
+  roles: 
+    - resolve
+
 - name: Database servers
   hosts: db_servers
   become: true
