@@ -20,12 +20,7 @@
     - options
     - local
   become: yes
-
-- name: Restart Bind after config changes
-  ansible.builtin.service:
-    name: bind9
-    state: restarted
-  become: yes
+  notify: Restart bind
 
 - name: Configure master zone
   ansible.builtin.template:

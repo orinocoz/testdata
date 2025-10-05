@@ -1,9 +1,9 @@
 startup_name: acme.ttu
-forwarders:
+dns_forwarders:
   - 1.1.1.1
   - 8.8.8.8
   - 9.9.9.9
-allowed_networks:
+dns_allowed_networks:
   - 192.168.42.0/23
   - 127.0.0.0/8
 
