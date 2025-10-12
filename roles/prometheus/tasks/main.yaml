@@ -1,0 +1,24 @@
+- name: Install Prometheus
+  ansible.builtin.apt:
+    name: prometheus
+    state: present
+
+- name: Make sure Prometheus is enabled and running
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    enabled: true
+
+- name: Run Prometheus config template
+  ansible.builtin.template:
+    src: config.yaml.j2 
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644'
+  notify: Restart Prometheus
+
+- name: Run Prometheus Web External Template
+  ansible.builtin.template:
+    src: metric.yaml.j2
+    dest: /etc/default/prometheus
+    mode: '0755'
+  notify: Restart Prometheus

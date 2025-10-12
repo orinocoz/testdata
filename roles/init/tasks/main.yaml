@@ -34,3 +34,8 @@
 #    user: roman
 #    state: present
 #    key: https://github.com/romankuchin.keys
+
+- name: Install Prometheus node 
+  ansible.builtin.apt:
+    name: prometheus-node-exporter
+    state: present

@@ -12,16 +12,18 @@
     owner: root
     mode: '0644'
 
-# First install does not need that, restart every time
-#- name: Restart Nginx if config changed
-#  ansible.builtin.service:
-#    name: nginx
-#    state: restarted
-#  notify:
-#    - Restart Nginx
-
 - name: Ensure Nginx service is started and enabled
   ansible.builtin.service:
     name: nginx
+    state: started
+    enabled: true
+
+- name: Install prometheus-nginx-exporter
+  ansible.builtin.apt:
+    name: prometheus-nginx-exporter
+
+- name: Start Ngnix exporter service
+  ansible.builtin.service:
+    name: prometheus-nginx-exporter
     state: started
     enabled: true

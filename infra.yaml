@@ -3,31 +3,42 @@
   become: true
   roles:
     - init
-  tags: i
+  tags: init
 
 - name: DNS server
   hosts: dns_servers
   become: true
   roles:
     - bind
+  tags: bind
 
-- name: Resolve
+- name: DNS resolver
   hosts: all
   become: true
   gather_facts: yes
   roles: 
     - resolve
+  tags: bind
 
 - name: Database servers
   hosts: db_servers
   become: true
   roles:
     - mysql
+  tags: mysql
 
-- name: Web Servers
+- name: Web servers
   hosts: web_servers
   become: true
   roles:
     - agama
     - nginx
     - uwsgi
+  tags: nginx
+
+- name: Prometheus server
+  hosts: prometheus
+  roles:
+    - nginx
+    - prometheus
+  tags: prom

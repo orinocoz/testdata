@@ -9,3 +9,6 @@ orinocoz-2
 
 [web_servers]
 orinocoz-1
+
+[prometheus]
+orinocoz-2
