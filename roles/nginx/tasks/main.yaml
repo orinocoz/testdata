@@ -6,8 +6,8 @@
     - Restart Nginx
 
 - name: Copy nginx uWSGI config
-  ansible.builtin.copy:
-    src: default
+  ansible.builtin.template:
+    src: default.j2
     dest: /etc/nginx/sites-enabled/default
     owner: root
     mode: '0644'
@@ -18,12 +18,3 @@
     state: started
     enabled: true
 
-- name: Install prometheus-nginx-exporter
-  ansible.builtin.apt:
-    name: prometheus-nginx-exporter
-
-- name: Start Ngnix exporter service
-  ansible.builtin.service:
-    name: prometheus-nginx-exporter
-    state: started
-    enabled: true

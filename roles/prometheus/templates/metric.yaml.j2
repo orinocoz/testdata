@@ -1,1 +1,1 @@
-ARGS='--web.external-url=http://prometheus/prometheus'
+ARGS="--web.external-url=http://{{groups['prometheus'][0]}}/prometheus"

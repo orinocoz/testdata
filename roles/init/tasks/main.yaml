@@ -39,3 +39,9 @@
   ansible.builtin.apt:
     name: prometheus-node-exporter
     state: present
+
+- name: Ensure node_exporter are started and enabled
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: yes

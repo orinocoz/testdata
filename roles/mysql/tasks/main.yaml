@@ -25,6 +25,7 @@
 
 - name: Create MySQL user
   community.mysql.mysql_user:
+    column_case_sensitive: true
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     host: "%"
