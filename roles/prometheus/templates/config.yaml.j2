@@ -16,3 +16,24 @@ scrape_configs:
     metrics_path: '/prometheus/metrics'
     static_configs:
       - targets: ['localhost:9090']
+
+  - job_name: "mysql"
+    static_configs:
+      - targets:
+{% for vm in groups['db_servers'] %}
+        - {{ vm }}:{{ prometheus_exporters['mysql']['port'] }}
+{% endfor %}
+
+  - job_name: "bind9"
+    static_configs:
+      - targets:
+{% for vm in groups['dns_servers'] %}
+          - {{ vm }}:{{ prometheus_exporters['bind']['port'] }}
+{% endfor %}
+
+  - job_name: "nginx"
+    static_configs:
+      - targets:
+{% for vm in groups['all'] %}
+        - {{ vm }}:{{ prometheus_exporters['nginx']['port'] }}
+{% endfor %}
