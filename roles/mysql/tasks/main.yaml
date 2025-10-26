@@ -44,6 +44,14 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
 
+- name: Enable mysqld_exporter config path
+  ansible.builtin.lineinfile:
+    path: /etc/default/prometheus-mysqld-exporter
+    regexp: '^ARGS='
+    line: 'ARGS="--config.my-cnf /var/lib/prometheus/.my.cnf"'
+  notify:
+    - Restart MySQL Exporter
+
 - name: MySQL Exporter user conf
   ansible.builtin.template:
     src: my.cnf.j2

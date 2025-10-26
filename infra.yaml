@@ -42,3 +42,11 @@
     - nginx
     - prometheus
   tags: prom
+
+- name: Grafana
+  hosts: grafana
+  roles:
+    - nginx
+    - grafana
+  tags: g
+
