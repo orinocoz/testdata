@@ -40,13 +40,13 @@
 #    policy_rc_d: 101
 # service stopped for this start, automatically starts next boot
 
-#- name: MySQL Exporter user
-#  community.mysql.mysql_user:
-#    column_case_sensitive: true
-#    name: "{{ mysql_exporter_user }}"
-#    password: "{{ mysql_exporter_password }}"
-#    login_unix_socket: /var/run/mysqld/mysqld.sock
-#    priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
+- name: MySQL Exporter user
+  community.mysql.mysql_user:
+    column_case_sensitive: true
+    name: "{{ mysql_exporter_user }}"
+    password: "{{ mysql_exporter_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
 
 - name: Enable mysqld_exporter config path
 #  ansible.builtin.lineinfile:
@@ -58,7 +58,7 @@
   ansible.builtin.template:
     src: mysqld_exporter_path.j2
     dest: /etc/default/prometheus-mysqld-exporter
-    owner: root
+    owner: prometheus
     group: prometheus
     mode: '0640'
 #  notify:
