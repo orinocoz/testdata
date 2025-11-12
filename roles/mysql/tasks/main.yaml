@@ -37,7 +37,7 @@
     name: prometheus-mysqld-exporter
     state: present
 #  vars:
-#    policy_rc_d: 101
+    policy_rc_d: 101
 # service stopped for this start, automatically starts next boot
 
 - name: MySQL Exporter user
