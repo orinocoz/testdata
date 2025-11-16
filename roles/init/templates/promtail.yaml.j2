@@ -44,12 +44,12 @@ scrape_configs:
           __path__: /var/log/nginx/error.log
 {% endif %}
 {% if inventory_hostname in groups['web_servers'] %}
-  - job_name: agama_logs
+  - job_name: agama_logs_slo
     static_configs:
       - targets: ['localhost']
         labels:
           hostname: "{{ inventory_hostname }}"
-          job: agama
-          __path__: /var/log/uwsgi/app/agama.log
+          job: agama_logs_slo
+          __path__: /var/log/nginx/agama.log
 {% endif %}
 

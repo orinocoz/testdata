@@ -8,5 +8,12 @@ datasources:
     isDefault: true
     version: 1
     editable: false
-
+  - name: Loki1
+    type: loki
+    access: proxy
+    orgId: 1
+    uid: LOKI-BAAS
+    url: http://{{ groups['loki'][0] }}:3100
+    isDefault: false
+    editable: true
 

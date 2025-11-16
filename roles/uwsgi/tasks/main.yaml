@@ -21,3 +21,13 @@
     name: uwsgi
     state: started
     enabled: true
+
+- name: Ensure that uWsgi log file exists and allow adm group to read it
+  ansible.builtin.file:
+    path: /var/log/uwsgi/app/agama.log
+    state: touch
+    access_time: preserve
+    modification_time: preserve
+    owner: agama  
+    group: adm
+    mode: '0640'
