@@ -50,3 +50,7 @@
     - grafana
   tags: g
 
+- name: Logging server setup
+  hosts: loki
+  roles:
+    - loki

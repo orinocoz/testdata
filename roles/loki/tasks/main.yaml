@@ -1,0 +1,16 @@
+- name: Install Loki
+  ansible.builtin.apt:
+    name: loki
+    state: present
+
+- name: Loki service start
+  service:
+    name: loki
+    state: started
+    enabled: true
+
+- name: Copy Loki configuration
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: /etc/loki/config.yml
+  notify: Restart Loki
