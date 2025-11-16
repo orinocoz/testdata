@@ -1,0 +1,4 @@
+- name: Restart Promtail
+  service:
+    name: promtail
+    state: restarted
