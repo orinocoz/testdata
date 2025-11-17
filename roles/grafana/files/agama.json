@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki1"
+        "uid": "Loki1"
       },
       "fieldConfig": {
         "defaults": {},
