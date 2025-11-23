@@ -14,3 +14,12 @@
     src: config.yml.j2
     dest: /etc/loki/config.yml
   notify: Restart Loki
+
+- name: Create /home/backup/loki directory
+  ansible.builtin.file:
+    path: /home/backup/loki
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0700'
+

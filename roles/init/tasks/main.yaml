@@ -119,3 +119,15 @@
     mode: '0644'
     force: yes
 
+- name: Create /home/backup/restore directory
+  ansible.builtin.file:
+    path: /home/backup/restore
+    state: directory
+    owner: backup
+    group: backup
+    mode: '0700'
+
+- name: Install Duplicity
+  ansible.builtin.apt:
+    name: duplicity
+    state: present
