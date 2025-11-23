@@ -49,20 +49,12 @@
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
 
 - name: Enable mysqld_exporter config path
-#  ansible.builtin.lineinfile:
-#    path: /etc/default/prometheus-mysqld-exporter
-#    regexp: '^ARGS='
-#    line: 'ARGS="--config.my-cnf /var/lib/prometheus/.my.cnf"'
-#  notify:
-#    - Restart MySQL Exporter
   ansible.builtin.template:
     src: mysqld_exporter_path.j2
     dest: /etc/default/prometheus-mysqld-exporter
     owner: prometheus
     group: prometheus
     mode: '0640'
-#  notify:
-#    - Restart MySQL Exporter
   no_log: true
 
 
@@ -94,4 +86,38 @@
     group: backup
     mode: '0700'
 
+- name: Ensure MySQL backup user exist
+  community.mysql.mysql_user:
+    name: "{{ backup_user }}"
+    password: "{{ backup_password }}"
+    priv: "{{ mysql_database }}.*:LOCK TABLES, SELECT"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host: "localhost"
+  no_log: true
 
+- name: Create backup template
+  ansible.builtin.template:
+    src: backup.my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: '0600'
+  no_log: true
+
+- name: Ensure MySQL backup user exist
+  community.mysql.mysql_user:
+    name: "{{ backup_user }}"
+    password: "{{ backup_password }}"
+    priv: "{{ mysql_database }}.*:LOCK TABLES, SELECT"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host: "localhost"
+  no_log: true
+
+- name: Create backup template
+  ansible.builtin.template:
+    src: backup.my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+    mode: '0600'
+  no_log: true
