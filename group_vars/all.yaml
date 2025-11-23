@@ -56,3 +56,4 @@ backup_password: !vault |
           6132316537373933620a386562653434383430386262316361316634636438383736393963346161
           3763
 
+mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
