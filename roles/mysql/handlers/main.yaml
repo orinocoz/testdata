@@ -9,7 +9,7 @@
     state: restarted
 #    enabled: yes
 
-- name: Restart cron
+- name: Restart MySQL cron
   ansible.builtin.service:
     name: cron
     state: restarted

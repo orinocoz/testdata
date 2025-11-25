@@ -1,0 +1,11 @@
+{% if inventory_hostname == prometheus_server %}
+# Prometheus dump every day at 21:45 UTC
+45 21 * * * backup curl -XPOST http://localhost:9090/prometheus/api/v1/admin/tsdb/snapshot
+
+# Full backup on Sundays at 22:50 UTC
+50 22 * * 0 backup duplicity --no-encryption full /var/lib/prometheus/metrics2/snapshots/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/prometheus
+
+# Incremental backup Monday–Saturday at 22:50 UTC
+50 22 * * 1-6 backup duplicity --no-encryption incremental /var/lib/prometheus/metrics2/snapshots/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/prometheus
+{% endif %}
+ 

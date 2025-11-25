@@ -22,3 +22,10 @@
     dest: /etc/default/prometheus
     mode: '0755'
   notify: Restart Prometheus
+
+- name: Create Prometheus backup cron service
+  ansible.builtin.template:
+    src: backup-cron.j2
+    dest: /etc/cron.d/prometheus-backup
+  notify: Restart Prometheus cron
+  no_log: true

@@ -57,3 +57,6 @@ backup_password: !vault |
           3763
 
 mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
+github_user_backup: orinocoz
+prometheus_server: "{{ groups['prometheus'] | first }}"
+loki_server: "{{ groups['loki'] | first }}"

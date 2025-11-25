@@ -23,3 +23,9 @@
     group: backup
     mode: '0700'
 
+- name: Create Loki backup cron service
+  ansible.builtin.template:
+    src: backup-cron.j2
+    dest: /etc/cron.d/loki-backup
+  notify: Restart Loki cron
+  no_log: true

@@ -122,9 +122,9 @@
     mode: '0600'
   no_log: true
 
-- name: Create backup cron service
+- name: Create MySQL backup cron service
   ansible.builtin.template:
     src: mysql.backup.cron.j2
     dest: /etc/cron.d/mysql-backup
-  notify: Restart cron
+  notify: Restart MySQL cron
   no_log: true
