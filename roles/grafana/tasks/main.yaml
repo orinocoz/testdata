@@ -57,10 +57,20 @@
     owner: grafana
     group: grafana
     mode: '0640'
+  notify:
+    - Restart Grafana
 
-- name: File main.json
+- name: Deploy backup dashboard
   ansible.builtin.copy:
     src: main.json
     dest: /var/lib/grafana/dashboards/main.json
   notify:
    - Restart Grafana
+
+- name: File main.json
+  ansible.builtin.copy:
+    src: backups.json
+    dest: /var/lib/grafana/dashboards/backups.json
+  notify:
+   - Restart Grafana
+

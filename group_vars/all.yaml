@@ -24,7 +24,9 @@ prometheus_exporters:
   bind:
     port: 9119
   nginx:
-   port: 9113
+    port: 9113
+  backup:
+    port: 9111
 
 mysql_exporter_user:  exporter
 mysql_exporter_password: !vault |

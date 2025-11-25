@@ -37,3 +37,8 @@ scrape_configs:
 {% for vm in groups['all'] %}
         - {{ vm }}:{{ prometheus_exporters['nginx']['port'] }}
 {% endfor %}
+
+  - job_name: "backup"
+    static_configs:
+      - targets:
+        - backup.{{ startup_name }}:{{ prometheus_exporters['backup']['port'] }}
