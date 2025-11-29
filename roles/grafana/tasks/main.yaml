@@ -74,3 +74,10 @@
   notify:
    - Restart Grafana
 
+- name: File mysql.json
+  ansible.builtin.copy:
+    src: mysql.json
+    dest: /var/lib/grafana/dashboards/mysql.json
+  notify:
+   - Restart Grafana
+
