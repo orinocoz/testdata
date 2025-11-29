@@ -138,3 +138,13 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
   no_log: true
 
+- name: Set RO for replica server and remove from source
+  community.mysql.mysql_variables:
+    variable:          read_only
+    value:             "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    mode:              persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+    - Reset MySQL source
+    - Reset MySQL replica
+
