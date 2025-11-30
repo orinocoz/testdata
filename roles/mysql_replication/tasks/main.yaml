@@ -1,0 +1,64 @@
+# MySQL replication setup
+# This role runs AFTER the mysql role on all db_servers
+# to ensure replication user exists on source before replica connects
+
+# Step 1: Configure source server (run_once ensures it runs before replica tasks)
+- name: Set read_only OFF on source
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "OFF"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  delegate_to: "{{ mysql_host }}"
+  run_once: true
+
+- name: Stop replica on source
+  community.mysql.mysql_replication:
+    mode: stopreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  delegate_to: "{{ mysql_host }}"
+  run_once: true
+
+- name: Reset primary on source
+  community.mysql.mysql_replication:
+    mode: resetprimary
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  delegate_to: "{{ mysql_host }}"
+  run_once: true
+
+# Step 2: Configure replica servers (runs after source is ready)
+- name: Set read_only ON on replica
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "ON"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host
+
+- name: Stop replica on replica server
+  community.mysql.mysql_replication:
+    mode: stopreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host
+
+- name: Configure replica to connect to source
+  community.mysql.mysql_replication:
+    mode: changeprimary
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    primary_host: "{{ mysql_host }}"
+    primary_user: "{{ replica_user }}"
+    primary_password: "{{ replica_password }}"
+  when: inventory_hostname != mysql_host
+  no_log: true
+
+- name: Reset replica on replica server
+  community.mysql.mysql_replication:
+    mode: resetreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host
+
+- name: Start replica on replica server
+  community.mysql.mysql_replication:
+    mode: startreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: inventory_hostname != mysql_host

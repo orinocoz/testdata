@@ -27,6 +27,13 @@
     - mysql
   tags: mysql
 
+- name: MySQL replication
+  hosts: db_servers
+  become: true
+  roles:
+    - mysql_replication
+  tags: mysql
+
 - name: Web servers
   hosts: web_servers
   become: true
