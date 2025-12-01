@@ -16,15 +16,6 @@ scrape_configs:
           job: syslog
           __path__: /var/log/syslog
 {% endif %}
-{% if inventory_hostname in groups['web_servers'] %}
-  - job_name: agama_logs
-    static_configs:
-      - targets: ['localhost']
-        labels:
-          hostname: "{{ inventory_hostname }}"
-          job: agama
-          __path__: /var/log/uwsgi/app/agama.log
-{% endif %}
 {% if inventory_hostname in groups['all_hosts'] %}
   - job_name: nginx_access_logs
     static_configs:
