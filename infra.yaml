@@ -54,6 +54,7 @@
   hosts: grafana
   roles:
     - nginx
+    - docker
     - grafana
   tags: g
 

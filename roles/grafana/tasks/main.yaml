@@ -1,83 +1,55 @@
-- name: Add Grafana GPG key
-  ansible.builtin.apt_key:
-    url: https://apt.grafana.com/gpg.key
-    state: present
+- name: Create Grafana config directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - /opt/grafana
+    - /opt/grafana/provisioning
+    - /opt/grafana/provisioning/dashboards
+    - /opt/grafana/provisioning/datasources
 
-- name: Add Grafana APT repository
-  ansible.builtin.apt_repository:
-    repo: "deb https://apt.grafana.com stable main"
-    state: present
-
-- name: Install APT grafana
-  ansible.builtin.apt:
-    name: grafana
-    state: present
-
-- name: Service Grafana
-  ansible.builtin.service:
-    name: grafana-server
-    state: started
-    enabled: true
-
-- name: File grafana.ini
+- name: Deploy grafana.ini
   ansible.builtin.template:
     src: grafana.ini.j2
-    dest: /etc/grafana/grafana.ini
-    owner: grafana
-    group: grafana
-    mode: "0700"
-  no_log: true
-  notify:
-    - Restart Grafana
-- name: File datasource.yaml
+    dest: /opt/grafana/grafana.ini
+    owner: "grafana"
+    mode: '0400'
+  notify: Restart Grafana container
+
+- name: Deploy datasource configuration
   ansible.builtin.template:
     src: datasource.yaml.j2
-    dest: /etc/grafana/provisioning/datasources/datasource.yaml
-  notify:
-     - Restart Grafana
+    dest: /opt/grafana/provisioning/datasources/datasource.yaml
+  notify: Restart Grafana container
 
-- name: File dashboards.yaml
+- name: Deploy dashboard provisioning config
   ansible.builtin.template:
     src: dashboards.yaml.j2
-    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
-  notify:
-    - Restart Grafana
+    dest: /opt/grafana/provisioning/dashboards/dashboards.yaml
+  notify: Restart Grafana container
 
-- name: Ensure dashboards directory exists
-  ansible.builtin.file:
-    path: /var/lib/grafana/dashboards
-    state: directory
-    owner: grafana
-    group: grafana
-
-- name: Deploy agama dashboard
+- name: Deploy dashboard JSON files
   ansible.builtin.copy:
-    src: agama.json
-    dest: /var/lib/grafana/dashboards/agama.json
-    owner: grafana
-    group: grafana
-    mode: '0640'
-  notify:
-    - Restart Grafana
+    src: "{{ item }}"
+    dest: /opt/grafana/provisioning/dashboards/{{ item }}
+  loop:
+    - agama.json
+    - main.json
+    - backups.json
+    - mysql.json
+  notify: Restart Grafana container
 
-- name: Deploy backup dashboard
-  ansible.builtin.copy:
-    src: main.json
-    dest: /var/lib/grafana/dashboards/main.json
-  notify:
-   - Restart Grafana
-
-- name: File main.json
-  ansible.builtin.copy:
-    src: backups.json
-    dest: /var/lib/grafana/dashboards/backups.json
-  notify:
-   - Restart Grafana
-
-- name: File mysql.json
-  ansible.builtin.copy:
-    src: mysql.json
-    dest: /var/lib/grafana/dashboards/mysql.json
-  notify:
-   - Restart Grafana
-
+- name: Run Grafana container
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    state: started
+    restart_policy: always
+    ports:
+      - "{{ grafana_port }}:3000"
+    volumes:
+      - /opt/grafana:/etc/grafana
+    log_driver: grafana/loki-docker-driver
+    log_options:
+      loki-url: "http://{{ loki_server }}:3100/loki/api/v1/push"
