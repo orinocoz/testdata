@@ -6,6 +6,7 @@ dns_forwarders:
 dns_allowed_networks:
   - 192.168.42.0/23
   - 127.0.0.0/8
+  - 172.17.0.0/16
 
 mysql_host: orinocoz-2
 mysql_database: agama
