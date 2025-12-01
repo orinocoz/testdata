@@ -3,8 +3,7 @@ server {
 	server_name _;
 	{% if inventory_hostname in groups['web_servers'] %}
 	location / {
-		uwsgi_pass localhost:{{ agama_port }};
-		include uwsgi_params;
+		proxy_pass http://localhost:{{ agama_port }};
 	}
 	{% endif %}
 	{% if inventory_hostname in groups['prometheus'] %}
