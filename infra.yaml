@@ -1,3 +1,8 @@
+- name: Gather facts from all hosts
+  hosts: all
+  gather_facts: yes
+  tasks: []
+
 - name: Initial setup
   hosts: all
   become: true

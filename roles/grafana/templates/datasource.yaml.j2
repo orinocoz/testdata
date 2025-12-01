@@ -4,7 +4,7 @@ datasources:
     type: prometheus
     access: proxy
     orgId: 1
-    url: http://{{hostvars[groups['prometheus'][0]]['ansible_hostname']}}:9090/prometheus
+    url: http://{{ groups['prometheus'][0] }}:9090/prometheus
     isDefault: true
     version: 1
     editable: false

@@ -50,6 +50,10 @@
       - "{{ grafana_port }}:3000"
     volumes:
       - /opt/grafana:/etc/grafana
+    dns_servers:
+      - "{{ hostvars[groups['dns_servers'][0]]['ansible_default_ipv4']['address'] }}"
+    dns_search_domains:
+      - "{{ startup_name }}"
     log_driver: grafana/loki-docker-driver
     log_options:
       loki-url: "http://{{ loki_server }}:3100/loki/api/v1/push"

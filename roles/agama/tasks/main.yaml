@@ -39,7 +39,7 @@
     env:
       AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}"
     dns_servers:
-      - "{{ dns_server_ip | default(dns_forwarders[0]) }}"
+      - "{{ hostvars[groups['dns_servers'][0]]['ansible_default_ipv4']['address'] }}"
     dns_search_domains:
       - "{{ startup_name }}"
     log_driver: grafana/loki-docker-driver
