@@ -38,8 +38,8 @@
   hosts: web_servers
   become: true
   roles:
+    - docker 
     - agama
-    - docker
   tags: nginx
 
 - name: Prometheus server
@@ -52,8 +52,8 @@
 - name: Grafana
   hosts: grafana
   roles:
-    - nginx
     - docker
+    - nginx
     - grafana
   tags: g
 
