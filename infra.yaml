@@ -39,8 +39,7 @@
   become: true
   roles:
     - agama
-    - nginx
-    - uwsgi
+    - docker
   tags: nginx
 
 - name: Prometheus server
