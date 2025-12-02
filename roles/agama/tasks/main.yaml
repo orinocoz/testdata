@@ -28,14 +28,14 @@
     state: present
     force_source: "{{ agama_app.changed or agama_dockerfile.changed }}"
 
-- name: Run Agama container
+- name: Run Agama containers
   community.docker.docker_container:
-    name: agama
+    name: "agama-{{ item }}"
     image: agama
     state: started
     restart_policy: always
     ports:
-      - "{{ agama_port }}:8000"
+      - "{{ agama_port + item }}:8000"
     env:
       AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}"
     dns_servers:
@@ -45,6 +45,7 @@
     log_driver: grafana/loki-docker-driver
     log_options:
       loki-url: "http://{{ loki_server }}:3100/loki/api/v1/push"
+  loop: "{{ range(agama_container_count) | list }}"
   no_log: true
   tags:
     - agama
