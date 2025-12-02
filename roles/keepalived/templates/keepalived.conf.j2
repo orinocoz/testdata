@@ -1,0 +1,39 @@
+global_defs {
+    enable_script_security
+}
+
+vrrp_script check_haproxy {
+    script "/home/keepalived_script/check_haproxy.sh"
+    interval 1
+    weight 20
+    user keepalived_script
+}
+
+vrrp_instance VI_1 {
+    interface ens3
+    state {% if inventory_hostname == groups['haproxy'][0] %}MASTER{% else %}BACKUP{% endif %}
+
+    virtual_router_id {{ keepalived_vrrp_id }}
+    priority {% if inventory_hostname == groups['haproxy'][0] %}101{% else %}100{% endif %}
+
+    advert_int 1
+
+    unicast_peer {
+{% for host in groups['haproxy'] if host != inventory_hostname %}
+        {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+{% endfor %}
+    }
+
+    virtual_ipaddress {
+        {{ keepalived_virtual_ip }}
+    }
+
+    authentication {
+        auth_type PASS
+        auth_pass {{ keepalived_auth_pass }}
+    }
+
+    track_script {
+        check_haproxy
+    }
+}
