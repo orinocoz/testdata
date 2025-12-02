@@ -31,3 +31,32 @@
     name: keepalived
     state: started
     enabled: true
+
+- name: Download keepalived-exporter
+  ansible.builtin.get_url:
+    url: "https://github.com/mehdy/keepalived-exporter/releases/download/v{{ keepalived_exporter_version }}/keepalived-exporter_{{ keepalived_exporter_version }}_linux_amd64.tar.gz"
+    dest: "/tmp/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
+    mode: '0644'
+
+- name: Extract keepalived-exporter
+  ansible.builtin.unarchive:
+    src: "/tmp/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
+    dest: /usr/local/bin
+    remote_src: true
+    creates: /usr/local/bin/keepalived-exporter
+  notify: Restart keepalived-exporter
+
+- name: Deploy keepalived-exporter systemd service
+  ansible.builtin.template:
+    src: keepalived-exporter.service.j2
+    dest: /etc/systemd/system/keepalived-exporter.service
+    mode: '0644'
+  notify:
+    - Reload systemd
+    - Restart keepalived-exporter
+
+- name: Ensure keepalived-exporter is started and enabled
+  ansible.builtin.service:
+    name: keepalived-exporter
+    state: started
+    enabled: true

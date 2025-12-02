@@ -1,0 +1,12 @@
+[Unit]
+Description=Keepalived Exporter
+After=network.target keepalived.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/keepalived-exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

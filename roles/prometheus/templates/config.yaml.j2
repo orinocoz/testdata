@@ -42,3 +42,10 @@ scrape_configs:
     static_configs:
       - targets:
         - backup.{{ startup_name }}:{{ prometheus_exporters['backup']['port'] }}
+
+  - job_name: keepalived
+    static_configs:
+{% for host in groups['haproxy'] %}
+      - targets:
+          - {{ host }}:{{ prometheus_exporters['keepalived']['port'] }}
+{% endfor %}

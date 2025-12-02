@@ -35,6 +35,8 @@ prometheus_exporters:
     port: 9111
   haproxy:
     port: 9101
+  keepalived:
+    port: 9165
 
 mysql_exporter_user:  exporter
 mysql_exporter_password: !vault |
@@ -96,4 +98,5 @@ keepalived_auth_pass: !vault |
           6463
 haproxy_frontend_port: 88
 haproxy_stats_port: 9188
+keepalived_exporter_version: "1.7.0"
 

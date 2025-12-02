@@ -2,3 +2,12 @@
   ansible.builtin.service:
     name: keepalived
     state: restarted
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart keepalived-exporter
+  ansible.builtin.service:
+    name: keepalived-exporter
+    state: restarted
