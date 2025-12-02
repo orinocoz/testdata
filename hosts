@@ -21,6 +21,10 @@ orinocoz-1
 [loki]
 orinocoz-1
 
+[haproxy]
+orinocoz-1
+orinocoz-2
+
 [all_hosts]
 orinocoz-1
 orinocoz-2

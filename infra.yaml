@@ -66,3 +66,11 @@
   hosts: loki
   roles:
     - loki
+
+- name: HAProxy load balancers
+  hosts: haproxy
+  become: true
+  roles:
+    - haproxy
+    - keepalived
+  tags: haproxy
