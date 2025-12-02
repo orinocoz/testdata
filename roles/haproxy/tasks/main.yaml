@@ -17,3 +17,23 @@
     name: haproxy
     state: started
     enabled: true
+
+- name: Install prometheus-haproxy-exporter
+  ansible.builtin.apt:
+    name: prometheus-haproxy-exporter
+    state: present
+  notify: Restart HAProxy exporter
+
+- name: Configure HAProxy exporter
+  ansible.builtin.copy:
+    dest: /etc/default/prometheus-haproxy-exporter
+    content: |
+      ARGS="--haproxy.scrape-uri=http://localhost:{{ haproxy_stats_port }}/haproxy?stats;csv"
+    mode: '0644'
+  notify: Restart HAProxy exporter
+
+- name: Ensure HAProxy exporter is started and enabled
+  ansible.builtin.service:
+    name: prometheus-haproxy-exporter
+    state: started
+    enabled: true
