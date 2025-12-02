@@ -38,6 +38,7 @@
     - main.json
     - backups.json
     - mysql.json
+    - haproxy.json
   notify: Restart Grafana container
 
 - name: Run Grafana container

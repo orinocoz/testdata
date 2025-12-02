@@ -770,7 +770,7 @@
   ],
   "refresh": "5s",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": ["main", "overview"],
   "templating": {
     "list": []
   },

@@ -1,8 +1,3 @@
-- name: Gather facts from all hosts
-  hosts: all
-  gather_facts: yes
-  tasks: []
-
 startup_name: acme.ttu
 dns_forwarders:
   - 1.1.1.1

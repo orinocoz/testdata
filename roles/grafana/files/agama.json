@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "Loki1"
+        "uid": "LOKI-BAAS"
       },
       "fieldConfig": {
         "defaults": {},
@@ -53,7 +53,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki1"
+            "uid": "LOKI-BAAS"
           },
           "direction": "backward",
           "editorMode": "code",
@@ -68,7 +68,7 @@
   ],
   "preload": false,
   "schemaVersion": 42,
-  "tags": [],
+  "tags": ["agama", "loki"],
   "templating": {
     "list": []
   },
