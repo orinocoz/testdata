@@ -10,6 +10,8 @@ server {
     location /prometheus {
         proxy_pass http://localhost:9090;
     }
+	{% endif %}
+	{% if inventory_hostname in groups['prometheus'] and inventory_hostname not in groups['web_servers'] %}
 	location = / {
   		return 404 ;
 	}

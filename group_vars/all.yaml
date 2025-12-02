@@ -83,7 +83,6 @@ agama_port: 8001
 
 agama_container_count: 2
 keepalived_vrrp_id: 35
-keepalived_virtual_ip: 192.168.100.35
 keepalived_auth_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36383237303931643433656530393564643234636364663630626562373433353764343464353962

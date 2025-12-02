@@ -9,3 +9,8 @@ admin_password = {{ grafana_password }}
 [dashboards]
 default_home_dashboard_path = /etc/grafana/provisioning/dashboards/main.json
 
+[auth.anonymous]
+enabled = true
+org_name = Main Org :)
+org_role = Viewer
+
