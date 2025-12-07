@@ -26,6 +26,16 @@
     - inventory_hostname == mysql_host
     - replica_status.Is_Replica is defined
     - replica_status.Is_Replica
+    - replica_status.Replica_IO_Running == "Yes" or replica_status.Replica_SQL_Running == "Yes"
+
+- name: Reset replica config on source
+  community.mysql.mysql_query:
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    query: "RESET REPLICA ALL"
+  when:
+    - inventory_hostname == mysql_host
+    - replica_status.Is_Replica is defined
+    - replica_status.Is_Replica
 
 # Step 3: Configure replica servers
 - name: Set read_only ON on replica

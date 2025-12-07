@@ -31,6 +31,15 @@
   when: inventory_hostname in groups['dns_primary']
   notify: Reload rndc
 
+- name: Configure reverse zone
+  ansible.builtin.template:
+    src: db.reverse.j2
+    dest: /var/cache/bind/db.168.192
+    force: no
+  become: yes
+  when: inventory_hostname in groups['dns_primary']
+  notify: Reload rndc
+
 - name: Install Bind exporter
   ansible.builtin.apt:
     name: prometheus-bind-exporter
@@ -82,7 +91,7 @@
   run_once: true
   when: inventory_hostname in groups['dns_primary']
 
-  - name: Add NS CNAME records
+- name: Add NS CNAME records
   community.general.nsupdate:
     key_name: "nsupdate.key"
     key_secret: "{{ dns_nsupdate_key }}"
@@ -95,6 +104,33 @@
   loop: "{{ groups['dns_servers'] }}"
   loop_control:
     index_var: idx
+  run_once: true
+  when: inventory_hostname in groups['dns_primary']
+
+- name: Add PTR records for all hosts
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "168.192.in-addr.arpa"
+    record: "{{ hostvars[item]['ansible_default_ipv4']['address'].split('.')[3] }}.{{ hostvars[item]['ansible_default_ipv4']['address'].split('.')[2] }}"
+    type: "PTR"
+    value: "{{ item }}.{{ startup_name }}."
+  loop: "{{ groups['all'] }}"
+  run_once: true
+  when: inventory_hostname in groups['dns_primary']
+
+- name: Add PTR record for backup server
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "168.192.in-addr.arpa"
+    record: "{{ backup_server_ip.split('.')[3] }}.{{ backup_server_ip.split('.')[2] }}"
+    type: "PTR"
+    value: "backup.{{ startup_name }}."
   run_once: true
   when: inventory_hostname in groups['dns_primary']
 

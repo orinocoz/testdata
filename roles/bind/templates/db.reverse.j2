@@ -1,0 +1,12 @@
+$TTL 86400
+@   IN  SOA ns-1.{{ startup_name }}. admin.{{ startup_name }}. (
+            {{ ansible_date_time.epoch }}   ; Serial
+       604800   ; Refresh
+        86400   ; Retry
+      2419200   ; Expire
+       604800 ) ; Negative Cache TTL
+;
+; NS records
+{% for dns_server in groups['dns_servers'] %}
+@       IN  NS  {{ dns_server }}.{{ startup_name }}.
+{% endfor %}
