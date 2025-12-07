@@ -43,15 +43,3 @@ scrape_configs:
           job: agama_logs_slo
           __path__: /var/log/nginx/agama.log
 {% endif %}
-{% if inventory_hostname in groups['haproxy'] %}
-  - job_name: haproxy_syslog
-    syslog:
-      listen_address: 127.0.0.1:8514
-      listen_protocol: udp
-      labels:
-        hostname: "{{ inventory_hostname }}"
-        job: haproxy
-    relabel_configs:
-      - source_labels: ['__syslog_message_hostname']
-        target_label: 'host'
-{% endif %}
