@@ -26,6 +26,7 @@
   ansible.builtin.template:
     src: db.master.j2
     dest: /var/cache/bind/db.{{ startup_name }}
+    force: no
   become: yes
   when: inventory_hostname in groups['dns_primary']
   notify: Reload rndc
@@ -51,4 +52,49 @@
     enabled: yes
   become: yes
 
+- name: Flush handlers to ensure BIND has latest config
+  ansible.builtin.meta: flush_handlers
+
+- name: Add A records for all hosts
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "{{ item }}"
+    type: "A"
+    value: "{{ hostvars[item]['ansible_default_ipv4']['address'] }}"
+  loop: "{{ groups['all'] }}"
+  run_once: true
+  when: inventory_hostname in groups['dns_primary']
+
+- name: Add backup server A record
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "backup"
+    type: "A"
+    value: "{{ backup_server_ip }}"
+  run_once: true
+  when: inventory_hostname in groups['dns_primary']
+
+  - name: Add NS CNAME records
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "ns-{{ idx + 1 }}"
+    type: "CNAME"
+    value: "{{ item }}.{{ startup_name }}."
+  loop: "{{ groups['dns_servers'] }}"
+  loop_control:
+    index_var: idx
+  run_once: true
+  when: inventory_hostname in groups['dns_primary']
 

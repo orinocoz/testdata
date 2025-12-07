@@ -37,7 +37,7 @@
     ports:
       - "{{ agama_port + item }}:8000"
     env:
-      AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}"
+      AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@db-1.{{  startup_name }}/{{ mysql_database }}"
     dns_servers:
       - "{{ hostvars[groups['dns_servers'][0]]['ansible_default_ipv4']['address'] }}"
     dns_search_domains:
@@ -50,3 +50,19 @@
   tags:
     - agama
     - mysql_switchover
+
+- name: Add web CNAME records
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "www-{{ idx + 1 }}"
+    type: "CNAME"
+    value: "{{ item }}.{{ startup_name }}."
+  loop: "{{ groups['web_servers'] }}"
+  loop_control:
+    index_var: idx
+  run_once: true
+  delegate_to: "{{ groups['dns_primary'][0] }}"

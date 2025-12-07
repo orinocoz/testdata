@@ -1,16 +1,17 @@
 $TTL 86400
-@   IN  SOA {{ startup_name }}. root.{{ startup_name }}. (
-            2   ; Serial
+@   IN  SOA ns-1.{{ startup_name }}. hostmaster.{{ startup_name }}. (
+            {{ ansible_date_time.epoch }}   ; Serial generated once and updated by nsupdate
        604800   ; Refresh
         86400   ; Retry
       2419200   ; Expire
        604800 ) ; Negative Cache TTL
 ;
-
+; NS records - one per DNS server
 {% for dns_server in groups['dns_servers'] %}
-@		IN	NS	{{ dns_server }}.{{ startup_name }}.
+@       IN  NS  {{ dns_server }}.{{ startup_name }}.
 {% endfor %}
-{% for host in groups['all'] %}
-{{ hostvars[host]['inventory_hostname'] }}	IN	A	{{ hostvars[host]['ansible_default_ipv4']['address'] | default('127.0.0.1') }}
-backup IN A {{ backup_server_ip }}
+
+; A records for NS servers only
+{% for dns_server in groups['dns_servers'] %}
+{{ dns_server }}    IN  A   {{ hostvars[dns_server]['ansible_default_ipv4']['address'] }}
 {% endfor %}

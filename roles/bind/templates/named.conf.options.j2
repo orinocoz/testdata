@@ -9,6 +9,11 @@ key "transfer.key" {
     secret "{{ dns_transfer_key }}";
 };
 
+key "nsupdate.key" {
+    algorithm hmac-sha256;
+    secret "{{ dns_nsupdate_key }}";
+};
+
 options {
   directory "/var/cache/bind";
   allow-query {dns_allowed_networks;};

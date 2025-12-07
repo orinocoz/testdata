@@ -58,3 +58,17 @@
     log_driver: grafana/loki-docker-driver
     log_options:
       loki-url: "http://{{ loki_server }}:3100/loki/api/v1/push"
+
+- name: Add Grafana CNAME record
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "grafana"
+    type: "CNAME"
+    value: "{{ inventory_hostname }}.{{ startup_name }}."
+  run_once: true
+  delegate_to: "{{ groups['dns_primary'][0] }}"
+

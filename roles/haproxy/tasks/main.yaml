@@ -37,3 +37,19 @@
     name: prometheus-haproxy-exporter
     state: started
     enabled: true
+
+- name: Add LB CNAME records
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ dns_nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ startup_name }}"
+    record: "lb-{{ idx + 1 }}"
+    type: "CNAME"
+    value: "{{ item }}.{{ startup_name }}."
+  loop: "{{ groups['haproxy'] }}"
+  loop_control:
+    index_var: idx
+  run_once: true
+  delegate_to: "{{ groups['dns_primary'][0] }}"

@@ -131,3 +131,8 @@
   ansible.builtin.apt:
     name: duplicity
     state: present
+
+- name: Install dnspython for nsupdate
+  ansible.builtin.apt:
+    name: python3-dnspython
+    state: present

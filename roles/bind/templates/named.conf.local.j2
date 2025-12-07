@@ -3,6 +3,7 @@ zone "{{ startup_name }}" {
     type primary;
     file "db.{{ startup_name }}";
     allow-transfer { 127.0.0.1; key "transfer.key"; };
+    allow-update { key "nsupdate.key"; };
 };
 {% endif %}
 
