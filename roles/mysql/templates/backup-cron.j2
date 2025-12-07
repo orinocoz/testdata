@@ -2,9 +2,9 @@
 # MySQL dump every day at 21:45 UTC
 45 21 * * * backup mysqldump agama > /home/backup/mysql/agama.sql
 
-# Full backup on Sundays at 22:50 UTC
+# Full backup on Sundays at 22:50 UTC, then cleanup old backups (keep only 1 full chain)
 # --allow-source-mismatch: mysql_backup_host changes when replication roles switch
-50 22 * * 0 backup duplicity --no-encryption --allow-source-mismatch full /home/backup/mysql/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/mysql
+50 22 * * 0 backup duplicity --no-encryption --allow-source-mismatch full /home/backup/mysql/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/mysql && duplicity remove-all-but-n-full 1 --force rsync://{{ github_user_backup }}@backup.{{ startup_name }}/mysql
 
 # Incremental backup Monday–Saturday at 22:50 UTC
 50 22 * * 1-6 backup duplicity --no-encryption --allow-source-mismatch incremental /home/backup/mysql/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/mysql

@@ -44,6 +44,20 @@ Ansible Git repo is mirrored to GitHub (github.com/orinocoz/ica0002).
 
 Backup data from both servers will be synchronized to encrypted AWS S3 bucket in future (work in progress).
 
+## Storage Limitations
+
+Backup server quota: **200 MB** per user.
+
+Current approximate usage per service:
+ - MySQL: ~1 MB (small, text-based SQL dumps)
+ - Prometheus: ~100-150 MB (largest - snapshot directory names change daily, causing large incremental backups)
+ - Loki: ~5-20 MB (WAL and TSDB files)
+
+To stay within quota limits:
+ - Old backup chains are automatically cleaned after each Sunday full backup (keep only 1 full chain + its incrementals)
+ - Prometheus consumes the most space because snapshot timestamps create new directory names daily, making each "incremental" backup nearly full-sized
+
+If quota is exceeded, backups will fail silently (0-volume backup sets) and monitoring metrics will show stale timestamps.
 
 ## Retention
 

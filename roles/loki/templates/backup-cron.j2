@@ -1,8 +1,8 @@
-# Loki files backup sync every day at 21:45 UTC
-45 21 * * * root cp -r /tmp/loki/tsdb-shipper-active /home/backup/loki/ && cp -r /tmp/loki/wal /home/backup/loki/ && chown -R backup:backup /home/backup/loki && chmod -R u+rwX,g+rX /home/backup/loki
+# Loki files backup sync every day at 21:45 UTC - delete old files first, then copy fresh
+45 21 * * * root rm -rf /home/backup/loki/* && cp -r /tmp/loki/tsdb-shipper-active /home/backup/loki/ && cp -r /tmp/loki/wal /home/backup/loki/ && chown -R backup:backup /home/backup/loki && chmod -R u+rwX,g+rX /home/backup/loki
 
-# Full Loki backup on Sundays at 22:50 UTC
-50 22 * * 0 backup duplicity --no-encryption full /home/backup/loki/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/loki
+# Full Loki backup on Sundays at 22:50 UTC, then cleanup old backups (keep only 1 full chain)
+50 22 * * 0 backup duplicity --no-encryption full /home/backup/loki/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/loki && duplicity remove-all-but-n-full 1 --force rsync://{{ github_user_backup }}@backup.{{ startup_name }}/loki
 
 # Incremental Loki backup Monday–Saturday at 22:50 UTC
 50 22 * * 1-6 backup duplicity --no-encryption incremental /home/backup/loki/ rsync://{{ github_user_backup }}@backup.{{ startup_name }}/loki

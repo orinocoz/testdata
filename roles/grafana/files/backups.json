@@ -34,23 +34,253 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              {"color": "green", "value": null},
-              {"color": "red", "value": 86400}
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 60},
+              {"color": "green", "value": 360}
             ]
-          }
+          },
+          "unit": "m",
+          "min": 0,
+          "max": 1440,
+          "decimals": 0
         },
         "overrides": []
       },
-      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 0 },
-      "id": 1,
-      "options": {},
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 0 },
+      "id": 13,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
       "targets": [
         {
-          "expr": "time() - backup_last_success_time{user=\"orinocoz\", service=\"loki\"}",
+          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"mysql\"}) / 60), 0)",
           "refId": "A"
         }
       ],
-      "title": "Last Loki Backup Age (seconds)",
+      "title": "MySQL - Time Until Next Backup",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 60},
+              {"color": "green", "value": 360}
+            ]
+          },
+          "unit": "m",
+          "min": 0,
+          "max": 1440,
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 0 },
+      "id": 14,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "targets": [
+        {
+          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"prometheus\"}) / 60), 0)",
+          "refId": "A"
+        }
+      ],
+      "title": "Prometheus - Time Until Next Backup",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 60},
+              {"color": "green", "value": 360}
+            ]
+          },
+          "unit": "m",
+          "min": 0,
+          "max": 1440,
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 0 },
+      "id": 15,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "targets": [
+        {
+          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"loki\"}) / 60), 0)",
+          "refId": "A"
+        }
+      ],
+      "title": "Loki - Time Until Next Backup",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          },
+          "unit": "time:YYYY-MM-DD HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 7 },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"mysql\"} * 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL - Last Backup",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          },
+          "unit": "time:YYYY-MM-DD HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 7 },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"prometheus\"} * 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Prometheus - Last Backup",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          },
+          "unit": "time:YYYY-MM-DD HH:mm"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 7 },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"loki\"} * 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Loki - Last Backup",
       "type": "stat"
     },
     {
@@ -65,16 +295,68 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              {"color": "green", "value": null},
-              {"color": "red", "value": 0}
+              {"color": "green", "value": null}
             ]
           }
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 12, "x": 0, "y": 3 },
+      "gridPos": { "h": 5, "w": 8, "x": 0, "y": 11 },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "backups_total{user=\"orinocoz\", service=\"mysql\"}",
+          "legendFormat": "{{type}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL Backup Counts",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 8, "x": 8, "y": 11 },
       "id": 2,
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" } },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "targets": [
         {
           "expr": "backups_total{user=\"orinocoz\", service=\"prometheus\"}",
@@ -90,10 +372,33 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "fieldConfig": { "defaults": {}, "overrides": [] },
-      "gridPos": { "h": 4, "w": 12, "x": 12, "y": 3 },
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 8, "x": 16, "y": 11 },
       "id": 3,
-      "options": { "legend": { "displayMode": "list", "placement": "bottom" } },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "targets": [
         {
           "expr": "backups_total{user=\"orinocoz\", service=\"loki\"}",
@@ -102,46 +407,6 @@
         }
       ],
       "title": "Loki Backup Counts",
-      "type": "stat"
-    },
-    {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
-      "gridPos": { "h": 4, "w": 12, "x": 0, "y": 7 },
-      "id": 4,
-      "targets": [
-        {
-          "expr": "time() - backup_last_success_time{user=\"orinocoz\", service=\"mysql\"}",
-          "refId": "A"
-        }
-      ],
-      "title": "Last MySQL Backup Age (seconds)",
-      "type": "stat"
-    },
-    {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
-      "gridPos": { "h": 4, "w": 12, "x": 12, "y": 7 },
-      "id": 5,
-      "targets": [
-        {
-          "expr": "time() - backup_last_success_time{user=\"orinocoz\", service=\"prometheus\"}",
-          "refId": "A"
-        }
-      ],
-      "title": "Last Prometheus Backup Age (seconds)",
-      "type": "stat"
-    },
-    {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
-      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 11 },
-      "id": 6,
-      "targets": [
-        {
-          "expr": "backups_total{user=\"orinocoz\", service=\"mysql\"}",
-          "legendFormat": "{{type}}",
-          "refId": "A"
-        }
-      ],
-      "title": "MySQL Backup Counts",
       "type": "stat"
     }
   ],
@@ -158,4 +423,3 @@
   "version": 2,
   "weekStart": ""
 }
-

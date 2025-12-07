@@ -41,5 +41,6 @@ scrape_configs:
         labels:
           hostname: "{{ inventory_hostname }}"
           job: agama_logs_slo
+          service_name: agama
           __path__: /var/log/nginx/agama.log
 {% endif %}

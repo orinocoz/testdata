@@ -27,26 +27,31 @@
         "uid": "LOKI-BAAS"
       },
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "custom": {
+            "displayMode": "json"
+          }
+        },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 20,
+        "w": 24,
         "x": 0,
         "y": 0
       },
       "id": 1,
       "options": {
         "dedupStrategy": "none",
-        "enableInfiniteScrolling": false,
+        "enableInfiniteScrolling": true,
         "enableLogDetails": true,
         "prettifyLogMessage": false,
         "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
+        "showLabels": true,
+        "showTime": true,
         "sortOrder": "Descending",
-        "wrapLogMessage": false
+        "wrapLogMessage": false,
+        "fontSize": "10px"
       },
       "pluginVersion": "12.2.1",
       "targets": [
@@ -57,12 +62,12 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{service_name=\"agama\"}",
+          "expr": "{service_name=~\"agama.*\", container_name=~\"$container\", host=~\"$host\"}",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Agama.log",
+      "title": "Agama Logs",
       "type": "logs"
     }
   ],
@@ -70,7 +75,64 @@
   "schemaVersion": 42,
   "tags": ["agama", "loki"],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "LOKI-BAAS"
+        },
+        "definition": "",
+        "includeAll": true,
+        "label": "Container",
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "label": "container_name",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "{service_name=~\"agama.*\"}",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "LOKI-BAAS"
+        },
+        "definition": "",
+        "includeAll": true,
+        "label": "Host",
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": {
+          "label": "host",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "{service_name=~\"agama.*\"}",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
