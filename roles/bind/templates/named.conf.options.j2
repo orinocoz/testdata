@@ -4,9 +4,13 @@ acl dns_allowed_networks{
     {% endfor %}
 };
 
+key "transfer.key" {
+    algorithm hmac-sha256;
+    secret "{{ dns_transfer_key }}";
+};
+
 options {
   directory "/var/cache/bind";
-
   allow-query {dns_allowed_networks;};
 
   forwarders {

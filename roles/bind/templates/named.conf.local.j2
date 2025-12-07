@@ -1,4 +1,15 @@
+{% if inventory_hostname in groups['dns_primary'] %}
 zone "{{ startup_name }}" {
-  type primary;
-  file "db.{{ startup_name }}";
+    type primary;
+    file "db.{{ startup_name }}";
+    allow-transfer { 127.0.0.1; key "transfer.key"; };
 };
+{% endif %}
+
+{% if inventory_hostname in groups['dns_secondary'] %}
+zone "{{ startup_name }}" {
+    type secondary;
+    file "db.{{ startup_name }}";
+    primaries { {{ hostvars[groups['dns_primary'][0]]['ansible_default_ipv4']['address'] }} key "transfer.key"; };
+};
+{% endif %}
