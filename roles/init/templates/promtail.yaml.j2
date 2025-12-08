@@ -7,6 +7,14 @@ clients:
   - url: http://{{ groups['loki'][0] }}:3100/loki/api/v1/push
 
 scrape_configs:
+{% if inventory_hostname in groups['haproxy'] %}
+  - job_name: haproxy
+    syslog:
+      listen_address: 0.0.0.0:8814
+      labels:
+        job: haproxy
+        hostname: "{{ inventory_hostname }}"
+{% endif %}
 {% if inventory_hostname in groups['all_hosts'] %}
   - job_name: syslog_logs
     static_configs:

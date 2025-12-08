@@ -56,3 +56,17 @@ scrape_configs:
       - targets:
           - {{ host }}:{{ prometheus_exporters['keepalived']['port'] }}
 {% endfor %}
+
+  - job_name: loki
+    static_configs:
+      - targets:
+{% for host in groups['loki'] %}
+          - {{ host }}:3100
+{% endfor %}
+
+  - job_name: promtail
+    static_configs:
+      - targets:
+{% for host in groups['all_hosts'] %}
+          - {{ host }}:9080
+{% endfor %}
