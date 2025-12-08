@@ -137,7 +137,7 @@
       "type": "stat"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1s",
   "schemaVersion": 38,
   "tags": ["haproxy", "keepalived"],
   "time": {"from": "now-5m", "to": "now"},
