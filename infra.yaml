@@ -66,6 +66,7 @@
   hosts: loki
   roles:
     - loki
+  tags: loki
 
 - name: HAProxy load balancers
   hosts: haproxy

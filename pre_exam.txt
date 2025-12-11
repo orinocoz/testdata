@@ -1,0 +1,17 @@
+Thu Dec 11 09:07:45 PM EET 2025
++ hostname
+angaar
++ ansible-playbook infra.yaml --diff
+
+PLAY [Gather facts from all hosts] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+fatal: [orinocoz-3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 193.40.157.25 port 18022: No route to host", "unreachable": true}
+fatal: [orinocoz-2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 193.40.157.25 port 19122: No route to host", "unreachable": true}
+fatal: [orinocoz-1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 193.40.157.25 port 25122: No route to host", "unreachable": true}
+
+PLAY RECAP *********************************************************************
+orinocoz-1                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+orinocoz-2                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+orinocoz-3                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+

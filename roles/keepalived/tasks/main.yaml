@@ -35,7 +35,7 @@
 - name: Download keepalived-exporter
   ansible.builtin.get_url:
     url: "https://github.com/mehdy/keepalived-exporter/releases/download/v{{ keepalived_exporter_version }}/keepalived-exporter_{{ keepalived_exporter_version }}_linux_amd64.tar.gz"
-    dest: "/tmp/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
+    dest: "/opt/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
     mode: '0644'
 
 - name: Extract keepalived-exporter
