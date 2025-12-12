@@ -43,8 +43,9 @@
   hosts: web_servers
   become: true
   roles:
-    - docker 
+    - docker
     - agama
+    - nginx
   tags: nginx
 
 - name: Prometheus server

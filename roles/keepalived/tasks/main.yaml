@@ -40,7 +40,7 @@
 
 - name: Extract keepalived-exporter
   ansible.builtin.unarchive:
-    src: "/tmp/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
+    src: "/opt/keepalived-exporter-{{ keepalived_exporter_version }}.tar.gz"
     dest: /usr/local/bin
     remote_src: true
     creates: /usr/local/bin/keepalived-exporter
