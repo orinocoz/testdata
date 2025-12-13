@@ -1,4 +1,4 @@
-Sat Dec 13 03:50:40 PM EET 2025
+Sat Dec 13 07:21:30 PM EET 2025
 + hostname
 angaar
 + ansible-playbook infra.yaml --diff
@@ -6,71 +6,71 @@ angaar
 PLAY [Gather facts from all hosts] *********************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-3]
 ok: [orinocoz-1]
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Add Grafana APT GPG key] ******************************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Add Grafana APT repository (OSS)] *********************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [init : Install Prometheus node] ******************************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [init : Ensure node_exporter are started and enabled] *********************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Install Promtail] *************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Add Promtail user to adm group] ***********************************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [init : Ensure Promtail state directory exists] ***************************
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 
 TASK [init : Deploy Promtail configuration] ************************************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [init : Ensure Promtail service is started and enabled] *******************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Create a backup user] *********************************************
 [WARNING]: Found existing ssh key private file "/home/backup/.ssh/id_rsa", no
@@ -86,48 +86,51 @@ ok: [orinocoz-2]
 
 TASK [init : Deploy known_hosts for backup user] *******************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Create /home/backup/restore directory] ****************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Install Duplicity] ************************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Install dnspython for nsupdate] ***********************************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 PLAY [DNS server] **************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Install Bind] *****************************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Ensure Bind is running and enabled] *******************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Configure DNS forwarders] *****************************************
-ok: [orinocoz-1] => (item=options)
-ok: [orinocoz-2] => (item=options)
-ok: [orinocoz-3] => (item=options)
-ok: [orinocoz-2] => (item=local)
-ok: [orinocoz-3] => (item=local)
-ok: [orinocoz-1] => (item=local)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-2]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
 
 TASK [bind : Configure master zone] ********************************************
 skipping: [orinocoz-1]
@@ -140,9 +143,9 @@ skipping: [orinocoz-2]
 ok: [orinocoz-3]
 
 TASK [bind : Install Bind exporter] ********************************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
 ok: [orinocoz-3]
@@ -150,9 +153,9 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [bind : Ensure Bind exporter is running and enabled] **********************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 
@@ -161,22 +164,25 @@ TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 
 TASK [bind : Add A records for all hosts] **************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add backup server A record] ***************************************
 ok: [orinocoz-3]
 
 TASK [bind : Add NS CNAME records] *********************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR records for all hosts] ************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR record for backup server] *********************************
 ok: [orinocoz-3]
@@ -184,13 +190,13 @@ ok: [orinocoz-3]
 PLAY [DNS resolver] ************************************************************
 
 TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [resolve : Stop daemon systemd-resolved] **********************************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [resolve : Change DNS configuration file] *********************************
@@ -205,40 +211,40 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Install MySQL] ***************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Override MySQL bind address] *************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Ensure MySQL is started and enabled] *****************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : MySQL database] **************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create MySQL user] ***********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Install MySQL Exporter] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : MySQL Exporter user] *********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Enable mysqld_exporter config path] ******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : MySQL Exporter user conf] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
@@ -253,32 +259,33 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Ensure MySQL backup user exist] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create backup template] ******************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Ensure MySQL backup user exist] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create backup template] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create MySQL backup cron service] ********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : MySQL replication user] ******************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Add DB CNAME records] ********************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 PLAY [MySQL replication] *******************************************************
 
@@ -321,28 +328,28 @@ skipping: [orinocoz-2]
 PLAY [Web servers] *************************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [docker : Install Docker packages] ****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [docker : Ensure Docker service is running and enabled] *******************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [docker : Install Loki Docker logging driver] *****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [agama : Create Agama build directory] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [agama : Download Agama application] **************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [agama : Download Agama Dockerfile] ***************************************
 ok: [orinocoz-2]
@@ -361,28 +368,61 @@ ok: [orinocoz-1] => (item=None)
 ok: [orinocoz-1]
 
 TASK [agama : Add web CNAME records] *******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [nginx : Install Nginx 1.24.0] ********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [nginx : Copy nginx uWSGI config] *****************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpy2pnnbbz/default.j2
+@@ -9,10 +9,10 @@
+ 
+ server {
+     listen 8080 default_server;
+-    
++
+     location /stub_status {
+         stub_status;
+-        allow localhost;
++        allow 127.0.0.1;
+         deny all;
+     }
+ }
+
+changed: [orinocoz-2]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpy2jtc_ih/default.j2
+@@ -9,10 +9,10 @@
+ 
+ server {
+     listen 8080 default_server;
+-    
++
+     location /stub_status {
+         stub_status;
+-        allow localhost;
++        allow 127.0.0.1;
+         deny all;
+     }
+ }
+
+changed: [orinocoz-1]
 
 TASK [nginx : Ensure Nginx service is started and enabled] *********************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+changed: [orinocoz-2]
+changed: [orinocoz-1]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Prometheus server] *******************************************************
 
@@ -390,37 +430,301 @@ TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-3]
 
 TASK [nginx : Install Nginx 1.24.0] ********************************************
-ok: [orinocoz-3]
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-3]
 
 TASK [nginx : Copy nginx uWSGI config] *****************************************
-ok: [orinocoz-3]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpm35_5lg6/default.j2
+@@ -1,91 +1,25 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
++	server_name _;
++		    location /prometheus {
++        proxy_pass http://localhost:9090;
++    }
++			location = / {
++  		return 404 ;
++	}
++	
++                location /grafana {
++                proxy_pass http://localhost:3001;
++                proxy_set_header Host $http_host;
++        }
++        }
+ 
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
++server {
++    listen 8080 default_server;
+ 
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+-	server_name _;
+-
+-	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
+-	}
+-
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
+-
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
++    location /stub_status {
++        stub_status;
++        allow 127.0.0.1;
++        deny all;
++    }
+ }
+-
+-
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
+
+changed: [orinocoz-3]
 
 TASK [nginx : Ensure Nginx service is started and enabled] *********************
 ok: [orinocoz-3]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
-ok: [orinocoz-3]
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-3]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
 ok: [orinocoz-3]
 
 TASK [prometheus : Install Prometheus] *****************************************
-ok: [orinocoz-3]
+The following additional packages will be installed:
+  fonts-glyphicons-halflings javascript-common libjs-bootstrap
+  libjs-bootstrap4 libjs-d3 libjs-eonasdan-bootstrap-datetimepicker
+  libjs-jquery libjs-jquery-hotkeys libjs-moment libjs-moment-timezone
+  libjs-mustache libjs-popper.js libjs-rickshaw libjs-sizzle node-jquery
+The following NEW packages will be installed:
+  fonts-glyphicons-halflings javascript-common libjs-bootstrap
+  libjs-bootstrap4 libjs-d3 libjs-eonasdan-bootstrap-datetimepicker
+  libjs-jquery libjs-jquery-hotkeys libjs-moment libjs-moment-timezone
+  libjs-mustache libjs-popper.js libjs-rickshaw libjs-sizzle node-jquery
+  prometheus
+0 upgraded, 16 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-3]
 
 TASK [prometheus : Make sure Prometheus is enabled and running] ****************
 ok: [orinocoz-3]
 
 TASK [prometheus : Run Prometheus config template] *****************************
-ok: [orinocoz-3]
+--- before: /etc/prometheus/prometheus.yml
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmptult_7ry/config.yaml.j2
+@@ -1,44 +1,69 @@
+-# Sample config for Prometheus.
++global:
++  scrape_interval: 5s
++  evaluation_interval: 5s
+ 
+-global:
+-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+-  # scrape_timeout is set to the global default (10s).
+-
+-  # Attach these labels to any time series or alerts when communicating with
+-  # external systems (federation, remote storage, Alertmanager).
+-  external_labels:
+-      monitor: 'example'
+-
+-# Alertmanager configuration
+-alerting:
+-  alertmanagers:
+-  - static_configs:
+-    - targets: ['localhost:9093']
+-
+-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+-rule_files:
+-  # - "first_rules.yml"
+-  # - "second_rules.yml"
+-
+-# A scrape configuration containing exactly one endpoint to scrape:
+-# Here it's Prometheus itself.
+ scrape_configs:
+-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
++  - job_name: 'linux'
++    static_configs:
++      - targets:
++                - orinocoz-3:9100
++                - orinocoz-1:9100
++                - orinocoz-2:9100
++        
+   - job_name: 'prometheus'
+-
+-    # Override the global default and scrape targets from this job every 5 seconds.
+     scrape_interval: 5s
+     scrape_timeout: 5s
+-
+-    # metrics_path defaults to '/metrics'
+-    # scheme defaults to 'http'.
+-
++    metrics_path: '/prometheus/metrics'
+     static_configs:
+       - targets: ['localhost:9090']
+ 
+-  - job_name: node
+-    # If prometheus-node-exporter is installed, grab stats about the local
+-    # machine by default.
++  - job_name: "mysql"
+     static_configs:
+-      - targets: ['localhost:9100']
++      - targets:
++        - orinocoz-1:9104
++        - orinocoz-2:9104
++
++  - job_name: "bind9"
++    static_configs:
++      - targets:
++          - orinocoz-3:9119
++          - orinocoz-1:9119
++          - orinocoz-2:9119
++
++  - job_name: "nginx"
++    static_configs:
++      - targets:
++        - orinocoz-3:9113
++        - orinocoz-1:9113
++        - orinocoz-2:9113
++
++  - job_name: "backup"
++    static_configs:
++      - targets:
++        - backup.acme.ttu:9111
++
++  - job_name: haproxy
++    static_configs:
++      - targets:
++          - orinocoz-1:9101
++      - targets:
++          - orinocoz-2:9101
++
++  - job_name: keepalived
++    static_configs:
++      - targets:
++          - orinocoz-1:9165
++      - targets:
++          - orinocoz-2:9165
++
++  - job_name: loki
++    static_configs:
++      - targets:
++          - orinocoz-3:3100
++
++  - job_name: promtail
++    static_configs:
++      - targets:
++          - orinocoz-1:9080
++          - orinocoz-2:9080
++          - orinocoz-3:9080
+
+changed: [orinocoz-3]
 
 TASK [prometheus : Run Prometheus Web External Template] ***********************
-ok: [orinocoz-3]
+--- before: /etc/default/prometheus
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmp2zcjl30n/metric.yaml.j2
+@@ -1,5 +1 @@
+-# Set the command-line arguments to pass to the server.
+-# Due to shell escaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
++ARGS="--web.external-url=http://orinocoz-3/prometheus --web.route-prefix=/prometheus --web.enable-admin-api --storage.tsdb.path=/var/lib/prometheus/metrics2"
+
+changed: [orinocoz-3]
 
 TASK [prometheus : Create Prometheus backup cron service] **********************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
 
 TASK [prometheus : Add Prometheus CNAME record] ********************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
+
+RUNNING HANDLER [nginx : Restart Nginx] ****************************************
+changed: [orinocoz-3]
+
+RUNNING HANDLER [prometheus : Restart Prometheus] ******************************
+changed: [orinocoz-3]
+
+RUNNING HANDLER [prometheus : Restart Prometheus cron] *************************
+changed: [orinocoz-3]
 
 PLAY [Grafana] *****************************************************************
 
@@ -428,13 +732,22 @@ TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-3]
 
 TASK [docker : Install Docker packages] ****************************************
-ok: [orinocoz-3]
+The following additional packages will be installed:
+  bridge-utils containerd dnsmasq-base pigz python3-websocket runc ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-buildx
+  docker-compose-v2 docker-doc rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dnsmasq-base docker.io pigz python3-docker
+  python3-websocket runc ubuntu-fan
+0 upgraded, 9 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-3]
 
 TASK [docker : Ensure Docker service is running and enabled] *******************
 ok: [orinocoz-3]
 
 TASK [docker : Install Loki Docker logging driver] *****************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
 
 TASK [nginx : Install Nginx 1.24.0] ********************************************
 ok: [orinocoz-3]
@@ -452,32 +765,2959 @@ TASK [nginx : Start Ngnix exporter service] ************************************
 ok: [orinocoz-3]
 
 TASK [grafana : Create Grafana config directories] *****************************
-ok: [orinocoz-3] => (item=/opt/grafana)
-ok: [orinocoz-3] => (item=/opt/grafana/provisioning)
-ok: [orinocoz-3] => (item=/opt/grafana/provisioning/dashboards)
-ok: [orinocoz-3] => (item=/opt/grafana/provisioning/datasources)
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [orinocoz-3] => (item=/opt/grafana)
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana/provisioning",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [orinocoz-3] => (item=/opt/grafana/provisioning)
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana/provisioning/dashboards",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [orinocoz-3] => (item=/opt/grafana/provisioning/dashboards)
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana/provisioning/datasources",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [orinocoz-3] => (item=/opt/grafana/provisioning/datasources)
 
 TASK [grafana : Deploy grafana.ini] ********************************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
 
 TASK [grafana : Deploy datasource configuration] *******************************
-ok: [orinocoz-3]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpujfsarad/datasource.yaml.j2
+@@ -0,0 +1,19 @@
++apiVersion: 1
++datasources:
++  - name: Prometheus
++    type: prometheus
++    uid: prometheus
++    access: proxy
++    orgId: 1
++    url: http://prometheus.acme.ttu:9090/prometheus
++    isDefault: true
++    version: 1
++    editable: false
++  - name: Loki1
++    type: loki
++    access: proxy
++    orgId: 1
++    uid: LOKI-BAAS
++    url: http://orinocoz-3:3100
++    isDefault: false
++    editable: true
+
+changed: [orinocoz-3]
 
 TASK [grafana : Deploy dashboard provisioning config] **************************
-ok: [orinocoz-3]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmppwopj9mr/dashboards.yaml.j2
+@@ -0,0 +1,11 @@
++apiVersion: 1
++
++providers:
++ - name: 'default'
++   orgId: 1
++   folder: ''
++   folderUid: ''
++   type: file
++   options:
++     path: /etc/grafana/provisioning/dashboards
++
+
+changed: [orinocoz-3]
 
 TASK [grafana : Deploy dashboard JSON files] ***********************************
-ok: [orinocoz-3] => (item=agama.json)
-ok: [orinocoz-3] => (item=main.json)
-ok: [orinocoz-3] => (item=backups.json)
-ok: [orinocoz-3] => (item=mysql.json)
-ok: [orinocoz-3] => (item=haproxy.json)
+--- before
++++ after: /home/doc/ica0002/roles/grafana/files/agama.json
+@@ -0,0 +1,147 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": {
++          "type": "grafana",
++          "uid": "-- Grafana --"
++        },
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": 2493910408450048,
++  "links": [],
++  "panels": [
++    {
++      "datasource": {
++        "type": "loki",
++        "uid": "LOKI-BAAS"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "custom": {
++            "displayMode": "json"
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 20,
++        "w": 24,
++        "x": 0,
++        "y": 0
++      },
++      "id": 1,
++      "options": {
++        "dedupStrategy": "none",
++        "enableInfiniteScrolling": true,
++        "enableLogDetails": true,
++        "prettifyLogMessage": false,
++        "showCommonLabels": false,
++        "showLabels": true,
++        "showTime": true,
++        "sortOrder": "Descending",
++        "wrapLogMessage": false,
++        "fontSize": "10px"
++      },
++      "pluginVersion": "12.2.1",
++      "targets": [
++        {
++          "datasource": {
++            "type": "loki",
++            "uid": "LOKI-BAAS"
++          },
++          "direction": "backward",
++          "editorMode": "code",
++          "expr": "{service_name=~\"agama.*\", container_name=~\"$container\", host=~\"$host\"}",
++          "queryType": "range",
++          "refId": "A"
++        }
++      ],
++      "title": "Agama Logs",
++      "type": "logs"
++    }
++  ],
++  "preload": false,
++  "refresh": "1s",
++  "schemaVersion": 42,
++  "tags": ["agama", "loki"],
++  "templating": {
++    "list": [
++      {
++        "current": {
++          "selected": true,
++          "text": "All",
++          "value": "$__all"
++        },
++        "datasource": {
++          "type": "loki",
++          "uid": "LOKI-BAAS"
++        },
++        "definition": "",
++        "includeAll": true,
++        "label": "Container",
++        "multi": true,
++        "name": "container",
++        "options": [],
++        "query": {
++          "label": "container_name",
++          "refId": "LokiVariableQueryEditor-VariableQuery",
++          "stream": "{service_name=~\"agama.*\"}",
++          "type": 1
++        },
++        "refresh": 1,
++        "regex": "",
++        "skipUrlSync": false,
++        "sort": 1,
++        "type": "query"
++      },
++      {
++        "current": {
++          "selected": true,
++          "text": "All",
++          "value": "$__all"
++        },
++        "datasource": {
++          "type": "loki",
++          "uid": "LOKI-BAAS"
++        },
++        "definition": "",
++        "includeAll": true,
++        "label": "Host",
++        "multi": true,
++        "name": "host",
++        "options": [],
++        "query": {
++          "label": "host",
++          "refId": "LokiVariableQueryEditor-VariableQuery",
++          "stream": "{service_name=~\"agama.*\"}",
++          "type": 1
++        },
++        "refresh": 1,
++        "regex": "",
++        "skipUrlSync": false,
++        "sort": 1,
++        "type": "query"
++      }
++    ]
++  },
++  "time": {
++    "from": "now-6h",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "browser",
++  "title": "Agama",
++  "uid": "bimqc9r",
++  "version": 1
++}
+
+changed: [orinocoz-3] => (item=agama.json)
+--- before
++++ after: /home/doc/ica0002/roles/grafana/files/main.json
+@@ -0,0 +1,1543 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": {
++          "type": "grafana",
++          "uid": "-- Grafana --"
++        },
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": 1,
++  "links": [],
++  "panels": [
++    {
++      "datasource": {
++        "type": "loki",
++        "uid": "LOKI-BAAS"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "axisSoftMax": 100,
++            "axisSoftMin": 95,
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "dashed+area"
++            }
++          },
++          "mappings": [],
++          "noValue": "0",
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": 0
++              },
++              {
++                "color": "dark-green",
++                "value": 98
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 8,
++        "w": 12,
++        "x": 0,
++        "y": 0
++      },
++      "id": 11,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "loki",
++            "uid": "LOKI-BAAS"
++          },
++          "editorMode": "code",
++          "expr": "100 * sum(count_over_time({job=\"haproxy\"} |~ \"^[23]\"[15m])) / sum(count_over_time({job=\"haproxy\"} |~ \"^[235]\"[15m]))",
++          "legendFormat": "Uptime %",
++          "queryType": "range",
++          "refId": "A"
++        }
++      ],
++      "title": "SLI: Uptime (%)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "type": "loki",
++        "uid": "LOKI-BAAS"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "axisSoftMax": 150,
++            "axisSoftMin": 0,
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "dashed+area"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 100
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 8,
++        "w": 12,
++        "x": 12,
++        "y": 0
++      },
++      "id": 12,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "loki",
++            "uid": "LOKI-BAAS"
++          },
++          "editorMode": "code",
++          "expr": "avg_over_time({job=\"haproxy\"} | regexp \"^[2-3][0-9]{2} (?P<latency>[0-9.]+)\" | unwrap latency [15m])",
++          "legendFormat": "Latency ms",
++          "queryType": "range",
++          "refId": "A"
++        }
++      ],
++      "title": "SLI: Latency (ms)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 12,
++        "x": 0,
++        "y": 8
++      },
++      "id": 2,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "100 * (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Memory Consumption (%)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 12,
++        "x": 12,
++        "y": 8
++      },
++      "id": 1,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "100 * (1 - rate(node_cpu_seconds_total{mode=\"idle\"}[1m]))",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "CPU Utilization (%)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 0,
++        "y": 15
++      },
++      "id": 3,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "bind_up",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Bind9",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 6,
++        "y": 15
++      },
++      "id": 5,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "nginx_up",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Nginx",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 12,
++        "y": 15
++      },
++      "id": 4,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "mysql_up",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          },
++          "noValue": "0"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 18,
++        "y": 15
++      },
++      "id": 13,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "haproxy_up",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "HAProxy",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          },
++          "noValue": "0"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 0,
++        "y": 20
++      },
++      "id": 14,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "keepalived_up",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Keepalived",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 0,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "light-green",
++                  "index": 1,
++                  "text": "STAND-BY"
++                },
++                "2": {
++                  "color": "dark-green",
++                  "index": 2,
++                  "text": "ACTIVE"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              }
++            ]
++          },
++          "noValue": "0"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 6,
++        "y": 20
++      },
++      "id": 15,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "keepalived_vrrp_state",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Keepalived VRRP",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 0.5
++              }
++            ]
++          },
++          "noValue": "0"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 12,
++        "x": 12,
++        "y": 20
++      },
++      "id": 16,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "haproxy_server_up",
++          "instant": false,
++          "legendFormat": "{{server}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "HAProxy Servers",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 0,
++        "y": 25
++      },
++      "id": 6,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(bind_resolver_queries_total{type=\"A\"}[1m])",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "DNS (A queries/min)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 8,
++        "y": 25
++      },
++      "id": 8,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(nginx_http_requests_total[1m])",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Nginx (requests/min)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 8,
++        "x": 16,
++        "y": 25
++      },
++      "id": 7,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[1m])",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL (SELECT/min)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 12,
++        "x": 0,
++        "y": 32
++      },
++      "id": 17,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "sum by (level) (rate(loki_log_messages_total[1m]))",
++          "instant": false,
++          "legendFormat": "__auto",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Loki (logs/min)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 7,
++        "w": 12,
++        "x": 12,
++        "y": 32
++      },
++      "id": 18,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(promtail_sent_entries_total[1m])",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Promtail (logs/min)",
++      "type": "timeseries"
++    },
++    {
++      "datasource": {
++        "default": true,
++        "type": "prometheus"
++      },
++      "description": "Zone serial numbers should match between primary and secondary DNS servers",
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 4,
++        "w": 24,
++        "x": 0,
++        "y": 39
++      },
++      "id": 9,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "horizontal",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "bind_zone_serial{zone_name=\"acme.ttu\"}",
++          "instant": false,
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "DNS Zone Serial",
++      "type": "stat"
++    }
++  ],
++  "refresh": "1s",
++  "schemaVersion": 39,
++  "tags": ["main", "overview"],
++  "templating": {
++    "list": []
++  },
++  "time": {
++    "from": "now-6h",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "browser",
++  "title": "Main",
++  "uid": "t2g2h2j2-k222-m2n2-o2p2-q2r2s2t2u2v2",
++  "version": 6,
++  "weekStart": ""
++}
+
+changed: [orinocoz-3] => (item=main.json)
+--- before
++++ after: /home/doc/ica0002/roles/grafana/files/backups.json
+@@ -0,0 +1,425 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": {
++          "type": "grafana",
++          "uid": "-- Grafana --"
++        },
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": 69,
++  "links": [],
++  "liveNow": false,
++  "panels": [
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "red", "value": null},
++              {"color": "yellow", "value": 60},
++              {"color": "green", "value": 360}
++            ]
++          },
++          "unit": "m",
++          "min": 0,
++          "max": 1440,
++          "decimals": 0
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 0 },
++      "id": 13,
++      "options": {
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "showThresholdLabels": false,
++        "showThresholdMarkers": true
++      },
++      "targets": [
++        {
++          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"mysql\"}) / 60), 0)",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL - Time Until Next Backup",
++      "type": "gauge"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "red", "value": null},
++              {"color": "yellow", "value": 60},
++              {"color": "green", "value": 360}
++            ]
++          },
++          "unit": "m",
++          "min": 0,
++          "max": 1440,
++          "decimals": 0
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 0 },
++      "id": 14,
++      "options": {
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "showThresholdLabels": false,
++        "showThresholdMarkers": true
++      },
++      "targets": [
++        {
++          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"prometheus\"}) / 60), 0)",
++          "refId": "A"
++        }
++      ],
++      "title": "Prometheus - Time Until Next Backup",
++      "type": "gauge"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "red", "value": null},
++              {"color": "yellow", "value": 60},
++              {"color": "green", "value": 360}
++            ]
++          },
++          "unit": "m",
++          "min": 0,
++          "max": 1440,
++          "decimals": 0
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 7, "w": 8, "x": 16, "y": 0 },
++      "id": 15,
++      "options": {
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "showThresholdLabels": false,
++        "showThresholdMarkers": true
++      },
++      "targets": [
++        {
++          "expr": "clamp_min((1440 - (time() - backup_last_success_time{user=\"orinocoz\", service=\"loki\"}) / 60), 0)",
++          "refId": "A"
++        }
++      ],
++      "title": "Loki - Time Until Next Backup",
++      "type": "gauge"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          },
++          "unit": "time:YYYY-MM-DD HH:mm"
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 7 },
++      "id": 10,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"mysql\"} * 1000",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL - Last Backup",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          },
++          "unit": "time:YYYY-MM-DD HH:mm"
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 7 },
++      "id": 11,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"prometheus\"} * 1000",
++          "refId": "A"
++        }
++      ],
++      "title": "Prometheus - Last Backup",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "thresholds"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          },
++          "unit": "time:YYYY-MM-DD HH:mm"
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 7 },
++      "id": 12,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backup_last_success_time{user=\"orinocoz\", service=\"loki\"} * 1000",
++          "refId": "A"
++        }
++      ],
++      "title": "Loki - Last Backup",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "palette-classic"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 5, "w": 8, "x": 0, "y": 11 },
++      "id": 6,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backups_total{user=\"orinocoz\", service=\"mysql\"}",
++          "legendFormat": "{{type}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL Backup Counts",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "palette-classic"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 5, "w": 8, "x": 8, "y": 11 },
++      "id": 2,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backups_total{user=\"orinocoz\", service=\"prometheus\"}",
++          "legendFormat": "{{type}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Prometheus Backup Counts",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {"mode": "palette-classic"},
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {"color": "green", "value": null}
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": { "h": 5, "w": 8, "x": 16, "y": 11 },
++      "id": 3,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": ["lastNotNull"],
++          "fields": "",
++          "values": false
++        },
++        "textMode": "auto"
++      },
++      "targets": [
++        {
++          "expr": "backups_total{user=\"orinocoz\", service=\"loki\"}",
++          "legendFormat": "{{type}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Loki Backup Counts",
++      "type": "stat"
++    }
++  ],
++  "refresh": "1s",
++  "schemaVersion": 37,
++  "style": "dark",
++  "tags": ["backups"],
++  "templating": { "list": [] },
++  "time": { "from": "now-6h", "to": "now" },
++  "timepicker": {},
++  "timezone": "",
++  "title": "Backups",
++  "uid": "dc327_n4k",
++  "version": 2,
++  "weekStart": ""
++}
+
+changed: [orinocoz-3] => (item=backups.json)
+--- before
++++ after: /home/doc/ica0002/roles/grafana/files/mysql.json
+@@ -0,0 +1,549 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": {
++          "type": "grafana",
++          "uid": "-- Grafana --"
++        },
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": 3,
++  "links": [],
++  "panels": [
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "DOWN"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "UP"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 0,
++        "y": 0
++      },
++      "id": 2,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "percentChangeColorMode": "standard",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "editorMode": "code",
++          "expr": "mysql_up",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL Server Status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "orange",
++                  "index": 1,
++                  "text": "Disabled"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "Running"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 6,
++        "y": 0
++      },
++      "id": 6,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "percentChangeColorMode": "standard",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "editorMode": "code",
++          "expr": "mysql_slave_status_slave_sql_running",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Slave SQL Status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "orange",
++                  "index": 1,
++                  "text": "Disabled"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "Enabled"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 12,
++        "y": 0
++      },
++      "id": 5,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "percentChangeColorMode": "standard",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "editorMode": "code",
++          "expr": "mysql_slave_status_slave_io_running",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Slave IO Status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "green",
++                  "index": 1,
++                  "text": "Write Enabled"
++                },
++                "1": {
++                  "color": "orange",
++                  "index": 0,
++                  "text": "Read Only"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 18,
++        "y": 0
++      },
++      "id": 4,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "percentChangeColorMode": "standard",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "editorMode": "code",
++          "expr": "mysql_global_variables_read_only",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "Read Only Status",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 0,
++        "y": 5
++      },
++      "id": 3,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "percentChangeColorMode": "standard",
++        "reduceOptions": {
++          "calcs": [
++            "lastNotNull"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "showPercentChange": false,
++        "textMode": "auto",
++        "wideLayout": true
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "editorMode": "code",
++          "expr": "mysql_global_variables_server_id",
++          "legendFormat": "{{instance}}",
++          "range": true,
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL Server ID",
++      "type": "stat"
++    },
++    {
++      "datasource": {
++        "type": "prometheus",
++        "uid": "prometheus"
++      },
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisBorderShow": false,
++            "axisCenteredZero": false,
++            "axisColorMode": "text",
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "barWidthFactor": 0.6,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "insertNulls": false,
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "showValues": false,
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": 0
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 10,
++        "w": 18,
++        "x": 6,
++        "y": 5
++      },
++      "id": 1,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom",
++          "showLegend": true
++        },
++        "tooltip": {
++          "hideZeros": false,
++          "mode": "single",
++          "sort": "none"
++        }
++      },
++      "pluginVersion": "12.3.0",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(mysql_global_status_commands_total{command=\"select\"}[5m])",
++          "legendFormat": "{{instance}} : {{command}}",
++          "range": true,
++          "refId": "A"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(mysql_global_status_commands_total{command=\"insert\"}[5m])",
++          "hide": false,
++          "instant": false,
++          "legendFormat": "{{instance}} : {{command}}",
++          "range": true,
++          "refId": "B"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "prometheus"
++          },
++          "editorMode": "code",
++          "expr": "rate(mysql_global_status_commands_total{command=\"update\"}[5m])",
++          "hide": false,
++          "instant": false,
++          "legendFormat": "{{instance}} : {{command}}",
++          "range": true,
++          "refId": "C"
++        }
++      ],
++      "title": "MySQL Commands Rate",
++      "type": "timeseries"
++    }
++  ],
++  "preload": false,
++  "refresh": "1s",
++  "schemaVersion": 42,
++  "tags": ["mysql"],
++  "templating": {
++    "list": []
++  },
++  "time": {
++    "from": "now-6h",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "browser",
++  "title": "MySQL stats",
++  "uid": "mysql-dashboard-uid-001",
++  "version": 4
++}
+
+changed: [orinocoz-3] => (item=mysql.json)
+--- before
++++ after: /home/doc/ica0002/roles/grafana/files/haproxy.json
+@@ -0,0 +1,147 @@
++{
++  "annotations": {"list": []},
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "graphTooltip": 0,
++  "id": null,
++  "links": [],
++  "panels": [
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
++            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
++      "id": 1,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "haproxy_up{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
++      "title": "HAProxy UP - orinocoz-1",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
++            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
++      "id": 2,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "haproxy_up{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
++      "title": "HAProxy UP - orinocoz-2",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
++            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
++      "id": 3,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "keepalived_up{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
++      "title": "Keepalived UP - orinocoz-1",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
++            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
++      "id": 4,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "keepalived_up{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
++      "title": "Keepalived UP - orinocoz-2",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "INIT"}}, "type": "value"},
++            {"options": {"1": {"color": "orange", "text": "BACKUP"}}, "type": "value"},
++            {"options": {"2": {"color": "green", "text": "MASTER"}}, "type": "value"},
++            {"options": {"3": {"color": "yellow", "text": "FAULT"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "orange", "value": 1}, {"color": "green", "value": 2}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 12, "x": 0, "y": 4},
++      "id": 5,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "keepalived_vrrp_state{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
++      "title": "Keepalived VRRP State - orinocoz-1",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "INIT"}}, "type": "value"},
++            {"options": {"1": {"color": "orange", "text": "BACKUP"}}, "type": "value"},
++            {"options": {"2": {"color": "green", "text": "MASTER"}}, "type": "value"},
++            {"options": {"3": {"color": "yellow", "text": "FAULT"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "orange", "value": 1}, {"color": "green", "value": 2}]}
++        }
++      },
++      "gridPos": {"h": 4, "w": 12, "x": 12, "y": 4},
++      "id": 6,
++      "options": {"colorMode": "value", "graphMode": "none"},
++      "targets": [{"expr": "keepalived_vrrp_state{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
++      "title": "Keepalived VRRP State - orinocoz-2",
++      "type": "stat"
++    },
++    {
++      "datasource": {"type": "prometheus", "uid": "prometheus"},
++      "fieldConfig": {
++        "defaults": {
++          "mappings": [
++            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
++            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
++          ],
++          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
++        }
++      },
++      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8},
++      "id": 7,
++      "options": {"colorMode": "value", "graphMode": "none", "orientation": "horizontal"},
++      "targets": [{"expr": "haproxy_server_up", "legendFormat": "{{server}}"}],
++      "title": "HAProxy Backend Servers Status",
++      "type": "stat"
++    }
++  ],
++  "refresh": "1s",
++  "schemaVersion": 38,
++  "tags": ["haproxy", "keepalived"],
++  "time": {"from": "now-5m", "to": "now"},
++  "title": "HAProxy & Keepalived",
++  "uid": "haproxy-keepalived",
++  "version": 1
++}
+
+changed: [orinocoz-3] => (item=haproxy.json)
 
 TASK [grafana : Run Grafana container] *****************************************
-ok: [orinocoz-3]
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [orinocoz-3]
 
 TASK [grafana : Add Grafana CNAME record] **************************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
+
+RUNNING HANDLER [grafana : Restart Grafana container] **************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "restarted": false,
++    "restarted": true,
+     "running": true
+ }
+
+changed: [orinocoz-3]
 
 PLAY [Logging server setup] ****************************************************
 
@@ -485,22 +3725,84 @@ TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-3]
 
 TASK [loki : Install Loki] *****************************************************
-ok: [orinocoz-3]
+The following NEW packages will be installed:
+  loki
+0 upgraded, 1 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-3]
 
 TASK [loki : Loki service start] ***********************************************
 ok: [orinocoz-3]
 
 TASK [loki : Copy Loki configuration] ******************************************
-ok: [orinocoz-3]
+--- before: /etc/loki/config.yml
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmp_cp6vdzr/config.yml.j2
+@@ -7,7 +7,7 @@
+   grpc_server_max_concurrent_streams: 1000
+ 
+ common:
+-  instance_addr: 127.0.0.1
++  instance_addr: 0.0.0.0
+   path_prefix: /tmp/loki
+   storage:
+     filesystem:
+@@ -27,7 +27,6 @@
+ 
+ limits_config:
+   metric_aggregation_enabled: true
+-  enable_multi_variant_queries: true
+ 
+ schema_config:
+   configs:
+@@ -50,16 +49,4 @@
+ frontend:
+   encoding: protobuf
+ 
+-
+-# By default, Loki will send anonymous, but uniquely-identifiable usage and configuration
+-# analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/
+-#
+-# Statistics help us better understand how Loki is used, and they show us performance
+-# levels for most users. This helps us prioritize features and documentation.
+-# For more information on what's sent, look at
+-# https://github.com/grafana/loki/blob/main/pkg/analytics/stats.go
+-# Refer to the buildReport method to see what goes into a report.
+-#
+-# If you would like to disable reporting, uncomment the following lines:
+-#analytics:
+-#  reporting_enabled: false
++# reporting_enabled: false
+
+changed: [orinocoz-3]
 
 TASK [loki : Create /home/backup/loki directory] *******************************
-ok: [orinocoz-3]
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0700",
++    "owner": 34,
+     "path": "/home/backup/loki",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [orinocoz-3]
 
 TASK [loki : Create Loki backup cron service] **********************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
 
 TASK [loki : Add Loki CNAME record] ********************************************
-ok: [orinocoz-3]
+changed: [orinocoz-3]
+
+RUNNING HANDLER [loki : Restart Loki] ******************************************
+changed: [orinocoz-3]
+
+RUNNING HANDLER [loki : Restart Loki cron] *************************************
+changed: [orinocoz-3]
 
 PLAY [HAProxy load balancers] **************************************************
 
@@ -509,73 +3811,346 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [haproxy : Install HAProxy] ***********************************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+The following additional packages will be installed:
+  liblua5.4-0
+Suggested packages:
+  vim-haproxy haproxy-doc
+The following NEW packages will be installed:
+  haproxy liblua5.4-0
+0 upgraded, 2 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-1]
+The following additional packages will be installed:
+  liblua5.4-0
+Suggested packages:
+  vim-haproxy haproxy-doc
+The following NEW packages will be installed:
+  haproxy liblua5.4-0
+0 upgraded, 2 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-2]
 
 TASK [haproxy : Deploy HAProxy configuration] **********************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+--- before: /etc/haproxy/haproxy.cfg
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpch6bzyvl/haproxy.cfg.j2
+@@ -1,34 +1,42 @@
+ global
+-	log /dev/log	local0
+-	log /dev/log	local1 notice
+-	chroot /var/lib/haproxy
+-	stats socket /run/haproxy/admin.sock mode 660 level admin
+-	stats timeout 30s
+-	user haproxy
+-	group haproxy
+-	daemon
++#    log /dev/log local0
++#    log /dev/log local1 notice
++    log ring@promtail local0
++    chroot /var/lib/haproxy
++    stats socket /run/haproxy/admin.sock mode 660 level admin
++    stats timeout 30s
++    user haproxy
++    group haproxy
++    daemon
+ 
+-	# Default SSL material locations
+-	ca-base /etc/ssl/certs
+-	crt-base /etc/ssl/private
+-
+-	# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+-        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
++ring promtail
++    format rfc5424
++    maxlen 1024
++    server promtail localhost:8814
+ 
+ defaults
+-	log	global
+-	mode	http
+-	option	httplog
+-	option	dontlognull
+-        timeout connect 5000
+-        timeout client  50000
+-        timeout server  50000
+-	errorfile 400 /etc/haproxy/errors/400.http
+-	errorfile 403 /etc/haproxy/errors/403.http
+-	errorfile 408 /etc/haproxy/errors/408.http
+-	errorfile 500 /etc/haproxy/errors/500.http
+-	errorfile 502 /etc/haproxy/errors/502.http
+-	errorfile 503 /etc/haproxy/errors/503.http
+-	errorfile 504 /etc/haproxy/errors/504.http
++    log     global
++    mode    http
++    option  httplog
++    option  dontlognull
++    timeout connect 5000
++    timeout client  50000
++    timeout server  50000
++
++listen stats
++    bind localhost:9188
++    stats enable
++    stats uri /haproxy?stats
++
++frontend agama_frontend
++    bind *:88
++    log-format "%ST %Tr"
++    default_backend agama_backend
++
++backend agama_backend
++    balance roundrobin
++    option httpchk GET /
++    server orinocoz-1-agama-0 orinocoz-1:8001 check
++    server orinocoz-1-agama-1 orinocoz-1:8002 check
++    server orinocoz-2-agama-0 orinocoz-2:8001 check
++    server orinocoz-2-agama-1 orinocoz-2:8002 check
+
+changed: [orinocoz-1]
+--- before: /etc/haproxy/haproxy.cfg
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpx5q_zknb/haproxy.cfg.j2
+@@ -1,34 +1,42 @@
+ global
+-	log /dev/log	local0
+-	log /dev/log	local1 notice
+-	chroot /var/lib/haproxy
+-	stats socket /run/haproxy/admin.sock mode 660 level admin
+-	stats timeout 30s
+-	user haproxy
+-	group haproxy
+-	daemon
++#    log /dev/log local0
++#    log /dev/log local1 notice
++    log ring@promtail local0
++    chroot /var/lib/haproxy
++    stats socket /run/haproxy/admin.sock mode 660 level admin
++    stats timeout 30s
++    user haproxy
++    group haproxy
++    daemon
+ 
+-	# Default SSL material locations
+-	ca-base /etc/ssl/certs
+-	crt-base /etc/ssl/private
+-
+-	# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+-        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
++ring promtail
++    format rfc5424
++    maxlen 1024
++    server promtail localhost:8814
+ 
+ defaults
+-	log	global
+-	mode	http
+-	option	httplog
+-	option	dontlognull
+-        timeout connect 5000
+-        timeout client  50000
+-        timeout server  50000
+-	errorfile 400 /etc/haproxy/errors/400.http
+-	errorfile 403 /etc/haproxy/errors/403.http
+-	errorfile 408 /etc/haproxy/errors/408.http
+-	errorfile 500 /etc/haproxy/errors/500.http
+-	errorfile 502 /etc/haproxy/errors/502.http
+-	errorfile 503 /etc/haproxy/errors/503.http
+-	errorfile 504 /etc/haproxy/errors/504.http
++    log     global
++    mode    http
++    option  httplog
++    option  dontlognull
++    timeout connect 5000
++    timeout client  50000
++    timeout server  50000
++
++listen stats
++    bind localhost:9188
++    stats enable
++    stats uri /haproxy?stats
++
++frontend agama_frontend
++    bind *:88
++    log-format "%ST %Tr"
++    default_backend agama_backend
++
++backend agama_backend
++    balance roundrobin
++    option httpchk GET /
++    server orinocoz-1-agama-0 orinocoz-1:8001 check
++    server orinocoz-1-agama-1 orinocoz-1:8002 check
++    server orinocoz-2-agama-0 orinocoz-2:8001 check
++    server orinocoz-2-agama-1 orinocoz-2:8002 check
+
+changed: [orinocoz-2]
 
 TASK [haproxy : Ensure HAProxy is started and enabled] *************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Install prometheus-haproxy-exporter] ***************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+The following NEW packages will be installed:
+  prometheus-haproxy-exporter
+0 upgraded, 1 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-1]
+The following NEW packages will be installed:
+  prometheus-haproxy-exporter
+0 upgraded, 1 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-2]
 
 TASK [haproxy : Configure HAProxy exporter] ************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+--- before: /etc/default/prometheus-haproxy-exporter
++++ after: /etc/default/prometheus-haproxy-exporter
+@@ -1,5 +1 @@
+-# Set the command-line arguments to pass to the server.
+-# Due to shell escaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
++ARGS="--haproxy.scrape-uri=http://localhost:9188/haproxy?stats;csv"
+
+changed: [orinocoz-1]
+--- before: /etc/default/prometheus-haproxy-exporter
++++ after: /etc/default/prometheus-haproxy-exporter
+@@ -1,5 +1 @@
+-# Set the command-line arguments to pass to the server.
+-# Due to shell escaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
++ARGS="--haproxy.scrape-uri=http://localhost:9188/haproxy?stats;csv"
+
+changed: [orinocoz-2]
 
 TASK [haproxy : Ensure HAProxy exporter is started and enabled] ****************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [haproxy : Add LB CNAME records] ******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+changed: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+changed: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+changed: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+changed: [orinocoz-2]
+changed: [orinocoz-1]
 
 TASK [keepalived : Deploy Keepalived check script] *****************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmp5dndw_e9/check_haproxy.sh.j2
+@@ -0,0 +1,3 @@
++#!/bin/bash
++# Check if HAProxy is responding on port 88
++curl -sf http://localhost:88/ > /dev/null
+
+changed: [orinocoz-2]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmplw5ljmwb/check_haproxy.sh.j2
+@@ -0,0 +1,3 @@
++#!/bin/bash
++# Check if HAProxy is responding on port 88
++curl -sf http://localhost:88/ > /dev/null
+
+changed: [orinocoz-1]
 
 TASK [keepalived : Install Keepalived] *****************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+The following additional packages will be installed:
+  ipvsadm
+Suggested packages:
+  heartbeat ldirectord
+The following NEW packages will be installed:
+  ipvsadm keepalived
+0 upgraded, 2 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-1]
+The following additional packages will be installed:
+  ipvsadm
+Suggested packages:
+  heartbeat ldirectord
+The following NEW packages will be installed:
+  ipvsadm keepalived
+0 upgraded, 2 newly installed, 0 to remove and 246 not upgraded.
+changed: [orinocoz-2]
 
 TASK [keepalived : Deploy Keepalived configuration] ****************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+changed: [orinocoz-1]
+changed: [orinocoz-2]
 
 TASK [keepalived : Ensure Keepalived is started and enabled] *******************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
+changed: [orinocoz-1]
+changed: [orinocoz-2]
 
 TASK [keepalived : Download keepalived-exporter] *******************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+changed: [orinocoz-2]
+changed: [orinocoz-1]
 
 TASK [keepalived : Extract keepalived-exporter] ********************************
-skipping: [orinocoz-2]
-skipping: [orinocoz-1]
+changed: [orinocoz-2]
+changed: [orinocoz-1]
 
 TASK [keepalived : Deploy keepalived-exporter systemd service] *****************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpm9a83qyb/keepalived-exporter.service.j2
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Keepalived Exporter
++After=network.target keepalived.service
++
++[Service]
++Type=simple
++User=root
++ExecStart=/usr/local/bin/keepalived-exporter
++Restart=always
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [orinocoz-1]
+--- before
++++ after: /home/doc/.ansible/tmp/ansible-local-22922026z0ypofz/tmpv3v7z50h/keepalived-exporter.service.j2
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Keepalived Exporter
++After=network.target keepalived.service
++
++[Service]
++Type=simple
++User=root
++ExecStart=/usr/local/bin/keepalived-exporter
++Restart=always
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [orinocoz-2]
 
 TASK [keepalived : Ensure keepalived-exporter is started and enabled] **********
+changed: [orinocoz-1]
+changed: [orinocoz-2]
+
+RUNNING HANDLER [haproxy : Restart HAProxy] ************************************
+changed: [orinocoz-1]
+changed: [orinocoz-2]
+
+RUNNING HANDLER [haproxy : Restart HAProxy exporter] ***************************
+changed: [orinocoz-2]
+changed: [orinocoz-1]
+
+RUNNING HANDLER [keepalived : Restart Keepalived] ******************************
+changed: [orinocoz-2]
+changed: [orinocoz-1]
+
+RUNNING HANDLER [keepalived : Reload systemd] **********************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
+RUNNING HANDLER [keepalived : Restart keepalived-exporter] *********************
+changed: [orinocoz-1]
+changed: [orinocoz-2]
+
 PLAY RECAP *********************************************************************
-orinocoz-1                 : ok=82   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
-orinocoz-2                 : ok=79   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
-orinocoz-3                 : ok=71   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+orinocoz-1                 : ok=88   changed=20   unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+orinocoz-2                 : ok=85   changed=19   unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+orinocoz-3                 : ok=77   changed=28   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible-playbook infra.yaml --diff
 
@@ -583,8 +4158,8 @@ PLAY [Gather facts from all hosts] *********************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 
 PLAY [Initial setup] ***********************************************************
 
@@ -594,34 +4169,34 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [init : Add Grafana APT GPG key] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [init : Add Grafana APT repository (OSS)] *********************************
-ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [init : Install Prometheus node] ******************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Ensure node_exporter are started and enabled] *********************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Install Promtail] *************************************************
 ok: [orinocoz-3]
@@ -630,8 +4205,8 @@ ok: [orinocoz-2]
 
 TASK [init : Add Promtail user to adm group] ***********************************
 ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 
 TASK [init : Ensure Promtail state directory exists] ***************************
 ok: [orinocoz-2]
@@ -640,19 +4215,19 @@ ok: [orinocoz-1]
 
 TASK [init : Deploy Promtail configuration] ************************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Ensure Promtail service is started and enabled] *******************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Create a backup user] *********************************************
 [WARNING]: Found existing ssh key private file "/home/backup/.ssh/id_rsa", no
 force, so skipping ssh-keygen generation
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [init : Ensure backup user .ssh directory exists] *************************
@@ -662,8 +4237,8 @@ ok: [orinocoz-2]
 
 TASK [init : Deploy known_hosts for backup user] *******************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Create /home/backup/restore directory] ****************************
 ok: [orinocoz-3]
@@ -671,13 +4246,13 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [init : Install Duplicity] ************************************************
+ok: [orinocoz-1]
 ok: [orinocoz-3]
 ok: [orinocoz-2]
-ok: [orinocoz-1]
 
 TASK [init : Install dnspython for nsupdate] ***********************************
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 
 PLAY [DNS server] **************************************************************
@@ -698,12 +4273,15 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [bind : Configure DNS forwarders] *****************************************
-ok: [orinocoz-3] => (item=options)
-ok: [orinocoz-2] => (item=options)
-ok: [orinocoz-1] => (item=options)
-ok: [orinocoz-3] => (item=local)
-ok: [orinocoz-2] => (item=local)
-ok: [orinocoz-1] => (item=local)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-2]
 
 TASK [bind : Configure master zone] ********************************************
 skipping: [orinocoz-1]
@@ -717,17 +4295,17 @@ ok: [orinocoz-3]
 
 TASK [bind : Install Bind exporter] ********************************************
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
-ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Ensure Bind exporter is running and enabled] **********************
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
@@ -737,22 +4315,25 @@ TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 
 TASK [bind : Add A records for all hosts] **************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add backup server A record] ***************************************
 ok: [orinocoz-3]
 
 TASK [bind : Add NS CNAME records] *********************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR records for all hosts] ************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR record for backup server] *********************************
 ok: [orinocoz-3]
@@ -771,90 +4352,91 @@ ok: [orinocoz-2]
 
 TASK [resolve : Change DNS configuration file] *********************************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 PLAY [Database servers] ********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Install MySQL] ***************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Override MySQL bind address] *************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Ensure MySQL is started and enabled] *****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : MySQL database] **************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create MySQL user] ***********************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Install MySQL Exporter] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : MySQL Exporter user] *********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Enable mysqld_exporter config path] ******************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : MySQL Exporter user conf] ****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : MySQL Exporter service] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create /home/backup/mysql directory] *****************************
-ok: [orinocoz-1]
-ok: [orinocoz-2]
-
-TASK [mysql : Ensure MySQL backup user exist] **********************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
-
-TASK [mysql : Create backup template] ******************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Ensure MySQL backup user exist] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create backup template] ******************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Ensure MySQL backup user exist] **********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create backup template] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create MySQL backup cron service] ********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : MySQL replication user] ******************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Add DB CNAME records] ********************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 PLAY [MySQL replication] *******************************************************
 
@@ -863,8 +4445,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql_replication : Get replica status] **********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql_replication : Set read_only OFF on source] *************************
 skipping: [orinocoz-2]
@@ -909,8 +4491,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [docker : Install Loki Docker logging driver] *****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [agama : Create Agama build directory] ************************************
 ok: [orinocoz-2]
@@ -925,20 +4507,21 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [agama : Build Agama Docker image] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Run Agama containers] ********************************************
 ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-1] => (item=None)
-ok: [orinocoz-1] => (item=None)
-ok: [orinocoz-1]
 ok: [orinocoz-2] => (item=None)
 ok: [orinocoz-2]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
 
 TASK [agama : Add web CNAME records] *******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [nginx : Install Nginx 1.24.0] ********************************************
 ok: [orinocoz-2]
@@ -953,8 +4536,8 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [nginx : Install from APT prometheus-nginx-exporter] **********************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
 ok: [orinocoz-2]
@@ -1085,8 +4668,8 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [haproxy : Install HAProxy] ***********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Deploy HAProxy configuration] **********************************
 ok: [orinocoz-1]
@@ -1097,56 +4680,57 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Install prometheus-haproxy-exporter] ***************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Configure HAProxy exporter] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Ensure HAProxy exporter is started and enabled] ****************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Add LB CNAME records] ******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Deploy Keepalived check script] *****************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Install Keepalived] *****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Deploy Keepalived configuration] ****************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [keepalived : Ensure Keepalived is started and enabled] *******************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Download keepalived-exporter] *******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Extract keepalived-exporter] ********************************
-skipping: [orinocoz-2]
 skipping: [orinocoz-1]
+skipping: [orinocoz-2]
 
 TASK [keepalived : Deploy keepalived-exporter systemd service] *****************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Ensure keepalived-exporter is started and enabled] **********
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY RECAP *********************************************************************
 orinocoz-1                 : ok=82   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
@@ -1154,14 +4738,14 @@ orinocoz-2                 : ok=79   changed=0    unreachable=0    failed=0    s
 orinocoz-3                 : ok=71   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + ansible all -b -m reboot -a test_command=uptime
-orinocoz-3 | CHANGED => {
-    "changed": true,
-    "elapsed": 84,
-    "rebooted": true
-}
 orinocoz-2 | CHANGED => {
     "changed": true,
-    "elapsed": 84,
+    "elapsed": 85,
+    "rebooted": true
+}
+orinocoz-3 | CHANGED => {
+    "changed": true,
+    "elapsed": 85,
     "rebooted": true
 }
 orinocoz-1 | CHANGED => {
@@ -1182,14 +4766,14 @@ ok: [orinocoz-1]
 PLAY [Initial setup] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Update APT cache] *************************************************
 ok: [orinocoz-3]
@@ -1198,8 +4782,8 @@ ok: [orinocoz-1]
 
 TASK [init : Add Grafana APT GPG key] ******************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Add Grafana APT repository (OSS)] *********************************
 ok: [orinocoz-3]
@@ -1207,14 +4791,14 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [init : Install Prometheus node] ******************************************
-ok: [orinocoz-2]
-ok: [orinocoz-1]
 ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Ensure node_exporter are started and enabled] *********************
 ok: [orinocoz-1]
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 
 TASK [init : Install Promtail] *************************************************
 ok: [orinocoz-3]
@@ -1223,50 +4807,50 @@ ok: [orinocoz-1]
 
 TASK [init : Add Promtail user to adm group] ***********************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Ensure Promtail state directory exists] ***************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Deploy Promtail configuration] ************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Ensure Promtail service is started and enabled] *******************
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [init : Create a backup user] *********************************************
 [WARNING]: Found existing ssh key private file "/home/backup/.ssh/id_rsa", no
 force, so skipping ssh-keygen generation
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Ensure backup user .ssh directory exists] *************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Deploy known_hosts for backup user] *******************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Create /home/backup/restore directory] ****************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [init : Install Duplicity] ************************************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [init : Install dnspython for nsupdate] ***********************************
 ok: [orinocoz-3]
@@ -1281,22 +4865,25 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [bind : Install Bind] *****************************************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [bind : Ensure Bind is running and enabled] *******************************
+ok: [orinocoz-3]
 ok: [orinocoz-2]
 ok: [orinocoz-1]
-ok: [orinocoz-3]
 
 TASK [bind : Configure DNS forwarders] *****************************************
-ok: [orinocoz-2] => (item=options)
-ok: [orinocoz-3] => (item=options)
-ok: [orinocoz-1] => (item=options)
-ok: [orinocoz-2] => (item=local)
-ok: [orinocoz-1] => (item=local)
-ok: [orinocoz-3] => (item=local)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-2]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
 
 TASK [bind : Configure master zone] ********************************************
 skipping: [orinocoz-1]
@@ -1310,18 +4897,18 @@ ok: [orinocoz-3]
 
 TASK [bind : Install Bind exporter] ********************************************
 ok: [orinocoz-2]
-ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-3]
 
 TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
 ok: [orinocoz-3]
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [bind : Ensure Bind exporter is running and enabled] **********************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 
@@ -1330,22 +4917,25 @@ TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 TASK [bind : Flush handlers to ensure BIND has latest config] ******************
 
 TASK [bind : Add A records for all hosts] **************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add backup server A record] ***************************************
 ok: [orinocoz-3]
 
 TASK [bind : Add NS CNAME records] *********************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR records for all hosts] ************************************
-ok: [orinocoz-3] => (item=orinocoz-3)
-ok: [orinocoz-3] => (item=orinocoz-1)
-ok: [orinocoz-3] => (item=orinocoz-2)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
 
 TASK [bind : Add PTR record for backup server] *********************************
 ok: [orinocoz-3]
@@ -1359,19 +4949,19 @@ ok: [orinocoz-1]
 
 TASK [resolve : Stop daemon systemd-resolved] **********************************
 ok: [orinocoz-3]
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [resolve : Change DNS configuration file] *********************************
-ok: [orinocoz-2]
 ok: [orinocoz-3]
+ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 PLAY [Database servers] ********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Install MySQL] ***************************************************
 ok: [orinocoz-1]
@@ -1390,16 +4980,16 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Create MySQL user] ***********************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Install MySQL Exporter] ******************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : MySQL Exporter user] *********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Enable mysqld_exporter config path] ******************************
 ok: [orinocoz-2]
@@ -1414,16 +5004,16 @@ TASK [mysql : Force mysql exporter restart] ************************************
 TASK [mysql : Force mysql exporter restart] ************************************
 
 TASK [mysql : MySQL Exporter service] ******************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Create /home/backup/mysql directory] *****************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql : Ensure MySQL backup user exist] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : Create backup template] ******************************************
 ok: [orinocoz-2]
@@ -1438,26 +5028,27 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [mysql : Create MySQL backup cron service] ********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [mysql : MySQL replication user] ******************************************
 ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [mysql : Add DB CNAME records] ********************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 PLAY [MySQL replication] *******************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql_replication : Get replica status] **********************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [mysql_replication : Set read_only OFF on source] *************************
 skipping: [orinocoz-2]
@@ -1498,12 +5089,12 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [docker : Ensure Docker service is running and enabled] *******************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [docker : Install Loki Docker logging driver] *****************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Create Agama build directory] ************************************
 ok: [orinocoz-2]
@@ -1514,12 +5105,12 @@ ok: [orinocoz-1]
 ok: [orinocoz-2]
 
 TASK [agama : Download Agama Dockerfile] ***************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [agama : Build Agama Docker image] ****************************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [agama : Run Agama containers] ********************************************
 ok: [orinocoz-2] => (item=None)
@@ -1530,16 +5121,17 @@ ok: [orinocoz-1] => (item=None)
 ok: [orinocoz-1]
 
 TASK [agama : Add web CNAME records] *******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [nginx : Install Nginx 1.24.0] ********************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Copy nginx uWSGI config] *****************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [nginx : Ensure Nginx service is started and enabled] *********************
 ok: [orinocoz-2]
@@ -1550,8 +5142,8 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [nginx : Start Ngnix exporter service] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 PLAY [Prometheus server] *******************************************************
 
@@ -1682,64 +5274,65 @@ ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Deploy HAProxy configuration] **********************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Ensure HAProxy is started and enabled] *************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Install prometheus-haproxy-exporter] ***************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [haproxy : Configure HAProxy exporter] ************************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Ensure HAProxy exporter is started and enabled] ****************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [haproxy : Add LB CNAME records] ******************************************
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-1)
-ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=orinocoz-2)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
 
 TASK [keepalived : Create keepalived_script user] ******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Deploy Keepalived check script] *****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Install Keepalived] *****************************************
 ok: [orinocoz-2]
 ok: [orinocoz-1]
 
 TASK [keepalived : Deploy Keepalived configuration] ****************************
-ok: [orinocoz-2]
 ok: [orinocoz-1]
+ok: [orinocoz-2]
 
 TASK [keepalived : Ensure Keepalived is started and enabled] *******************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Download keepalived-exporter] *******************************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Extract keepalived-exporter] ********************************
 skipping: [orinocoz-1]
 skipping: [orinocoz-2]
 
 TASK [keepalived : Deploy keepalived-exporter systemd service] *****************
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 TASK [keepalived : Ensure keepalived-exporter is started and enabled] **********
-ok: [orinocoz-1]
 ok: [orinocoz-2]
+ok: [orinocoz-1]
 
 PLAY RECAP *********************************************************************
 orinocoz-1                 : ok=82   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
@@ -1747,4 +5340,4 @@ orinocoz-2                 : ok=79   changed=0    unreachable=0    failed=0    s
 orinocoz-3                 : ok=71   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 + date
-Sat Dec 13 03:58:59 PM EET 2025
+Sat Dec 13 07:31:56 PM EET 2025

@@ -27,10 +27,10 @@ server {
 
 server {
     listen 8080 default_server;
-    
+
     location /stub_status {
         stub_status;
-        allow localhost;
+        allow 127.0.0.1;
         deny all;
     }
 }
