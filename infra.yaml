@@ -48,6 +48,12 @@
     - nginx
   tags: nginx
 
+- name: Logging server setup
+  hosts: loki
+  roles:
+    - loki
+  tags: loki
+
 - name: Prometheus server
   hosts: prometheus
   roles:
@@ -62,12 +68,6 @@
     - nginx
     - grafana
   tags: g
-
-- name: Logging server setup
-  hosts: loki
-  roles:
-    - loki
-  tags: loki
 
 - name: HAProxy load balancers
   hosts: haproxy
