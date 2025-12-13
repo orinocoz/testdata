@@ -1,3 +1,3 @@
 #!/bin/bash
 # Check if HAProxy is responding on port 88
-curl -sf http://127.0.0.1:{{ haproxy_frontend_port }}/ > /dev/null
+curl -sf http://localhost:{{ haproxy_frontend_port }}/ > /dev/null
