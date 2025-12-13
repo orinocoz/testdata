@@ -42,3 +42,4 @@
     value: "{{ inventory_hostname }}.{{ startup_name }}."
   run_once: true
   delegate_to: "{{ groups['dns_primary'][0] }}"
+  no_log: true

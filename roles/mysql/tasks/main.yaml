@@ -31,6 +31,7 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
 
 - name: Install MySQL Exporter
   ansible.builtin.apt:
@@ -47,6 +48,7 @@
     password: "{{ mysql_exporter_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     priv: '*.*:PROCESS,REPLICATION CLIENT,SELECT'
+  no_log: true
 
 - name: Enable mysqld_exporter config path
   ansible.builtin.template:
@@ -153,3 +155,4 @@
     index_var: idx
   run_once: true
   delegate_to: "{{ groups['dns_primary'][0] }}"
+  no_log: true

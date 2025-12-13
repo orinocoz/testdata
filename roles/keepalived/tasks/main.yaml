@@ -25,6 +25,7 @@
     dest: /etc/keepalived/keepalived.conf
     mode: '0644'
   notify: Restart Keepalived
+  no_log: true
 
 - name: Ensure Keepalived is started and enabled
   ansible.builtin.service:

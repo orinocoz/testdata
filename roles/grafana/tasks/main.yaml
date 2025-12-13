@@ -16,6 +16,7 @@
     owner: "472"
     mode: '0400'
   notify: Restart Grafana container
+  no_log: true
 
 - name: Deploy datasource configuration
   ansible.builtin.template:
@@ -71,4 +72,5 @@
     value: "{{ inventory_hostname }}.{{ startup_name }}."
   run_once: true
   delegate_to: "{{ groups['dns_primary'][0] }}"
+  no_log: true
 

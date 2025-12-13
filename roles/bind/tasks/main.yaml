@@ -21,6 +21,7 @@
     - local
   become: yes
   notify: Restart bind
+  no_log: true
 
 - name: Configure master zone
   ansible.builtin.template:
@@ -77,6 +78,7 @@
   loop: "{{ groups['all'] }}"
   run_once: true
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
 - name: Add backup server A record
   community.general.nsupdate:
@@ -90,6 +92,7 @@
     value: "{{ backup_server_ip }}"
   run_once: true
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
 - name: Add NS CNAME records
   community.general.nsupdate:
@@ -106,6 +109,7 @@
     index_var: idx
   run_once: true
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
 - name: Add PTR records for all hosts
   community.general.nsupdate:
@@ -120,6 +124,7 @@
   loop: "{{ groups['all'] }}"
   run_once: true
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
 - name: Add PTR record for backup server
   community.general.nsupdate:
@@ -133,4 +138,5 @@
     value: "backup.{{ startup_name }}."
   run_once: true
   when: inventory_hostname in groups['dns_primary']
+  no_log: true
 
