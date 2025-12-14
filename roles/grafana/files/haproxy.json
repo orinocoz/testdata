@@ -1,147 +1,631 @@
 {
-  "annotations": {"list": []},
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 0,
   "links": [],
   "panels": [
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [
-            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
-            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
-        }
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
       },
-      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "gridPos": {
+        "h": 10,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "haproxy_server_up",
+          "legendFormat": "{{server}}",
+          "refId": "A"
+        }
+      ],
+      "title": "HAProxy Backend Servers Status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 5,
+        "y": 0
+      },
       "id": 1,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "haproxy_up{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "haproxy_up{instance=~\"orinocoz-1.*\"}",
+          "legendFormat": "orinocoz-1",
+          "refId": "A"
+        }
+      ],
       "title": "HAProxy UP - orinocoz-1",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [
-            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
-            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "INIT"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "orange",
+                  "text": "BACKUP"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "2": {
+                  "color": "green",
+                  "text": "MASTER"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "3": {
+                  "color": "yellow",
+                  "text": "FAULT"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
-        }
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "green",
+                "value": 2
+              }
+            ]
+          }
+        },
+        "overrides": []
       },
-      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
-      "id": 2,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "haproxy_up{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
-      "title": "HAProxy UP - orinocoz-2",
-      "type": "stat"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
-            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
-          ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
-        }
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 9,
+        "y": 0
       },
-      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
-      "id": 3,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "keepalived_up{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
-      "title": "Keepalived UP - orinocoz-1",
-      "type": "stat"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
-            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
-          ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
-        }
-      },
-      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
-      "id": 4,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "keepalived_up{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
-      "title": "Keepalived UP - orinocoz-2",
-      "type": "stat"
-    },
-    {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [
-            {"options": {"0": {"color": "red", "text": "INIT"}}, "type": "value"},
-            {"options": {"1": {"color": "orange", "text": "BACKUP"}}, "type": "value"},
-            {"options": {"2": {"color": "green", "text": "MASTER"}}, "type": "value"},
-            {"options": {"3": {"color": "yellow", "text": "FAULT"}}, "type": "value"}
-          ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "orange", "value": 1}, {"color": "green", "value": 2}]}
-        }
-      },
-      "gridPos": {"h": 4, "w": 12, "x": 0, "y": 4},
       "id": 5,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "keepalived_vrrp_state{instance=~\"orinocoz-1.*\"}", "legendFormat": "orinocoz-1"}],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "keepalived_vrrp_state{instance=~\"orinocoz-1.*\"}",
+          "legendFormat": "orinocoz-1",
+          "refId": "A"
+        }
+      ],
       "title": "Keepalived VRRP State - orinocoz-1",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [
-            {"options": {"0": {"color": "red", "text": "INIT"}}, "type": "value"},
-            {"options": {"1": {"color": "orange", "text": "BACKUP"}}, "type": "value"},
-            {"options": {"2": {"color": "green", "text": "MASTER"}}, "type": "value"},
-            {"options": {"3": {"color": "yellow", "text": "FAULT"}}, "type": "value"}
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "orange", "value": 1}, {"color": "green", "value": 2}]}
-        }
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
       },
-      "gridPos": {"h": 4, "w": 12, "x": 12, "y": 4},
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 14,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "keepalived_up{instance=~\"orinocoz-1.*\"}",
+          "legendFormat": "orinocoz-1",
+          "refId": "A"
+        }
+      ],
+      "title": "Keepalived UP - orinocoz-1",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 5,
+        "y": 2
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "haproxy_up{instance=~\"orinocoz-2.*\"}",
+          "legendFormat": "orinocoz-2",
+          "refId": "A"
+        }
+      ],
+      "title": "HAProxy UP - orinocoz-2",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "INIT"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "orange",
+                  "text": "BACKUP"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "2": {
+                  "color": "green",
+                  "text": "MASTER"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "3": {
+                  "color": "yellow",
+                  "text": "FAULT"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "green",
+                "value": 2
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 9,
+        "y": 2
+      },
       "id": 6,
-      "options": {"colorMode": "value", "graphMode": "none"},
-      "targets": [{"expr": "keepalived_vrrp_state{instance=~\"orinocoz-2.*\"}", "legendFormat": "orinocoz-2"}],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "keepalived_vrrp_state{instance=~\"orinocoz-2.*\"}",
+          "legendFormat": "orinocoz-2",
+          "refId": "A"
+        }
+      ],
       "title": "Keepalived VRRP State - orinocoz-2",
       "type": "stat"
     },
     {
-      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [
-            {"options": {"0": {"color": "red", "text": "DOWN"}}, "type": "value"},
-            {"options": {"1": {"color": "green", "text": "UP"}}, "type": "value"}
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
           ],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
-        }
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
       },
-      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8},
-      "id": 7,
-      "options": {"colorMode": "value", "graphMode": "none", "orientation": "horizontal"},
-      "targets": [{"expr": "haproxy_server_up", "legendFormat": "{{server}}"}],
-      "title": "HAProxy Backend Servers Status",
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 14,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "keepalived_up{instance=~\"orinocoz-2.*\"}",
+          "legendFormat": "orinocoz-2",
+          "refId": "A"
+        }
+      ],
+      "title": "Keepalived UP - orinocoz-2",
       "type": "stat"
     }
   ],
-  "refresh": "1s",
-  "schemaVersion": 38,
-  "tags": ["haproxy", "keepalived"],
-  "time": {"from": "now-5m", "to": "now"},
-  "title": "HAProxy & Keepalived",
-  "uid": "haproxy-keepalived",
-  "version": 1
+  "preload": false,
+  "refresh": "5s",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "HAProxy & Keepalived2",
+  "uid": "or7nzg9",
+  "version": 2
 }
