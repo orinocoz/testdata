@@ -3,14 +3,12 @@
     name: bind9
     state: present
     update_cache: yes
-  become: yes
 
 - name: Ensure Bind is running and enabled
   ansible.builtin.service:
     name: bind9
     state: started
     enabled: yes
-  become: yes
 
 - name: Configure DNS forwarders
   ansible.builtin.template:
@@ -19,7 +17,6 @@
   loop:
     - options
     - local
-  become: yes
   notify: Restart bind
   no_log: true
 
@@ -28,7 +25,6 @@
     src: db.master.j2
     dest: /var/cache/bind/db.{{ startup_name }}
     force: no
-  become: yes
   when: inventory_hostname in groups['dns_primary']
   notify: Reload rndc
 
@@ -37,7 +33,6 @@
     src: db.reverse.j2
     dest: /var/cache/bind/db.168.192
     force: no
-  become: yes
   when: inventory_hostname in groups['dns_primary']
   notify: Reload rndc
 
@@ -46,7 +41,6 @@
     name: prometheus-bind-exporter
     state: present
     update_cache: yes
-  become: yes
 
 - name: Create systemd service file for prometheus-bind-exporter
   ansible.builtin.template:
@@ -60,7 +54,6 @@
     name: prometheus-bind-exporter
     state: started
     enabled: yes
-  become: yes
 
 - name: Flush handlers to ensure BIND has latest config
   ansible.builtin.meta: flush_handlers

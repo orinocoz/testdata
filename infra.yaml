@@ -5,21 +5,18 @@
 
 - name: Initial setup
   hosts: all
-  become: true
   roles:
     - init
   tags: init
 
 - name: DNS server
   hosts: dns_servers
-  become: true
   roles:
     - bind
   tags: bind
 
 - name: DNS resolver
   hosts: all
-  become: true
   gather_facts: yes
   roles: 
     - resolve
@@ -27,21 +24,18 @@
 
 - name: Database servers
   hosts: db_servers
-  become: true
   roles:
     - mysql
   tags: mysql
 
 - name: MySQL replication
   hosts: db_servers
-  become: true
   roles:
     - mysql_replication
   tags: mysql
 
 - name: Web servers
   hosts: web_servers
-  become: true
   roles:
     - docker
     - agama
@@ -71,7 +65,6 @@
 
 - name: HAProxy load balancers
   hosts: haproxy
-  become: true
   roles:
     - haproxy
     - keepalived
