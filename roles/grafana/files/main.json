@@ -1575,12 +1575,12 @@
     "list": []
   },
   "time": {
-    "from": "2025-12-14T09:21:46.580Z",
-    "to": "2025-12-14T13:14:43.050Z"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Main1",
+  "title": "Main",
   "uid": "or94jjd",
   "version": 1
 }
