@@ -1570,7 +1570,7 @@
   "preload": false,
   "refresh": "5s",
   "schemaVersion": 42,
-  "tags": [],
+  "tags": ["mysql", "loki", "prometheus", "haproxy", "nginx", "bind9", "keepalived"],
   "templating": {
     "list": []
   },

@@ -615,7 +615,7 @@
   "preload": false,
   "refresh": "5s",
   "schemaVersion": 42,
-  "tags": [],
+  "tags": ["keepalived", "haproxy", "vrrp", "agama"],
   "templating": {
     "list": []
   },
@@ -625,7 +625,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "HAProxy & Keepalived2",
+  "title": "HAProxy & Keepalived",
   "uid": "or7nzg9",
   "version": 2
 }
