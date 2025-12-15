@@ -1,31 +1,370 @@
-Mon Dec 15 10:56:57 PM EET 2025
+Mon Dec 15 11:23:25 PM EET 2025
 + hostname
 angaar
 + ansible-playbook infra.yaml --diff
-[WARNING]:  * Failed to parse /home/doc/ica0002/hosts with yaml plugin: We were
-unable to read either as JSON nor YAML, these are the errors we got from each:
-JSON: Expecting value: line 1 column 1 (char 0)  Syntax Error while loading
-YAML.   mapping values are not allowed in this context. mapping values are not
-allowed in this context   in "<unicode string>", line 12, column 13  The error
-appears to be in '/home/doc/ica0002/hosts': line 12, column 13, but may be
-elsewhere in the file depending on the exact syntax problem.  The offending
-line appears to be:   [dns_servers: children]             ^ here
-[WARNING]:  * Failed to parse /home/doc/ica0002/hosts with ini plugin:
-/home/doc/ica0002/hosts:12: Invalid section entry: '[dns_servers: children]'.
-Please make sure that there are no spaces in the section entry, and that there
-are no other invalid characters
-[WARNING]: Unable to parse /home/doc/ica0002/hosts as an inventory source
-[WARNING]: No inventory was parsed, only implicit localhost is available
 
 PLAY [Gather facts from all hosts] *********************************************
 
 TASK [Gathering Facts] *********************************************************
-fatal: [orinocoz-1]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '[193.40.157.25]:18922' (ED25519) to the list of known hosts.\r\nubuntu@193.40.157.25: Permission denied (publickey).", "unreachable": true}
-fatal: [orinocoz-3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '[193.40.157.25]:24222' (ED25519) to the list of known hosts.\r\nubuntu@193.40.157.25: Permission denied (publickey).", "unreachable": true}
-fatal: [orinocoz-2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '[193.40.157.25]:19522' (ED25519) to the list of known hosts.\r\nubuntu@193.40.157.25: Permission denied (publickey).", "unreachable": true}
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+PLAY [Initial setup] ***********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+TASK [init : Update APT cache] *************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [init : Update APT cache] *************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [init : Add Grafana APT GPG key] ******************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [init : Add Grafana APT repository (OSS)] *********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [init : Install Prometheus node] ******************************************
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
+
+TASK [init : Ensure node_exporter are started and enabled] *********************
+ok: [orinocoz-2]
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+
+TASK [init : Install Promtail] *************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
+
+TASK [init : Add Promtail user to adm group] ***********************************
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+ok: [orinocoz-1]
+
+TASK [init : Ensure Promtail state directory exists] ***************************
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+TASK [init : Deploy Promtail configuration] ************************************
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+TASK [init : Ensure Promtail service is started and enabled] *******************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [init : Create a backup user] *********************************************
+[WARNING]: Found existing ssh key private file "/home/backup/.ssh/id_rsa", no
+force, so skipping ssh-keygen generation
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [init : Ensure backup user .ssh directory exists] *************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [init : Deploy known_hosts for backup user] *******************************
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+TASK [init : Create /home/backup/restore directory] ****************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [init : Install Duplicity] ************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [init : Install dnspython for nsupdate] ***********************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+PLAY [DNS servers] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [bind : Install Bind] *****************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [bind : Ensure Bind is running and enabled] *******************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [bind : Configure DNS forwarders] *****************************************
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+ok: [orinocoz-1] => (item=None)
+ok: [orinocoz-1]
+ok: [orinocoz-2] => (item=None)
+ok: [orinocoz-2]
+
+TASK [bind : Configure master zone] ********************************************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [bind : Configure reverse zone] *******************************************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [bind : Install Bind exporter] ********************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [bind : Create systemd service file for prometheus-bind-exporter] *********
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+TASK [bind : Ensure Bind exporter is running and enabled] **********************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [bind : Flush handlers to ensure BIND has latest config] ******************
+
+TASK [bind : Flush handlers to ensure BIND has latest config] ******************
+
+TASK [bind : Flush handlers to ensure BIND has latest config] ******************
+
+TASK [bind : Add A records for all hosts] **************************************
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+
+TASK [bind : Add backup server A record] ***************************************
+ok: [orinocoz-3]
+
+TASK [bind : Add NS CNAME records] *********************************************
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+
+TASK [bind : Add PTR records for all hosts] ************************************
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3] => (item=None)
+ok: [orinocoz-3]
+
+TASK [bind : Add PTR record for backup server] *********************************
+ok: [orinocoz-3]
+
+PLAY [DNS resolver servers] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-3]
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [resolve : Stop daemon systemd-resolved] **********************************
+ok: [orinocoz-1]
+ok: [orinocoz-3]
+ok: [orinocoz-2]
+
+TASK [resolve : Change DNS configuration file] *********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+ok: [orinocoz-3]
+
+PLAY [Database servers] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Install MySQL] ***************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Override MySQL bind address] *************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Ensure MySQL is started and enabled] *****************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : MySQL database] **************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create MySQL user] ***********************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Install MySQL Exporter] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : MySQL Exporter user] *********************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Enable mysqld_exporter config path] ******************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : MySQL Exporter user conf] ****************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Force mysql exporter restart] ************************************
+
+TASK [mysql : Force mysql exporter restart] ************************************
+
+TASK [mysql : MySQL Exporter service] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create /home/backup/mysql directory] *****************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Ensure MySQL backup user exist] **********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create backup template] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Ensure MySQL backup user exist] **********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create backup template] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Create MySQL backup cron service] ********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : MySQL replication user] ******************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql : Add DB CNAME records] ********************************************
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> orinocoz-3(193.40.157.25)] => (item=None)
+ok: [orinocoz-1 -> {{ groups['dns_primary'][0] }}]
+
+PLAY [MySQL replication server] ************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql_replication : Get replica status] **********************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql_replication : Set read_only OFF on source] *************************
+skipping: [orinocoz-2]
+ok: [orinocoz-1]
+
+TASK [mysql_replication : Stop replica on source (if running)] *****************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+
+TASK [mysql_replication : Reset replica config on source] **********************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+
+TASK [mysql_replication : Set read_only ON on replica] *************************
+skipping: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [mysql_replication : Stop replica before reconfiguring] *******************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+
+TASK [mysql_replication : Configure replica to connect to source] **************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+
+TASK [mysql_replication : Start replica on replica server] *********************
+skipping: [orinocoz-1]
+skipping: [orinocoz-2]
+
+PLAY [Web servers] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [docker : Install Docker packages] ****************************************
+ok: [orinocoz-2]
+ok: [orinocoz-1]
+
+TASK [docker : Ensure Docker service is running and enabled] *******************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [docker : Install Loki Docker logging driver] *****************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [agama : Create Agama build directory] ************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [agama : Download Agama application] **************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [agama : Download Agama Dockerfile] ***************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [agama : Build Agama Docker image] ****************************************
+ok: [orinocoz-1]
+ok: [orinocoz-2]
+
+TASK [agama : Run Agama containers] ********************************************
+fatal: [orinocoz-1]: FAILED! => {"censored": "the output has been hidden due to the fact that 'no_log: true' was specified for this result"}
+fatal: [orinocoz-2]: FAILED! => {"censored": "the output has been hidden due to the fact that 'no_log: true' was specified for this result"}
 
 PLAY RECAP *********************************************************************
-orinocoz-1                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-orinocoz-2                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-orinocoz-3                 : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+orinocoz-1                 : ok=59   changed=0    unreachable=0    failed=1    skipped=8    rescued=0    ignored=0   
+orinocoz-2                 : ok=58   changed=0    unreachable=0    failed=1    skipped=8    rescued=0    ignored=0   
+orinocoz-3                 : ok=36   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 

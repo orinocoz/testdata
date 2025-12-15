@@ -67,7 +67,7 @@ backup_password: !vault |
 mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
 github_user_backup: orinocoz
 prometheus_server: "{{ groups['prometheus_servers'] | first }}"
-loki_server: "{{ groups['loki'] | first }}"
+loki_server: "{{ groups['loki_servers'] | first }}"
 
 replica_user: replication
 replica_password: !vault |

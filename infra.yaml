@@ -9,13 +9,13 @@
     - init
   tags: init
 
-- name: DNS server
+- name: DNS servers
   hosts: dns_servers
   roles:
     - bind
   tags: bind
 
-- name: DNS resolver
+- name: DNS resolver servers
   hosts: all
   gather_facts: yes
   roles: 
@@ -28,7 +28,7 @@
     - mysql
   tags: mysql
 
-- name: MySQL replication
+- name: MySQL replication server
   hosts: db_servers
   roles:
     - mysql_replication
@@ -42,21 +42,21 @@
     - nginx
   tags: nginx
 
-- name: Logging server setup
-  hosts: loki
+- name: Logging server
+  hosts: loki_servers
   roles:
     - loki
   tags: loki
 
 - name: Prometheus server
-  hosts: prometheus
+  hosts: prometheus_servers
   roles:
     - nginx
     - prometheus
   tags: prom
 
-- name: Grafana
-  hosts: grafana
+- name: Grafana server
+  hosts: grafana_servers
   roles:
     - docker
     - nginx
@@ -64,7 +64,7 @@
   tags: g
 
 - name: HAProxy load balancers
-  hosts: haproxy
+  hosts: haproxy_servers
   roles:
     - haproxy
     - keepalived

@@ -9,7 +9,7 @@ orinocoz-3
 orinocoz-1
 orinocoz-2
 
-[dns_servers: children]
+[dns_servers:children]
 dns_primary
 dns_secondary
 
