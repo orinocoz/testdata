@@ -5,7 +5,7 @@ datasources:
     uid: prometheus
     access: proxy
     orgId: 1
-    url: http://prometheus.{{ startup_name }}:9090/prometheus
+    url: http://{{ groups['prometheus_servers'][0]:9090/prometheus
     isDefault: true
     version: 1
     editable: false
@@ -14,6 +14,6 @@ datasources:
     access: proxy
     orgId: 1
     uid: LOKI-BAAS
-    url: http://{{ groups['loki'][0] }}:3100
+    url: http://{{ groups['loki_servers'][0] }}:3100
     isDefault: false
     editable: true

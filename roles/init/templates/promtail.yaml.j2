@@ -4,10 +4,10 @@ positions:
   filename: /var/lib/promtail/positions.yaml
 
 clients:
-  - url: http://{{ groups['loki'][0] }}:3100/loki/api/v1/push
+  - url: http://{{ groups['loki_servers'][0] }}:3100/loki/api/v1/push
 
 scrape_configs:
-{% if inventory_hostname in groups['haproxy'] %}
+{% if inventory_hostname in groups['haproxy_servers'] %}
   - job_name: haproxy
     syslog:
       listen_address: 0.0.0.0:8814

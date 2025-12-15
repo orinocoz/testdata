@@ -8,7 +8,7 @@ dns_allowed_networks:
   - 127.0.0.0/8
   - 172.17.0.0/16
 
-mysql_host: orinocoz-1
+mysql_host: "{{ groups['db_servers'][0] }}"
 # db-2.{{ startup_name }}
 mysql_database: agama
 mysql_user: agama
@@ -66,7 +66,7 @@ backup_password: !vault |
 
 mysql_backup_host: "{{ groups['db_servers'] | reject('eq', mysql_host) | first | default(mysql_host) }}"
 github_user_backup: orinocoz
-prometheus_server: "{{ groups['prometheus'] | first }}"
+prometheus_server: "{{ groups['prometheus_servers'] | first }}"
 loki_server: "{{ groups['loki'] | first }}"
 
 replica_user: replication

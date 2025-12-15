@@ -1,5 +1,5 @@
 [server]
-root_url = http://{{ hostvars[groups['grafana'][0]]['ansible_host'] }}:{{ hostvars[groups['grafana'][0]]['ansible_port'] + 58 }}/grafana
+root_url = http://{{ hostvars[groups['grafana_servers'][0]]['ansible_host'] }}:{{ hostvars[groups['grafana_servers'][0]]['ansible_port'] + 58 }}/grafana
 serve_from_sub_path = true
 
 [security]

@@ -1,1 +1,1 @@
-ARGS="--web.external-url=http://{{groups['prometheus'][0]}}/prometheus --web.route-prefix=/prometheus --web.enable-admin-api --storage.tsdb.path=/var/lib/prometheus/metrics2"
+ARGS="--web.external-url=http://{{groups['prometheus_servers'][0]}}/prometheus --web.route-prefix=/prometheus --web.enable-admin-api --storage.tsdb.path=/var/lib/prometheus/metrics2"

@@ -6,18 +6,18 @@ server {
 		proxy_pass http://localhost:{{ agama_port }};
 	}
 	{% endif %}
-	{% if inventory_hostname in groups['prometheus'] %}
+	{% if inventory_hostname in groups['prometheus_servers'] %}
     location /prometheus {
         proxy_pass http://localhost:9090;
     }
 	{% endif %}
-	{% if inventory_hostname in groups['prometheus'] and inventory_hostname not in groups['web_servers'] %}
+	{% if inventory_hostname in groups['prometheus_servers'] and inventory_hostname not in groups['web_servers'] %}
 	location = / {
   		return 404 ;
 	}
 	{% endif %}
 
-        {% if inventory_hostname in groups['grafana'] %}
+        {% if inventory_hostname in groups['grafana_servers'] %}
         location /grafana {
                 proxy_pass http://localhost:{{ grafana_port }};
                 proxy_set_header Host $http_host;

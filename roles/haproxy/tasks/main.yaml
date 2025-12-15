@@ -48,7 +48,7 @@
     record: "lb-{{ idx + 1 }}"
     type: "CNAME"
     value: "{{ item }}.{{ startup_name }}."
-  loop: "{{ groups['haproxy'] }}"
+  loop: "{{ groups['haproxy_servers'] }}"
   loop_control:
     index_var: idx
   run_once: true
