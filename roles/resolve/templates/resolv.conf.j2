@@ -1,6 +1,6 @@
 {% if startup_name %}
 search {{ startup_name }}
 {% endif %}
-{% for vm in groups['dns_servers'] %}
+{% for vm in groups['dns_secondary'] %}
 nameserver {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
 {% endfor %}
