@@ -41,7 +41,7 @@ This document provides step-by-step instructions to restore services from backup
 
 4. **Stop the application to prevent writes:**
    ```bash
-   sudo docker stop agama
+   sudo docker stop agama-0 agama-1
    ```
 
 5. **Import the database dump (as root):**
@@ -58,7 +58,7 @@ This document provides step-by-step instructions to restore services from backup
 
 7. **Restart the application:**
    ```bash
-   sudo docker start agama
+   sudo docker start agama-0 agama-1
    ```
 
 8. **Verify application works:**
@@ -68,7 +68,7 @@ This document provides step-by-step instructions to restore services from backup
 
 ### Notes
 - MySQL backups run on `mysql_backup_host` (the replica server)
-- After restoring on replica, replication will sync data to primary
+- To restore production data: restore dump on the primary server, then replication will sync to replica
 - RPO: 24 hours | RTO: 1 hour
 
 ---

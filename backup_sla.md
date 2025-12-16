@@ -61,11 +61,11 @@ If quota is exceeded, backups will fail silently (0-volume backup sets) and moni
 
 ## Retention
 
-MySQL backups are stored for 4 weeks; 7 versions (recovery points) are available to restore.
+MySQL backups are stored for 1 week; 7 versions (recovery points) are available to restore.
 
-Prometheus backups are stored for 4 weeks; 7 versions are available to restore.
+Prometheus backups are stored for 1 week; 7 versions are available to restore.
 
-Loki backups are stored for 4 weeks; 7 versions are available to restore.
+Loki backups are stored for 1 week; 7 versions are available to restore.
 
 
 ## Usability checks
