@@ -4,7 +4,7 @@
 # Update APT cache
 - name: Update APT cache
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 86400
 
 ## Create user juri
@@ -55,7 +55,7 @@
   ansible.builtin.service:
     name: prometheus-node-exporter
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Install Promtail
   ansible.builtin.apt:
@@ -66,7 +66,7 @@
   ansible.builtin.user:
     name: promtail
     groups: adm
-    append: yes
+    append: true
 
 - name: Ensure Promtail state directory exists
   ansible.builtin.file:
@@ -88,14 +88,14 @@
   ansible.builtin.service:
     name: promtail
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Create a backup user
   ansible.builtin.user:
     name: backup
     shell: /bin/bash
     home: /home/backup
-    create_home: yes
+    create_home: true
     generate_ssh_key: true
 
 - name: Ensure backup user .ssh directory exists
@@ -113,7 +113,7 @@
     owner: backup
     group: backup
     mode: '0600'
-    force: yes
+    force: true
 
 - name: Create /home/backup/restore directory
   ansible.builtin.file:

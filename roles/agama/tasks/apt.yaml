@@ -18,7 +18,7 @@
       - sqlite3
       - python3-flask
       - python3-flask-sqlalchemy
-    update_cache: yes
+    update_cache: true
     state: present
 
 - name: Download AGAMA application

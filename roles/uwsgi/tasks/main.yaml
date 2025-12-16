@@ -4,7 +4,7 @@
       - uwsgi
       - uwsgi-plugin-python3
       - python3-pymysql
-    update_cache: yes
+    update_cache: true
   notify:
     - Restart uWSGI
 

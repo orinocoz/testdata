@@ -4,7 +4,7 @@
       - docker.io
       - python3-docker
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Ensure Docker service is running and enabled
   ansible.builtin.service:
