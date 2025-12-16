@@ -35,10 +35,6 @@
 #    state: present
 #    key: https://github.com/romankuchin.keys
 
-- name: Update APT cache
-  ansible.builtin.apt:
-    cache_valid_time: 86400
-
 - name: Add Grafana APT GPG key
   ansible.builtin.apt_key:
     url: https://packages.grafana.com/gpg.key
@@ -50,12 +46,12 @@
     filename: grafana
     state: present
 
-- name: Install Prometheus node 
+- name: Install Prometheus node exporter 
   ansible.builtin.apt:
     name: prometheus-node-exporter
     state: present
 
-- name: Ensure node_exporter are started and enabled
+- name: Ensure Prometheus node exporter are started and enabled
   ansible.builtin.service:
     name: prometheus-node-exporter
     state: started
@@ -116,7 +112,7 @@
     dest: /home/backup/.ssh/known_hosts
     owner: backup
     group: backup
-    mode: '0644'
+    mode: '0600'
     force: yes
 
 - name: Create /home/backup/restore directory

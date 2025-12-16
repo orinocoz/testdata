@@ -106,15 +106,6 @@
     mode: '0600'
   no_log: true
 
-- name: Ensure MySQL backup user exist
-  community.mysql.mysql_user:
-    name: "{{ backup_user }}"
-    password: "{{ backup_password }}"
-    priv: "{{ mysql_database }}.*:LOCK TABLES, SELECT"
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-    host: "localhost"
-  no_log: true
-
 - name: Create backup template
   ansible.builtin.template:
     src: backup.my.cnf.j2

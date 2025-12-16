@@ -9,7 +9,6 @@ dns_allowed_networks:
   - 172.17.0.0/16
 
 mysql_host: "{{ groups['db_servers'][0] }}"
-# db-2.{{ startup_name }}
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
