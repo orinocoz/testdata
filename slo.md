@@ -8,41 +8,74 @@ This document defines the Service Level Objectives for the Agama web application
 ### User Journey 1: View Agama Main Page
 **Description:** User accesses the main Agama page to view content.
 
-**Service Level Indicators (SLIs):**
-- **Availability:** Percentage of successful HTTP requests (status codes 2xx and 3xx)
-  - Target: 95% of requests succeed
-  - Measurement: `(count of 2xx/3xx responses) / (total requests) * 100`
+**SLI Type:** Availability
 
-- **Latency:** Response time for the main page
-  - Target: 95% of requests complete in < 500ms
-  - Measurement: p95 response time from Nginx logs
+**SLI Specification:**
+- Event: HTTP request to Agama main page
+- Valid events: All requests through HAProxy (excluding health checks)
+- Success criterion: Response status code 2xx or 3xx
+- Recording: HAProxy logs collected by Promtail into Loki
 
-**SLO Thresholds:**
-- Availability SLO: >= 95%
-- Latency SLO: p95 <= 500ms
+**SLI Implementation:**
+- Formula: `count(2xx + 3xx) / count(2xx + 3xx + 5xx) * 100`
+- LogQL: `100 * sum(count_over_time({job="haproxy"} |~ "^[23]"[15m])) / sum(count_over_time({job="haproxy"} |~ "^[235]"[15m]))`
+
+**SLO:** >= 95% over 15-minute rolling window
+
+---
+
+**SLI Type:** Latency
+
+**SLI Specification:**
+- Event: HTTP request to Agama main page
+- Valid events: Successful requests (2xx/3xx responses)
+- Success criterion: Response time below threshold
+- Recording: HAProxy logs collected by Promtail into Loki
+
+**SLI Implementation:**
+- Formula: Average response time for successful requests
+- LogQL: `avg_over_time({job="haproxy"} | regexp "^[2-3][0-9]{2} (?P<latency>[0-9.]+)" | unwrap latency [15m])`
+
+**SLO:** average <= 100ms over 15-minute rolling window
 
 ### User Journey 2: Submit Data to Agama Application
 **Description:** User submits data through the Agama web interface.
 
-**Service Level Indicators (SLIs):**
-- **Availability:** Percentage of successful POST/PUT requests
-  - Target: 90% of write requests succeed
-  - Measurement: `(count of successful POST/PUT with 2xx/3xx) / (total POST/PUT requests) * 100`
+**SLI Type:** Availability
 
-- **Latency:** Response time for data submission
-  - Target: 95% of requests complete in < 1000ms
-  - Measurement: p95 response time for POST/PUT requests from Nginx logs
+**SLI Specification:**
+- Event: HTTP POST/PUT request to Agama application
+- Valid events: All write requests through HAProxy
+- Success criterion: Response status code 2xx or 3xx
+- Recording: HAProxy logs collected by Promtail into Loki
 
-**SLO Thresholds:**
-- Availability SLO: >= 90%
-- Latency SLO: p95 <= 1000ms
+**SLI Implementation:**
+- Formula: `count(2xx + 3xx) / count(2xx + 3xx + 5xx) * 100` for POST/PUT requests
+
+**SLO:** >= 90% over 15-minute rolling window
+
+---
+
+**SLI Type:** Latency
+
+**SLI Specification:**
+- Event: HTTP POST/PUT request to Agama application
+- Valid events: Successful write requests (2xx/3xx responses)
+- Success criterion: Response time below threshold
+- Recording: HAProxy logs collected by Promtail into Loki
+
+**SLI Implementation:**
+- Formula: Average response time for successful write requests
+
+**SLO:** average <= 100ms over 15-minute rolling window
 
 ## Monitoring and Alerting
 
 SLIs are tracked through:
-- Nginx access logs parsed by Promtail and stored in Loki
-- Metrics visualized in Grafana dashboards
-- Prometheus for metric aggregation and alerting
+- HAProxy logs parsed by Promtail and stored in Loki
+- Metrics visualized in Grafana Main dashboard
+- 15-minute rolling window measurements
+- Visual thresholds: Green (>= 98%), Yellow (60-98%), Red (< 60% time remaining)
 
 ## Review Period
 

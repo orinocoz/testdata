@@ -37,7 +37,7 @@
     ports:
       - "{{ agama_port + item }}:8000"
     env:
-      AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@db-1.{{  startup_name }}/{{ mysql_database }}"
+      AGAMA_DATABASE_URI: "mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@db-1.{{ startup_name }}/{{ mysql_database }}"
     dns_servers: "{{ groups['dns_secondary'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | list }}"
     dns_search_domains:
       - "{{ startup_name }}"
