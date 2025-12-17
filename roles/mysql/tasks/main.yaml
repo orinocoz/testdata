@@ -66,7 +66,7 @@
     dest: /var/lib/prometheus/.my.cnf
     owner: prometheus
     group: prometheus
-    mode: '0600'
+    mode: '0400'
   no_log: true
   notify:
     - Restart MySQL Exporter
@@ -103,7 +103,7 @@
     dest: /home/backup/.my.cnf
     owner: backup
     group: backup
-    mode: '0600'
+    mode: '0400'
   no_log: true
 
 - name: Create backup template
